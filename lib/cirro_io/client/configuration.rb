@@ -14,6 +14,17 @@ module CirroIO
 
         @private_key_path
       end
+
+      def site(value = nil)
+        @site = value unless value.nil?
+        raise 'site must be defined' unless defined?(@site)
+
+        @site
+      end
+
+      def api_version
+        'v1'
+      end
     end
   end
 end

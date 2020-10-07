@@ -1,5 +1,26 @@
 require 'bundler/setup'
+require 'pry'
 require 'cirro_io/client'
+
+# comment out below line and change values below to run test against actual API server
+require 'webmock/rspec'
+
+def test_app_id
+  'WULnc6Y0rlaTBCSiHAb0kGWKFuIxPWBXJysyZeG3Rtw' # Change this to a real one to
+end
+
+def test_site
+  'http://api.app.localhost:3000'
+  # 'https://api.staging.cirro.io' # Change this to a real one to
+end
+
+def configure_api_client
+  CirroIO::Client.configure do |c|
+    c.app_id test_app_id
+    c.private_key_path './spec/fixtures/private_key.pem'
+    c.site test_site
+  end
+end
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

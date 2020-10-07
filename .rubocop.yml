@@ -110,3 +110,9 @@ RSpec/FilePath:
 
 Style/Documentation:
   Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
