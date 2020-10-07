@@ -1,4 +1,4 @@
-require_relative 'lib/cirro_i_o/client/version'
+require_relative 'lib/cirro_io/client/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "cirro-ruby-client"
