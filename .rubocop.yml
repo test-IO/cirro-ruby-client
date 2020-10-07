@@ -14,7 +14,7 @@ Metrics/MethodLength:
   Max: 25
 
 Layout/LineLength:
-  Max: 90
+  Max: 160
 
 # Details:
 #   http://c2.com/cgi/wiki?AbcMetric
