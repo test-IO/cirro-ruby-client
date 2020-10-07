@@ -5,3 +5,8 @@ gemspec
 
 gem "rake", "~> 12.0"
 gem "rspec", "~> 3.0"
+
+group :development do
+  gem 'rubocop', require: false
+  gem 'rubocop-rspec'
+end
