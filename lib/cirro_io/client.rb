@@ -1,4 +1,4 @@
-require "cirro_io/client/version"
+require 'cirro_io/client/version'
 
 module CirroIO
   module Client
