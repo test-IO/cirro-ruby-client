@@ -1,8 +1,8 @@
-require_relative 'lib/cirro/ruby/client/version'
+require_relative 'lib/cirro_i_o/client/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "cirro-ruby-client"
-  spec.version       = Cirro::Ruby::Client::VERSION
+  spec.version       = CirroIO::Client::VERSION
   spec.authors       = ["Cirro Dev Team"]
   spec.email         = ["OrgtestIODevelopers@epam.com"]
 

@@ -1,5 +1,5 @@
 require "bundler/setup"
-require "cirro/ruby/client"
+require "cirro_i_o/client"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
