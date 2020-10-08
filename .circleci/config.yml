@@ -33,15 +33,21 @@ jobs:
       - run:
           name: Tag the version
           command: |
-            version=$(cat lib/sky/version.rb | grep VERSION | awk -F' = ' '{print $2}' | xargs)
+            version=$(cat lib/cirro-ruby-client/version.rb | grep VERSION | awk -F' = ' '{print $2}' | xargs)
             git tag v"$version"
             git push origin v"$version"
       - run:
           name: build gem
-          command: gem build sky.gemspec
+          command: gem build cirro-ruby-client.gemspec
       - run:
-          name: push to gemfury
-          command: curl -F package=@$(find . -name "*.gem" -maxdepth 1) https://$GEMFURY_TOKEN@push.fury.io/testcloud/
+          name: push to rubygems
+          command: |
+            echo "gem `gem --version`"
+            mkdir ~/.gem
+            cat .circleci/gem_credentials | sed -e "s/__RUBYGEMS_API_KEY__/${RUBYGEMS_API_KEY}/" > ~/.gem/credentials
+            chmod 0600 ~/.gem/credentials
+            gem push my_gem-*.gem
+            shred -u ~/.gem/credentials
 
 workflows:
   version: 2
@@ -51,7 +57,3 @@ workflows:
       - deploy:
           requires:
             - build
-          filters:
-            branches:
-              only:
-                - master
