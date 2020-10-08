@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cirro-ruby-client (0.1.0)
+    cirro-ruby-client (0.1.2)
       json_api_client
       jwt
 
