@@ -33,7 +33,7 @@ jobs:
       - run:
           name: Tag the version
           command: |
-            version=$(cat lib/cirro-io/client/version.rb | grep VERSION | awk -F' = ' '{print $2}' | xargs)
+            version=$(cat lib/cirro_io/client/version.rb | grep VERSION | awk -F' = ' '{print $2}' | xargs)
             git tag v"$version"
             git push origin v"$version"
       - run:
