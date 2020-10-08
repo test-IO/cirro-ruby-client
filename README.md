@@ -19,6 +19,19 @@ Or install it yourself as:
     $ gem install cirro-ruby-client
 
 
+## Configuration
+
+  You need to create an initializer file in config/initializers.
+
+  ```ruby
+  CirroIO::Client.configure do |c|
+    c.app_id 'WULnc6Y0rlaTBCSiHAb0kGWKFuIxPWBXJysyZeG3Rtw'
+    c.private_key_path './storage/cirro.pem'
+    c.site 'https://api.staging.cirro.io'
+  end
+  ```
+
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
