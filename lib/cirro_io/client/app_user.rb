@@ -1,10 +1,8 @@
 module CirroIO
   module Client
-    class AppWorker < Base
-      has_one :app_user
-
+    class AppUser < Base
       def self.resource_name
-        'app-workers'
+        'app-users'
       end
     end
   end
