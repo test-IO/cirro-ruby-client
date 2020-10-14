@@ -1,12 +1,13 @@
 require 'bundler/setup'
 require 'pry'
+require 'faker'
 require 'cirro_io/client'
 
 # comment out below line and change values below to run test against actual API server
 require 'webmock/rspec'
 
 def test_app_id
-  'WULnc6Y0rlaTBCSiHAb0kGWKFuIxPWBXJysyZeG3Rtw' # Change this to a real one to
+  'cirro-app-id-development' # Change this to a real one to
 end
 
 def test_site

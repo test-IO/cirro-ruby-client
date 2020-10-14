@@ -1,0 +1,16 @@
+{
+   "data":{
+      "id":"3",
+      "type":"app-users",
+      "links":{
+         "self":"http:g/api.app.localhost:3000/api/v1/app-users/3"
+      },
+      "attributes":{
+         "email":"clement_turcotte@bosco.info",
+         "first-name":"Graig",
+         "last-name":"Monahan",
+         "time-zone":"Berlin",
+         "screenname":"quia"
+      }
+   }
+}
