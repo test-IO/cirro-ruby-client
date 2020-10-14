@@ -33,12 +33,12 @@ RSpec.describe CirroIO::Client::AppUser do
     end
 
     it 'finds a app user' do
-      stub_request(:get, "#{test_site}/v1/app-users/4")
+      stub_request(:get, "#{test_site}/v1/app-users/3")
         .to_return(body: File.read('./spec/fixtures/app_user.json'), headers: { 'Content-Type' => 'application/json' })
 
-      app_user = described_class.find(4).first
+      app_user = described_class.find(3).first
 
-      expect(app_user.id).to eq('4')
+      expect(app_user.id).to eq('3')
     end
   end
 end
