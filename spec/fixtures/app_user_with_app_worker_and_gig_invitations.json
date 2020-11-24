@@ -1,0 +1,59 @@
+{
+  "data": {
+    "id": "30",
+    "type": "app-users",
+    "links": {
+      "self": "http://api.app.localhost:3000/api/v1/app-users/30"
+    },
+    "attributes": {
+      "email": "singhinther1@gmail.com",
+      "first-name": "Inderpal",
+      "last-name": "Singh",
+      "time-zone": "Berlin",
+      "screenname": "abcd1234",
+      "epam-idx": null,
+      "country-code": null
+    },
+    "relationships": {
+      "app-worker": {
+        "data": {
+          "type": "app-workers",
+          "id": "7"
+        }
+      }
+    }
+  },
+  "included": [
+    {
+      "id": "7",
+      "type": "app-workers",
+      "links": {
+        "self": "http://api.app.localhost:3000/api/v1/app-workers/7"
+      },
+      "attributes": {
+        "worker-document": {
+          "app_worker_id": 7,
+          "email": "singhinther1@gmail.com"
+        }
+      },
+      "relationships": {
+        "gig-invitations": {
+          "data": [
+            {
+              "type": "gig-invitations",
+              "id": "5"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "5",
+      "type": "gig-invitations",
+      "attributes": {
+        "status": "pending",
+        "gig-id": 4
+      }
+    }
+  ]
+}

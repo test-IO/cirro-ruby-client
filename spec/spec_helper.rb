@@ -7,7 +7,7 @@ require 'cirro_io/client'
 require 'webmock/rspec'
 
 def test_app_id
-  'cirro-app-id-development' # Change this to a real one to
+  'cirro-example-app-id-development' # Change this to a real one to
 end
 
 def test_site
