@@ -1,4 +1,5 @@
 require 'json_api_client'
+require 'cirro_io/client/jwt_token_generator'
 require 'cirro_io/client/version'
 require 'cirro_io/client/configuration'
 require 'cirro_io/client/response_debugging_middleware'
@@ -7,6 +8,8 @@ require 'cirro_io/client/base'
 require 'cirro_io/client/gig_invitation'
 require 'cirro_io/client/app_user'
 require 'cirro_io/client/app_worker'
+require 'cirro_io/client/bulk_actions/base'
+require 'cirro_io/client/bulk_actions/gig'
 
 module CirroIO
   module Client
