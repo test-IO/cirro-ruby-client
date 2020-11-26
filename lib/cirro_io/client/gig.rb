@@ -2,8 +2,7 @@ module CirroIO
   module Client
     class Gig < Base
       has_one :worker_invitation_filter
-      has_many :gig_tasks, class_name: 'GigTas'
-      resolve_custom_type 'gig-tasks', 'CirroIO::Client::GigTask'
+      has_many :gig_tasks
 
       # rubocop:disable Metrics/AbcSize
       def bulk_create_with(attrs)
