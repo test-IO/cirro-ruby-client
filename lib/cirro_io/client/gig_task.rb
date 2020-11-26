@@ -1,6 +1,6 @@
 module CirroIO
   module Client
-    class AppUser < Base
+    class GigTask < Base
     end
   end
 end

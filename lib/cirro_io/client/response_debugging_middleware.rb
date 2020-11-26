@@ -3,7 +3,7 @@ module CirroIO
   module Client
     class ResponseDebuggingMiddleware < Faraday::Response::Middleware
       def on_complete(env)
-        # binding.pry
+        binding.pry # rubocop:disable Lint/Debugger
       end
     end
   end

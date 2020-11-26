@@ -1,6 +1,6 @@
 module CirroIO
   module Client
-    class AppUser < Base
+    class WorkerInvitationFilter < Base
     end
   end
 end

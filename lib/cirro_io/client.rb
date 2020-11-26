@@ -7,6 +7,9 @@ require 'cirro_io/client/base'
 require 'cirro_io/client/gig_invitation'
 require 'cirro_io/client/app_user'
 require 'cirro_io/client/app_worker'
+require 'cirro_io/client/worker_invitation_filter'
+require 'cirro_io/client/gig_task'
+require 'cirro_io/client/gig'
 
 module CirroIO
   module Client
