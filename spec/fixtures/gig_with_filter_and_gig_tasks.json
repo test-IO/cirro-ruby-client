@@ -1,0 +1,75 @@
+{
+  "data": {
+    "id": "12",
+    "type": "gigs",
+    "links": {
+      "self": "/api/v1/gigs/12"
+    },
+    "attributes": {
+      "title": "Chia jean shorts kinfolk raw denim distillery phlogiston yuccie.",
+      "description": "Sustainable church-key banjo squid. Readymade chicharrones messenger bag chambray. Pour-over squid austin pinterest artisan hella diy migas. Cred roof art party.",
+      "url": "http://parker.org/lucia.murray",
+      "automatic-invites": true,
+      "total-seats": 10,
+      "archive-at": "2020-12-26T08:07:58.000Z"
+    },
+    "relationships": {
+      "worker-invitation-filter": {
+        "data": {
+          "type": "worker-invitation-filters",
+          "id": "13"
+        }
+      },
+      "gig-tasks": {
+        "links": {
+          "self": "/api/v1/gigs/12/relationships/gig-tasks",
+          "related": "/api/v1/gigs/12/gig-tasks"
+        },
+        "data": [
+          {
+            "type": "gig-tasks",
+            "id": "18"
+          },
+          {
+            "type": "gig-tasks",
+            "id": "19"
+          }
+        ]
+      }
+    }
+  },
+  "included": [
+    {
+      "id": "13",
+      "type": "worker-invitation-filters",
+      "links": {
+        "self": "/api/v1/worker-invitation-filters/13"
+      },
+      "attributes": {
+        "filter-query": "{}"
+      }
+    },
+    {
+      "id": "18",
+      "type": "gig-tasks",
+      "links": {
+        "self": "/api/v1/gig-tasks/18"
+      },
+      "attributes": {
+        "title": "Slow-carb mlkshk goth farm-to-table hashtag.",
+        "base-price": 5
+      }
+    },
+    {
+      "id": "19",
+      "type": "gig-tasks",
+      "links": {
+        "self": "/api/v1/gig-tasks/19"
+      },
+      "attributes": {
+        "title": "Tote bag distillery jean shorts vice try-hard wayfarers pabst fanny pack yolo.",
+        "base-price": 10
+      }
+    }
+  ]
+}

@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     cirro-ruby-client (1.0.1)
+      faraday_middleware
       json_api_client
       jwt
 

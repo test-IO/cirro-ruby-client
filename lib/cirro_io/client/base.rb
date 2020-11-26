@@ -9,6 +9,19 @@ module CirroIO
         super(url)
         connection.faraday.url_prefix = url
       end
+
+      def self.custom_post(endpoint, payload)
+        custom_connection.post(endpoint, payload.to_json)
+      end
+
+      def self.custom_connection
+        Faraday.new(url: "#{CirroIO::Client.configuration.site}/#{CirroIO::Client.configuration.api_version}") do |conn|
+          conn.request :json
+          conn.response :json
+          conn.use CirroIO::Client::JwtAuthentication
+          conn.use JsonApiClient::Middleware::Status, {}
+        end
+      end
     end
   end
 end
