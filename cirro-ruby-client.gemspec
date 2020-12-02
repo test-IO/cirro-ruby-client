@@ -27,4 +27,5 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'jwt'
   spec.add_runtime_dependency 'faraday_middleware'
+  spec.add_runtime_dependency 'json_api_client'
 end

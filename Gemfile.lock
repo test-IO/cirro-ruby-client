@@ -1,20 +1,9 @@
-GIT
-  remote: https://github.com/inderps/json_api_client
-  revision: 675e1c8b1bf9978ca4722c2aa19314fb0aa5860b
-  specs:
-    json_api_client (1.17.1)
-      activemodel (>= 3.2.0)
-      activesupport (>= 3.2.0)
-      addressable (~> 2.2)
-      faraday (>= 0.15.2, < 1.2.0)
-      faraday_middleware (>= 0.9.0, < 1.2.0)
-      rack (>= 0.2)
-
 PATH
   remote: .
   specs:
-    cirro-ruby-client (1.1.0)
+    cirro-ruby-client (1.2.0)
       faraday_middleware
+      json_api_client
       jwt
 
 GEM
@@ -37,13 +26,21 @@ GEM
     diff-lcs (1.4.4)
     faker (2.14.0)
       i18n (>= 1.6, < 2)
-    faraday (1.0.1)
+    faraday (1.1.0)
       multipart-post (>= 1.2, < 3)
+      ruby2_keywords
     faraday_middleware (1.0.0)
       faraday (~> 1.0)
     hashdiff (1.0.1)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
+    json_api_client (1.17.1)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      addressable (~> 2.2)
+      faraday (>= 0.15.2, < 1.2.0)
+      faraday_middleware (>= 0.9.0, < 1.2.0)
+      rack (>= 0.2)
     jwt (2.2.2)
     method_source (1.0.0)
     minitest (5.14.2)
@@ -87,6 +84,7 @@ GEM
     rubocop-rspec (1.43.2)
       rubocop (~> 0.87)
     ruby-progressbar (1.10.1)
+    ruby2_keywords (0.0.2)
     thread_safe (0.3.6)
     tzinfo (1.2.8)
       thread_safe (~> 0.1)
@@ -103,7 +101,6 @@ PLATFORMS
 DEPENDENCIES
   cirro-ruby-client!
   faker
-  json_api_client!
   pry
   rake (~> 12.0)
   rspec (~> 3.0)
