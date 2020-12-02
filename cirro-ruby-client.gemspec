@@ -26,6 +26,5 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_runtime_dependency 'jwt'
-  spec.add_runtime_dependency 'json_api_client'
   spec.add_runtime_dependency 'faraday_middleware'
 end

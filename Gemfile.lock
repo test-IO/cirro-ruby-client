@@ -1,17 +1,28 @@
+GIT
+  remote: https://github.com/inderps/json_api_client
+  revision: 675e1c8b1bf9978ca4722c2aa19314fb0aa5860b
+  specs:
+    json_api_client (1.17.1)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      addressable (~> 2.2)
+      faraday (>= 0.15.2, < 1.2.0)
+      faraday_middleware (>= 0.9.0, < 1.2.0)
+      rack (>= 0.2)
+
 PATH
   remote: .
   specs:
     cirro-ruby-client (1.1.0)
       faraday_middleware
-      json_api_client
       jwt
 
 GEM
   remote: https://rubygems.org/
   specs:
-    activemodel (6.0.3.3)
-      activesupport (= 6.0.3.3)
-    activesupport (6.0.3.3)
+    activemodel (6.0.3.4)
+      activesupport (= 6.0.3.4)
+    activesupport (6.0.3.4)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
@@ -33,13 +44,6 @@ GEM
     hashdiff (1.0.1)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
-    json_api_client (1.17.1)
-      activemodel (>= 3.2.0)
-      activesupport (>= 3.2.0)
-      addressable (~> 2.2)
-      faraday (>= 0.15.2, < 1.2.0)
-      faraday_middleware (>= 0.9.0, < 1.2.0)
-      rack (>= 0.2)
     jwt (2.2.2)
     method_source (1.0.0)
     minitest (5.14.2)
@@ -84,14 +88,14 @@ GEM
       rubocop (~> 0.87)
     ruby-progressbar (1.10.1)
     thread_safe (0.3.6)
-    tzinfo (1.2.7)
+    tzinfo (1.2.8)
       thread_safe (~> 0.1)
     unicode-display_width (1.7.0)
     webmock (3.9.1)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
-    zeitwerk (2.4.0)
+    zeitwerk (2.4.2)
 
 PLATFORMS
   ruby
@@ -99,6 +103,7 @@ PLATFORMS
 DEPENDENCIES
   cirro-ruby-client!
   faker
+  json_api_client!
   pry
   rake (~> 12.0)
   rspec (~> 3.0)
