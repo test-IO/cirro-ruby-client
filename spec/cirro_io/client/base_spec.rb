@@ -12,7 +12,7 @@ RSpec.describe CirroIO::Client::Base do
                 'Accept' => 'application/vnd.api+json',
                 'Accept-Encoding' => 'gzip,deflate',
                 'Content-Type' => 'application/vnd.api+json',
-                'User-Agent' => 'Faraday v1.0.1',
+                'User-Agent' => 'Faraday v1.1.0',
                 'Authorization' => 'Bearer jwt-token',
               })
         .to_return(body: File.read('./spec/fixtures/app_worker.json'), headers: { 'Content-Type' => 'application/json' })
@@ -30,7 +30,7 @@ RSpec.describe CirroIO::Client::Base do
                 'Accept' => '*/*',
                 'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
                 'Content-Type' => 'application/json',
-                'User-Agent' => 'Faraday v1.0.1',
+                'User-Agent' => 'Faraday v1.1.0',
                 'Authorization' => 'Bearer jwt-token',
               })
         .to_return(status: 201, body: '{}', headers: {})
