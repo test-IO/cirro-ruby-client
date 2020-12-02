@@ -1,0 +1,101 @@
+{
+  "data": {
+    "id": "10",
+    "type": "gigs",
+    "links": {
+      "self": "/api/v1/gigs/10"
+    },
+    "attributes": {
+      "title": "Beard tacos fanny pack echo whatever blog.",
+      "description": "Tote bag ennui vice cronut craft beer. Neutra brooklyn street distillery scenester cliche meditation. Listicle squid banh mi pinterest wolf 3 wolf moon.",
+      "url": "http://muller.org/dean.baumbach",
+      "automatic-invites": true,
+      "total-seats": 10,
+      "archive-at": "2020-11-30T10:30:56.000Z"
+    },
+    "relationships": {
+      "gig-tasks": {
+        "links": {
+          "self": "/api/v1/gigs/10/relationships/gig-tasks",
+          "related": "/api/v1/gigs/10/gig-tasks"
+        }
+      },
+      "gig-results": {
+        "data": [
+          {
+            "type": "gig-results",
+            "id": "1"
+          },
+          {
+            "type": "gig-results",
+            "id": "2"
+          }
+        ]
+      },
+      "gig-time-activities": {
+        "data": [
+          {
+            "type": "gig-time-activities",
+            "id": "1"
+          },
+          {
+            "type": "gig-time-activities",
+            "id": "2"
+          }
+        ]
+      }
+    }
+  },
+  "included": [
+    {
+      "id": "1",
+      "type": "gig-results",
+      "links": {
+        "self": "/api/v1/gig-results/1"
+      },
+      "attributes": {
+        "title": "Vice street locavore kogi craft beer readymade wolf actually truffaut.",
+        "description": "Knausgaard yolo xoxo etsy. Selfies pinterest seitan. 90's aesthetic wayfarers roof lomo echo. Kinfolk schlitz mustache franzen cornhole keytar brunch.",
+        "quantity": 2,
+        "multiplier": 100
+      }
+    },
+    {
+      "id": "2",
+      "type": "gig-results",
+      "links": {
+        "self": "/api/v1/gig-results/2"
+      },
+      "attributes": {
+        "title": "Selvage godard pbr\\u0026b wayfarers.",
+        "description": "Five dollar toast hella pbr\\u0026b carry echo normcore gluten-free. Literally heirloom godard portland. Thundercats cliche typewriter readymade cornhole butcher pitchfork banjo. Green juice hella wes anderson flexitarian cardigan. Meh mixtape yr before they sold out art party plaid bespoke fingerstache.",
+        "quantity": 4,
+        "multiplier": 100
+      }
+    },
+    {
+      "id": "1",
+      "type": "gig-time-activities",
+      "links": {
+        "self": "/api/v1/gig-time-activities/1"
+      },
+      "attributes": {
+        "description": "Viral swag selvage tofu. Taxidermy readymade franzen vinegar schlitz stumptown. Pabst butcher swag 3 wolf moon stumptown phlogiston literally.",
+        "duration-in-ms": 66000,
+        "date": "2020-11-27"
+      }
+    },
+    {
+      "id": "2",
+      "type": "gig-time-activities",
+      "links": {
+        "self": "/api/v1/gig-time-activities/2"
+      },
+      "attributes": {
+        "description": "Tacos meggings sustainable heirloom humblebrag austin cleanse portland. Kickstarter pop-up echo cray shoreditch. Gentrify williamsburg bitters thundercats crucifix. Ethical hammock venmo disrupt.",
+        "duration-in-ms": 56000,
+        "date": "2020-11-27"
+      }
+    }
+  ]
+}
