@@ -1,4 +1,10 @@
 require 'json_api_client'
+
+# temporary monkey patch code to fix gem bug
+require 'cirro_io/has_one'
+require 'cirro_io/base_association'
+# temporary monkey patch code to fix gem bug
+
 require 'cirro_io/client/version'
 require 'cirro_io/client/configuration'
 require 'cirro_io/client/response_debugging_middleware'
