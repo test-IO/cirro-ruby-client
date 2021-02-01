@@ -1,16 +1,16 @@
 module CirroIO
   module Client
     class Gig < Base
-      has_one :worker_invitation_filter
+      has_one :worker_filter
       has_many :gig_tasks
       has_many :gig_results
       has_many :gig_time_activities
 
       # rubocop:disable Metrics/AbcSize
-      def bulk_create_with(worker_invitation_filter, gig_tasks)
+      def bulk_create_with(worker_filter, gig_tasks)
         payload = { data: { attributes: attributes, relationships: {} } }
         payload[:data][:relationships][:gig_tasks] = gig_tasks.map(&:attributes)
-        payload[:data][:relationships][:worker_invitation_filter] = worker_invitation_filter.attributes
+        payload[:data][:relationships][:worker_filter] = worker_filter.attributes
 
         response = self.class.custom_post('bulk/gigs', format_to_dashed_keys(payload))
 
