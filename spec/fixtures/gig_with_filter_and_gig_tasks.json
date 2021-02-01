@@ -14,9 +14,9 @@
       "archive-at": "2020-12-30T10:27:18.000Z"
     },
     "relationships": {
-      "worker-invitation-filter": {
+      "worker-filter": {
         "data": {
-          "type": "worker-invitation-filters",
+          "type": "worker-filters",
           "id": "20"
         }
       },
@@ -41,9 +41,9 @@
   "included": [
     {
       "id": "20",
-      "type": "worker-invitation-filters",
+      "type": "worker-filters",
       "links": {
-        "self": "/api/v1/worker-invitation-filters/20"
+        "self": "/api/v1/worker-filters/20"
       },
       "attributes": {
         "filter-query": "{}"

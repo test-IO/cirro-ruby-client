@@ -13,7 +13,7 @@ RSpec.describe CirroIO::Client::Gig do
                           archive_at: 1.month.from_now)
     end
 
-    let(:worker_invitation_filter) { CirroIO::Client::WorkerInvitationFilter.new(filter_query: '{}') }
+    let(:worker_filter) { CirroIO::Client::WorkerFilter.new(filter_query: '{}') }
     let(:gig_task1) { CirroIO::Client::GigTask.new(title: Faker::Hipster.sentence, base_price: 5) }
     let(:gig_task2) { CirroIO::Client::GigTask.new(title: Faker::Hipster.sentence, base_price: 10) }
 
@@ -21,11 +21,11 @@ RSpec.describe CirroIO::Client::Gig do
       stub_request(:post, "#{test_site}/v1/bulk/gigs")
         .to_return(body: File.read('./spec/fixtures/gig_with_filter_and_gig_tasks.json'), headers: { 'Content-Type' => 'application/json' })
 
-      created_gig = gig.bulk_create_with(worker_invitation_filter, [gig_task1, gig_task2])
+      created_gig = gig.bulk_create_with(worker_filter, [gig_task1, gig_task2])
 
       expect(created_gig).to be_valid
       expect(created_gig.id).to eq('15')
-      expect(created_gig.worker_invitation_filter.id).to eq('20')
+      expect(created_gig.worker_filter.id).to eq('20')
       expect(created_gig.gig_tasks.map(&:id)).to eq(%w[24 25])
     end
   end
