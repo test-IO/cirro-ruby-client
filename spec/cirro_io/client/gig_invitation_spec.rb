@@ -24,11 +24,11 @@ RSpec.describe CirroIO::Client::GigInvitation do
             type: 'gig-invitations',
             'worker-filter': {
               type: 'worker-filters',
-              'filter-query': '{}'
+              'filter-query': '{}',
             },
-            'auto-accept': false
-          }
-        }
+            'auto-accept': false,
+          },
+        },
       }
 
       expect(a_request(:post, request_url).with(body: request_body.to_json)).to have_been_made
