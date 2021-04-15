@@ -1,6 +1,8 @@
 module CirroIO
   module Client
     class Gig < Base
+      include CirroIO::Client::BulkActionHelper
+
       has_one :worker_filter
       has_many :gig_tasks
       has_many :gig_results
@@ -34,12 +36,6 @@ module CirroIO
         self.class.parser.parse(self.class, response).first
       end
       # rubocop:enable Metrics/AbcSize
-
-      private
-
-      def format_to_dashed_keys(params)
-        params.deep_transform_keys { |key| key.to_s.gsub('_', '-') }
-      end
     end
   end
 end

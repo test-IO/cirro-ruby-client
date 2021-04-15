@@ -1,0 +1,6 @@
+{
+  "data": [
+    { "id": "26", "type": "gig-invitations", "attributes": { "status": "accepted", "gig-id": 1, "app-worker-id": 2 } },
+    { "id": "27", "type": "gig-invitations", "attributes": { "status": "accepted", "gig-id": 1, "app-worker-id": 3 } }
+  ]
+}

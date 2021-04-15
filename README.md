@@ -43,3 +43,15 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
+## Usage
+
+#### Bulk create gig invitations
+
+```ruby
+gig = CirroIO::Client::Gig.load(id: 1)
+filter = CirroIO::Client::WorkerFilter.new(filter_query: '{ "app_worker_id": { "$in": [1,2,3] } }')
+invitation = CirroIO::Client::GigInvitation.new(gig: gig)
+
+invitation.bulk_create_with(filter, auto_accept: true) # by default auto_accept is false
+```
