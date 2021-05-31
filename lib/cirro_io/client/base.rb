@@ -4,10 +4,17 @@ module CirroIO
       self.route_format = :dasherized_route
       self.json_key_format = :dasherized_key
 
-      # https://github.com/JsonApiClient/json_api_client/issues/215
+      @setup_connection = lambda do |connection|
+        connection.use CirroIO::Client::JwtAuthentication
+        connection.use Faraday::Response::Logger
+        # connection.use CirroIO::Client::ResponseDebuggingMiddleware # This middleware can be injected during debugging or while adding new specs
+      end
+
+      connection(&@setup_connection)
+
+      # HACK: https://github.com/JsonApiClient/json_api_client/issues/215
       def self.site=(url)
-        super(url)
-        connection.faraday.url_prefix = url
+        super.tap { connection true, &@setup_connection }
       end
 
       def self.custom_post(endpoint, payload)
@@ -24,10 +31,4 @@ module CirroIO
       end
     end
   end
-end
-
-CirroIO::Client::Base.connection do |connection|
-  connection.use CirroIO::Client::JwtAuthentication
-  connection.use Faraday::Response::Logger
-  # connection.use CirroIO::Client::ResponseDebuggingMiddleware # This middleware can be injected during debugging or while adding new specs
 end
