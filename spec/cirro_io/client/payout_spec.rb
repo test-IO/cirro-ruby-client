@@ -23,8 +23,8 @@ RSpec.describe CirroIO::Client::Payout do
   end
 
   describe '.create' do
-    let(:payout) { described_class.create app_worker_id: app_worker.id, **attributes }
-
+    let(:request_url) { "#{test_site}/v1/payouts" }
+    let(:payout) { described_class.create app_worker: app_worker, **attributes }
     let(:attributes) do
       {
         title: Faker::Hipster.sentence,
@@ -35,14 +35,29 @@ RSpec.describe CirroIO::Client::Payout do
     end
 
     before do
-      stub_request(:post, "#{test_site}/v1/app-workers/#{app_worker.id}/payouts")
+      stub_request(:post, request_url)
         .with(headers: request_headers)
         .to_return(body: File.read('./spec/fixtures/payout.json'), headers: response_headers)
     end
 
     it 'creates a payout for the app worker' do
+      request_body = {
+        data: {
+          type: 'payouts',
+          relationships: {
+            'app-worker': {
+              data: {
+                type: 'app-workers',
+                id: 1,
+              },
+            },
+          },
+          attributes: attributes
+        }
+      }
+
       expect(payout).to be_persisted
-      expect(payout.app_worker_id).to eq 1
+      expect(a_request(:post, request_url).with(body: request_body.to_json)).to have_been_made
     end
   end
 end
