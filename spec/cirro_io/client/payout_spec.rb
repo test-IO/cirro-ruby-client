@@ -1,16 +1,5 @@
 RSpec.describe CirroIO::Client::Payout do
   let(:app_worker) { CirroIO::Client::AppWorker.load id: 1 }
-
-  let :request_headers do
-    {
-      'Accept' => 'application/vnd.api+json',
-      'Accept-Encoding' => 'gzip,deflate',
-      'Content-Type' => 'application/vnd.api+json',
-      'User-Agent' => 'Faraday v1.1.0',
-      'Authorization' => 'Bearer jwt-token',
-    }
-  end
-
   let :response_headers do
     {
       'Content-Type' => 'application/json',
@@ -19,7 +8,6 @@ RSpec.describe CirroIO::Client::Payout do
 
   before do
     configure_api_client
-    allow(JWT).to receive(:encode).and_return('jwt-token')
   end
 
   describe '.create' do
@@ -35,9 +23,7 @@ RSpec.describe CirroIO::Client::Payout do
     end
 
     before do
-      stub_request(:post, request_url)
-        .with(headers: request_headers)
-        .to_return(body: File.read('./spec/fixtures/payout.json'), headers: response_headers)
+      stub_request(:post, request_url).to_return(body: File.read('./spec/fixtures/payout.json'), headers: response_headers)
     end
 
     it 'creates a payout for the app worker' do
@@ -52,8 +38,8 @@ RSpec.describe CirroIO::Client::Payout do
               },
             },
           },
-          attributes: attributes
-        }
+          attributes: attributes,
+        },
       }
 
       expect(payout).to be_persisted
