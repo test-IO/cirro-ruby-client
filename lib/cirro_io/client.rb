@@ -14,6 +14,7 @@ require 'cirro_io/client/gig_task'
 require 'cirro_io/client/gig_result'
 require 'cirro_io/client/gig_time_activity'
 require 'cirro_io/client/gig'
+require 'cirro_io/client/payout'
 
 module CirroIO
   module Client
