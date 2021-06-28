@@ -4,6 +4,7 @@ module CirroIO
       include CirroIO::Client::BulkActionHelper
 
       has_one :gig
+      has_one :app_worker
 
       def bulk_create_with(worker_filter, auto_accept: false)
         payload = { data: { attributes: attributes.merge(worker_filter: worker_filter.attributes, auto_accept: auto_accept) } }
