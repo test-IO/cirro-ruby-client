@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cirro-ruby-client (1.5.0)
+    cirro-ruby-client (1.6.1)
       faraday (< 1.2.0)
       faraday_middleware
       json_api_client (>= 1.10.0)
