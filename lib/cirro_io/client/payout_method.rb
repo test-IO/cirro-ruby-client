@@ -5,6 +5,7 @@ module CirroIO
 
       has_one :worker
 
+      # rubocop:disable Metrics/AbcSize
       def self.create(type, payout_data, worker_id)
         payload = { data: { type: 'payout-methods', attributes: {}, relationships: {} } }
 
@@ -19,14 +20,11 @@ module CirroIO
         relationships[:worker][:data][:type] = 'workers'
         relationships[:worker][:data][:id] = worker_id
 
-        response = custom_post(
-          'payout-methods',
-          format_to_dashed_keys(payload),
-          { 'Content-Type' => 'application/vnd.api+json' }
-        )
+        response = custom_post('payout-methods', format_to_dashed_keys(payload), { 'Content-Type' => 'application/vnd.api+json' })
 
         parser.parse(self, response).first
       end
+      # rubocop:enable Metrics/AbcSize
     end
   end
 end
