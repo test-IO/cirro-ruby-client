@@ -16,8 +16,8 @@ module CirroIO
         end
       end
 
-      def self.custom_post(endpoint, payload)
-        custom_connection.post(endpoint, payload.to_json)
+      def self.custom_post(endpoint, payload, headers = {})
+        custom_connection.post(endpoint, payload.to_json, headers)
       end
 
       def self.custom_connection

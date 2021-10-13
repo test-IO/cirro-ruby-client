@@ -19,9 +19,13 @@ module CirroIO
         relationships[:worker][:data][:type] = 'workers'
         relationships[:worker][:data][:id] = worker_id
 
-        response = custom_post('payout-methods', format_to_dashed_keys(payload))
+        response = custom_post(
+          'payout-methods',
+          format_to_dashed_keys(payload),
+          { 'Content-Type' => 'application/vnd.api+json' }
+        )
 
-        parser.parse(self.class, response).first
+        parser.parse(self, response).first
       end
     end
   end
