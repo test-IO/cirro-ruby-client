@@ -19,8 +19,7 @@ require 'cirro_io/client/notifications_broadcast'
 require 'cirro_io/client/notifications_channel'
 require 'cirro_io/client/notifications_template'
 require 'cirro_io/client/worker'
-require 'cirro_io/client/paypal'
-require 'cirro_io/client/bank'
+require 'cirro_io/client/payout_method'
 
 module CirroIO
   module Client
