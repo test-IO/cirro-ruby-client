@@ -10,7 +10,7 @@ infra_container_registry_auth:
       password: $GOOGLE_JSON_KEY
 
 jobs:
-  build:
+  test:
     docker:
       - image: circleci/ruby:2.7.1-node
         environment:
@@ -127,10 +127,10 @@ workflows:
   version: 2
   deploy_the_gem:
     jobs:
-      - build
+      - test
       - deploy:
           requires:
-            - build
+            - test
           filters:
             branches:
               only:
