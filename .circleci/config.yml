@@ -135,7 +135,7 @@ workflows:
             branches:
               only:
                 - master
-      - defectdojo:
+      - defectdojo
           # filters:
           #   branches:
           #     only:
