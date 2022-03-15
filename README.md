@@ -55,3 +55,18 @@ invitation = CirroIO::Client::GigInvitation.new(gig: gig)
 
 invitation.bulk_create_with(filter, auto_accept: true) # by default auto_accept is false
 ```
+
+#### Creating Payouts for workers
+
+```ruby
+app_worker = CirroIO::Client::AppWorker.load(id: 1234)
+
+CirroIO::Client::Payout.create(
+  app_worker: app_worker,
+  amount: 100, # € 1.00
+  title: "Bonus for something",
+  description: "Description of the bonus.",
+  cost_center_key: "PROJECT-CODE",
+  billing_date: DateTime.now
+)
+```
