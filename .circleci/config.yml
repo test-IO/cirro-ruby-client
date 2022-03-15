@@ -12,7 +12,7 @@ infra_container_registry_auth:
 jobs:
   test:
     docker:
-      - image: circleci/ruby:2.7.1-node
+      - image: cimg/ruby:2.7.1-node
         environment:
           - RAILS_ENV=test
           - RACK_ENV=test
@@ -37,7 +37,7 @@ jobs:
 
   deploy:
     docker:
-      - image: circleci/ruby:2.7.1-node
+      - image: cimg/ruby:2.7.1-node
     steps:
       - checkout
       - run:
