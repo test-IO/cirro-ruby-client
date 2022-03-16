@@ -4,7 +4,7 @@ PATH
     cirro-ruby-client (1.6.1)
       faraday (< 1.2.0)
       faraday_middleware
-      json_api_client (>= 1.10.0)
+      json_api_client (>= 1.10.0, <= 1.18.0)
       jwt
 
 GEM

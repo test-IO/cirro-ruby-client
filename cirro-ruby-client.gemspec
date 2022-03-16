@@ -28,5 +28,5 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'jwt'
   spec.add_runtime_dependency 'faraday', '< 1.2.0'
   spec.add_runtime_dependency 'faraday_middleware'
-  spec.add_runtime_dependency 'json_api_client', '>= 1.10.0'
+  spec.add_runtime_dependency 'json_api_client', '>= 1.10.0', '<= 1.18.0' # TODO: see https://github.com/test-IO/cirro-ruby-client/issues/19
 end
