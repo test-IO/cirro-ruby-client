@@ -32,6 +32,7 @@ module CirroIO
       # MonkeyPatch: https://github.com/JsonApiClient/json_api_client/issues/390
       # waiting for json_api_client to release a new version with the fix
       # https://github.com/JsonApiClient/json_api_client/pull/398
+      # rubocop:disable all
       def initialize(params = {})
         params = params.with_indifferent_access
         @persisted = nil
@@ -46,6 +47,7 @@ module CirroIO
 
         self.request_params = self.class.request_params_class.new(self.class)
       end
+      # rubocop:enable all
     end
   end
 end
