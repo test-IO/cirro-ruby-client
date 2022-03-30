@@ -28,6 +28,26 @@ module CirroIO
           conn.use JsonApiClient::Middleware::Status, {}
         end
       end
+
+      # HACK: https://github.com/JsonApiClient/json_api_client/issues/390
+      # waiting for json_api_client to release a new version with the fix
+      # https://github.com/JsonApiClient/json_api_client/pull/398
+      # rubocop:disable all
+      def initialize(params = {})
+        params = params.with_indifferent_access
+        @persisted = nil
+        @destroyed = nil
+        self.links = self.class.linker.new(params.delete(:links) || {})
+        self.relationships = self.class.relationship_linker.new(self.class, params.delete(:relationships) || {})
+        self.attributes = self.class.default_attributes.merge params.except(*self.class.prefix_params)
+        self.forget_change!(:type)
+        self.__belongs_to_params = params.slice(*self.class.prefix_params)
+
+        setup_default_properties
+
+        self.request_params = self.class.request_params_class.new(self.class)
+      end
+      # rubocop:enable all
     end
   end
 end
