@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cirro-ruby-client (1.7.0)
+    cirro-ruby-client (1.6.2)
       faraday (< 1.2.0)
       faraday_middleware
       json_api_client (>= 1.10.0)
@@ -10,14 +10,13 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    activemodel (6.1.5)
-      activesupport (= 6.1.5)
-    activesupport (6.1.5)
+    activemodel (7.0.2.3)
+      activesupport (= 7.0.2.3)
+    activesupport (7.0.2.3)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
-      zeitwerk (~> 2.3)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.1)
@@ -42,7 +41,7 @@ GEM
       faraday (>= 0.15.2, < 2.0)
       faraday_middleware (>= 0.9.0, < 2.0)
       rack (>= 0.2)
-    jwt (2.2.3)
+    jwt (2.3.0)
     method_source (1.0.0)
     minitest (5.15.0)
     multipart-post (2.1.1)
@@ -93,7 +92,6 @@ GEM
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
-    zeitwerk (2.5.4)
 
 PLATFORMS
   ruby
