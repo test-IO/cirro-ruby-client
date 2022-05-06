@@ -1,0 +1,59 @@
+{
+  "data": {
+    "id": "404603a5-73b7-41ff-b8a0-5954e6bcb933",
+    "type": "epam-accounts",
+    "links": {
+      "self": "http://api.cirro.io/api/v1/epam-accounts/404603a5-73b7-41ff-b8a0-5954e6bcb933"
+    },
+    "attributes": {
+      "last-synced-skills-at": null
+    },
+    "relationships": {
+      "skills": {
+        "data": [
+          {
+            "type": "skills",
+            "id": "1"
+          },
+          {
+            "type": "skills",
+            "id": "2"
+          },
+          {
+            "type": "skills",
+            "id": "3"
+          }
+        ]
+      }
+    }
+  },
+  "included": [
+    {
+      "id": "1",
+      "type": "skills",
+      "attributes": {
+        "name": "Plus",
+        "epam-idx": "c36a5ae6-9c40-4122-8857-6e96dc85a447",
+        "primary-in-epam": true
+      }
+    },
+    {
+      "id": "2",
+      "type": "skills",
+      "attributes": {
+        "name": "Draco",
+        "epam-idx": "9f3a7341-7c0d-4d7e-a985-02f2f1737bf4",
+        "primary-in-epam": true
+      }
+    },
+    {
+      "id": "3",
+      "type": "skills",
+      "attributes": {
+        "name": "Janus (time-reversible computing programming language)",
+        "epam-idx": "ca6acdd0-7f53-40c3-9d81-dfe2fba3b781",
+        "primary-in-epam": false
+      }
+    }
+  ]
+}

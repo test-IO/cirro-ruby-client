@@ -18,6 +18,8 @@ require 'cirro_io/client/payout'
 require 'cirro_io/client/notifications_broadcast'
 require 'cirro_io/client/notifications_channel'
 require 'cirro_io/client/notifications_template'
+require 'cirro_io/client/epam_account'
+require 'cirro_io/client/skill'
 
 module CirroIO
   module Client
