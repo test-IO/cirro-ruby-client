@@ -70,3 +70,89 @@ CirroIO::Client::Payout.create(
   billing_date: DateTime.now
 )
 ```
+
+# CirroIOV2::Client
+
+## Configuration
+
+  ```ruby
+  # with key path
+  client = CirroIOV2::Client.new(private_key_path: "./storage/cirro_key.pem", client_id: "WULnc6Y0rlaTBCSiHAb0kGWKFuIxPWBXJysyZeG3Rtw", site: "https://api.staging.cirro.io")
+
+  # with key string
+  client = CirroIOV2::Client.new(private_key: Rails.application.credentials.cirro_private_key, client_id: "WULnc6Y0rlaTBCSiHAb0kGWKFuIxPWBXJysyZeG3Rtw", site: "https://api.staging.cirro.io")
+  ```
+
+## Usage
+
+### Get user info
+
+```ruby
+client.User.find(1)
+```
+
+### Create a gig
+
+```ruby
+client.Gig.create(
+  title: "Favourite programming language?",
+  description: "Description of gig ...",
+  url: "http://heathcote.co/zina.gibson"
+  start_at: 1652285764,
+  end_at: 1653412329,
+  total_seats: 2,
+  invitation_mode: "auto",
+  filter_query: {
+  status: "active",
+  segment: "my_favorite_testers"
+  },
+  tasks: [
+    { title: "Ah, Wilderness!", base_price: 300 }
+  ],
+  notification_payload: {
+    project_title: "Corporate Tax",
+    task_title: "Add dataset",
+    task_type: "Review"
+  },
+  epam_options: {
+    extra_mile: true
+  }
+)
+```
+
+### Get list of gig invitations
+
+By default the response is paginated with 10 per page. The `has_more` attribute indicates whether there're more records to be fetched or not.
+You can move from page to page using `after` or `before`.
+
+```ruby
+# return all with max limit
+client.GigInvitation.all(limit: 100)
+
+# return paginated after gig invitation ID 100
+client.GigInvitation.all(limit: 100, after: 100)
+
+# return paginated before gig invitation ID 100
+client.GigInvitation.all(limit: 100, before: 100)
+
+# filter by user with ID 1 and gig with ID 1
+client.GigInvitation.all(user: 1, gig: 1)
+
+# filter by status
+client.GigInvitation.all(status: ['pending', 'accepted'])
+client.GigInvitation.all(status: 'accepted')
+```
+
+### Create a notification broadcast
+
+```ruby
+client.NotificationBroadcast.create(
+  payload: {
+    foo: 'bar',
+    key: 'value'
+  },
+  recipients: {
+    user_ids: [1, 2, 3]
+  }
+)
+```

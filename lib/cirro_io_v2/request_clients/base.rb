@@ -6,8 +6,10 @@ module CirroIOV2
 
       def request(*args)
         response = make_request(*args)
-        raise Errors::HTTPError, response unless response.is_a?(Net::HTTPSuccess)
+        raise Errors::HTTPError, response unless response.success?
         response
+      rescue Faraday::ParsingError => e
+        raise Errors::ResponseNotJsonError, e
       end
 
       def make_request(*args)

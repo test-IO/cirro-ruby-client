@@ -3,16 +3,19 @@ require 'openssl'
 
 module CirroIOV2
   module RequestClients
-    class Jwt
+    class Jwt < Base
       attr_reader :base_url, :private_key, :client_id, :connection
 
       def initialize(base_url:, private_key:, client_id:)
         # TODO raise errors for wrong input
         @base_url = base_url
-        @private_key = OpenSSL::PKey::RSA.new(private_key)
+        @private_key = private_key
         @client_id = client_id
 
-        @connection = Faraday.new(url: base_url, headers: {'Content-Type' => 'application/json'})
+        @connection = Faraday.new(url: base_url) do |conn|
+          conn.request :json
+          conn.response :json
+        end
       end
 
       def make_request(http_method, url, body = nil, params = nil, headers = {})
