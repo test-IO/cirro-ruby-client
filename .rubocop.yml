@@ -107,11 +107,17 @@ Style/HashTransformValues:
 RSpec/FilePath:
   Enabled: true
   IgnoreMethods: true
+  Exclude:
+    - "spec/cirro_io_v2/**/*_spec.rb"
+
 
 Style/Documentation:
   Enabled: false
 
 RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/EmptyExampleGroup:
   Enabled: false
 
 RSpec/MultipleExpectations:
