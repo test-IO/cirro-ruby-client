@@ -17,10 +17,10 @@ module CirroIOV2
     DEFAULT_OPTIONS = {
       site: 'https://api.cirro.io',
       api_version: 'v2',
-      auth_type: :jwt
+      auth_type: :jwt,
     }.freeze
 
-    DEFINED_OPTIONS = (DEFAULT_OPTIONS.keys + [:private_key, :private_key_path, :client_id]).freeze
+    DEFINED_OPTIONS = (DEFAULT_OPTIONS.keys + %i[private_key private_key_path client_id]).freeze
 
     def initialize(options = {})
       @options = DEFAULT_OPTIONS.merge(options)
@@ -33,13 +33,16 @@ module CirroIOV2
       when :jwt
         private_key = OpenSSL::PKey::RSA.new(private_key) if @options[:private_key]
         private_key = OpenSSL::PKey::RSA.new(File.read(@options[:private_key_path])) if @options[:private_key_path]
-        @request_client = RequestClients::Jwt.new(base_url: "#{@options[:site]}/#{@options[:api_version]}", client_id: @options[:client_id], private_key: private_key)
+        @request_client = RequestClients::Jwt.new(base_url: "#{@options[:site]}/#{@options[:api_version]}",
+                                                  client_id: @options[:client_id],
+                                                  private_key: private_key)
       else
         raise ArgumentError, 'Options: ":auth_type" must be ":jwt"'
       end
     end
 
     # resources
+    # rubocop:disable Naming/MethodName
 
     def User
       Resources::User.new(self)
@@ -60,5 +63,6 @@ module CirroIOV2
     def NotificationChannelPreference
       # TODO
     end
+    # rubocop:enable Naming/MethodName
   end
 end
