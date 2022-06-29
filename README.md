@@ -88,18 +88,13 @@ CirroIO::Client::Payout.create(
 ### Get user info
 
 ```ruby
-client.User.find(1) # makes API call with the ID
-
-# Using load + find
-user = client.User.load(1) # load stores the ID of the resource and doesn't make API call
-user.find
+client.User.find(1)
 ```
 
 ### Create a gig
 
 ```ruby
-# Using create
-client.Gig.create( # makes API call right away
+client.Gig.create(
   title: "Favourite programming language?",
   description: "Description of gig ...",
   url: "http://heathcote.co/zina.gibson"
@@ -123,34 +118,6 @@ client.Gig.create( # makes API call right away
     extra_mile: true
   }
 )
-
-# Using build + save
-gig = client.Gig.build( # build does not make a call to API, it only stores the given payload
-  title: "Favourite programming language?",
-  description: "Description of gig ...",
-  url: "http://heathcote.co/zina.gibson"
-  start_at: 1652285764,
-  end_at: 1653412329,
-  total_seats: 2,
-  invitation_mode: "auto",
-  filter_query: {
-  status: "active",
-  segment: "my_favorite_testers"
-  },
-  tasks: [
-    { title: "Ah, Wilderness!", base_price: 300 }
-  ],
-  notification_payload: {
-    project_title: "Corporate Tax",
-    task_title: "Add dataset",
-    task_type: "Review"
-  },
-  epam_options: {
-    extra_mile: true
-  }
-)
-
-gig.save
 ```
 
 ### Get list of gig invitations
@@ -160,27 +127,26 @@ You can move from page to page using `after` or `before`.
 
 ```ruby
 # return all with max limit
-client.GigInvitation.all(limit: 100)
+client.GigInvitation.list(limit: 100)
 
 # return paginated after gig invitation ID 100
-client.GigInvitation.all(limit: 100, after: 100)
+client.GigInvitation.list(limit: 100, after: 100)
 
 # return paginated before gig invitation ID 100
-client.GigInvitation.all(limit: 100, before: 100)
+client.GigInvitation.list(limit: 100, before: 100)
 
 # filter by user with ID 1 and gig with ID 1
-client.GigInvitation.all(user: 1, gig: 1)
+client.GigInvitation.list(user: 1, gig: 1)
 
 # filter by status
-client.GigInvitation.all(status: ['pending', 'accepted'])
-client.GigInvitation.all(status: 'accepted')
+client.GigInvitation.list(status: ['pending', 'accepted'])
+client.GigInvitation.list(status: 'accepted')
 ```
 
 ### Accept a gig invitation
 
 ```ruby
-invitation = client.GigInvitation.load(1) # load will not make an API call, it only stores the id of the resource
-invitation.accept
+client.GigInvitation.accept(1)
 ```
 
 ### Create a notification broadcast
