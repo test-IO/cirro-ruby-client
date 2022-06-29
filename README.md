@@ -88,13 +88,18 @@ CirroIO::Client::Payout.create(
 ### Get user info
 
 ```ruby
-client.User.find(1)
+client.User.find(1) # makes API call with the ID
+
+# Using load + find
+user = client.User.load(1) # load stores the ID of the resource and doesn't make API call
+user.find
 ```
 
 ### Create a gig
 
 ```ruby
-client.Gig.create(
+# Using create
+client.Gig.create( # makes API call right away
   title: "Favourite programming language?",
   description: "Description of gig ...",
   url: "http://heathcote.co/zina.gibson"
@@ -118,6 +123,34 @@ client.Gig.create(
     extra_mile: true
   }
 )
+
+# Using build + save
+gig = client.Gig.build( # build does not make a call to API, it only stores the given payload
+  title: "Favourite programming language?",
+  description: "Description of gig ...",
+  url: "http://heathcote.co/zina.gibson"
+  start_at: 1652285764,
+  end_at: 1653412329,
+  total_seats: 2,
+  invitation_mode: "auto",
+  filter_query: {
+  status: "active",
+  segment: "my_favorite_testers"
+  },
+  tasks: [
+    { title: "Ah, Wilderness!", base_price: 300 }
+  ],
+  notification_payload: {
+    project_title: "Corporate Tax",
+    task_title: "Add dataset",
+    task_type: "Review"
+  },
+  epam_options: {
+    extra_mile: true
+  }
+)
+
+gig.save
 ```
 
 ### Get list of gig invitations
@@ -143,6 +176,13 @@ client.GigInvitation.all(status: ['pending', 'accepted'])
 client.GigInvitation.all(status: 'accepted')
 ```
 
+### Accept a gig invitation
+
+```ruby
+invitation = client.GigInvitation.load(1) # load will not make an API call, it only stores the id of the resource
+invitation.accept
+```
+
 ### Create a notification broadcast
 
 ```ruby
@@ -153,6 +193,7 @@ client.NotificationBroadcast.create(
   },
   recipients: {
     user_ids: [1, 2, 3]
-  }
+  },
+  channel_id: 1
 )
 ```
