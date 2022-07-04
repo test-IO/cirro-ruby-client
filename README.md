@@ -83,14 +83,44 @@ CirroIO::Client::Payout.create(
   client = CirroIOV2::Client.new(private_key: Rails.application.credentials.cirro_private_key, client_id: "WULnc6Y0rlaTBCSiHAb0kGWKFuIxPWBXJysyZeG3Rtw", site: "https://api.staging.cirro.io")
   ```
 
-## Usage
+# Usage
 
+## User
 ### Get user info
 
 ```ruby
 client.User.find(1)
 ```
 
+### Get notification preferences for a user
+
+```ruby
+preference = client.User.get_notification_preference(1)
+# => NotificationPreference object
+
+preference.id
+# => '1'
+
+preference.locale
+# => 'de'
+
+preference.channels
+# => Array of NotificationChannelPreference objects
+```
+
+### Update notification preferences for a user
+
+```ruby
+client.User.update_notification_preference({
+  locale: 'de',
+  channels: [
+    { id: '1', preferences: { email: 'immediately' } },
+    { id: '2', preferences: { email: 'digest_daily' } }
+  ]
+})
+```
+
+## Gig
 ### Create a gig
 
 ```ruby
@@ -120,6 +150,7 @@ client.Gig.create(
 )
 ```
 
+## GigInvitation
 ### Get list of gig invitations
 
 By default the response is paginated with 10 per page. The `has_more` attribute indicates whether there're more records to be fetched or not.
@@ -136,11 +167,20 @@ client.GigInvitation.list(limit: 100, after: 100)
 client.GigInvitation.list(limit: 100, before: 100)
 
 # filter by user with ID 1 and gig with ID 1
-client.GigInvitation.list(user: 1, gig: 1)
+client.GigInvitation.list(user_id: 1, gig_id: 1)
 
 # filter by status
 client.GigInvitation.list(status: ['pending', 'accepted'])
 client.GigInvitation.list(status: 'accepted')
+
+list = client.GigInvitation.list(limit: 100)
+# => ListObject
+
+list.has_more?
+# => true
+
+list.data
+# => Array of GigInvitation objects
 ```
 
 ### Accept a gig invitation
@@ -149,7 +189,204 @@ client.GigInvitation.list(status: 'accepted')
 client.GigInvitation.accept(1)
 ```
 
-### Create a notification broadcast
+## Notification Locale
+### Create a notification locale
+
+```ruby
+locale = client.NotificationLocale.create(locale: 'de')
+# => NotificationLocale object
+
+locale.locale
+# => 'de'
+
+locale.configurations
+# => Array of NotificationConfiguration objects
+```
+
+### List all notification locales
+
+```ruby
+list = client.NotificationLocale.list
+# => ListObject
+
+list.has_more?
+# => true
+
+list.data
+# => Array of NotificationLocale objects
+
+client.NotificationLocale.list(default: true) # filter by default
+```
+
+## Notification Configuration
+### List all notification configurations
+
+```ruby
+list = client.NotificationConfiguration.list
+# => ListObject
+
+list.has_more?
+# => true
+
+list.data
+# => Array of NotificationConfiguration objects
+
+client.NotificationConfiguration.list(locale: 'de') # filter by locale
+
+client.NotificationConfiguration.list(limit: 100, after: 100) # pagination
+```
+
+## Notification Layout
+### Create a notification layout
+
+```ruby
+client.NotificationLayout.create(
+  name: 'custom_layout',
+  templates: [
+    { notification_configuration_id: '1', body: '<p>hello {{recipient}}</p>' },
+    { notification_configuration_id: '2', body: '<p>hallo {{recipient}}</p>' }
+  ]
+)
+```
+
+### Update a notification layout
+
+```ruby
+client.NotificationLayout.update('1', name: 'custom_layout')
+```
+
+### Create a new template
+
+```ruby
+client.NotificationLayout.create_template(
+  '1',
+  { notification_configuration_id: '1', body: '<p>hello {{recipient}}</p>' }
+)
+# => NotificationLayoutTemplate object
+```
+
+## Notification Layout Template
+### Update a notification layout template
+
+```ruby
+client.NotificationLayoutTemplate.update(
+  '1',
+  { notification_configuration_id: '1', body: '<p>hello {{recipient}}</p>' }
+)
+```
+### Delete a notification layout template
+
+```ruby
+client.NotificationLayoutTemplate.delete('1')
+```
+
+## Notification Channel
+### List all notification channels
+
+```ruby
+list = client.NotificationChannel
+# => ListObject
+
+list.has_more?
+# => true
+
+list.data
+# => Array of NotificationChannel objects
+
+# filter by layout_id
+client.NotificationChannel.list(notification_layout_id: 1)
+
+# pagination
+client.NotificationChannel.list(limit: 10, after: 10)
+```
+
+### Create a notification channel
+
+```ruby
+client.NotificationChannel.create(
+  name: 'new_bug_comment',
+  notification_layout_id: 1,
+  preferences: {
+    email: 'immediately'
+  },
+  templates: [
+    {
+      "notification_configuration_id": "1",
+      "subject": "New Bug Comment",
+      "body": "Hello {{recipient_first_name}}, you got {{pluralize count, 'new comment', 'new comments'}}"
+    },
+    {
+      "notification_configuration_id": "2",
+      "subject": "Neuer Kommentar",
+      "body": "Hallo {{recipient_first_name}}, Du hast {{pluralize count, 'neuen Kommentar', 'neue Kommentare'}}"
+    }
+  ]
+)
+```
+
+## Notification (Channel) Template
+### List all
+
+```ruby
+list = client.NotificationTemplate
+# => ListObject
+
+list.has_more?
+# => true
+
+list.data
+# => Array of NotificationTemplate objects
+
+# filter by channel id
+client.NotificationTemplate.list(notification_channel_id: 1)
+
+# filter by configuration id
+client.NotificationTemplate.list(notification_configuration_id: 1)
+
+# pagination
+client.NotificationTemplate.list(limit: 10, after: 10)
+```
+
+### Update a notification template
+
+```ruby
+client.NotificationTemplate.update(
+  '1',
+  "subject": "New Bug Comment",
+  "body": "Hello {{recipient_first_name}}, you got {{pluralize count, 'new comment', 'new comments'}}"
+)
+``` 
+
+### Delete a notification template
+
+```ruby
+client.NotificationTemplate.delete('1')
+``` 
+## Notifcation Channel Preference
+### List all
+
+```ruby
+list = client.NotificationChannelPreference.list
+# => ListObject
+
+list.has_more?
+# => true
+
+list.data
+# => Array of NotificationChannelPreference objects
+
+# filter by channel id
+client.NotificationChannelPreference.list(notification_channel_id: 1)
+
+# filter by user id
+client.NotificationChannelPreference.list(user_id: 1)
+
+# pagination
+client.NotificationChannelPreference.list(limit: 10, after: 10)
+```
+
+## Notifcation Broadcast
+### Create a notifcation broadcast
 
 ```ruby
 client.NotificationBroadcast.create(
@@ -160,6 +397,6 @@ client.NotificationBroadcast.create(
   recipients: {
     user_ids: [1, 2, 3]
   },
-  channel_id: 1
+  notification_channel_id: 1
 )
 ```
