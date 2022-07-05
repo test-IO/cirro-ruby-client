@@ -89,7 +89,14 @@ CirroIO::Client::Payout.create(
 ### Get user info
 
 ```ruby
-client.User.find(1)
+user = client.User.find(1)
+# => User object
+
+user.first_name
+# => 'Grazyna'
+
+user.worker
+# => { billable: false, document: {...} }
 ```
 
 ### Get notification preferences for a user
@@ -148,6 +155,7 @@ client.Gig.create(
     extra_mile: true
   }
 )
+# => Gig object
 ```
 
 ## GigInvitation
