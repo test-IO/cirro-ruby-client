@@ -31,7 +31,7 @@ module CirroIOV2
       # TODO: for now we only have jwt
       case @options[:auth_type]
       when :jwt
-        private_key = OpenSSL::PKey::RSA.new(private_key) if @options[:private_key]
+        private_key = OpenSSL::PKey::RSA.new(@options[:private_key]) if @options[:private_key]
         private_key = OpenSSL::PKey::RSA.new(File.read(@options[:private_key_path])) if @options[:private_key_path]
         @request_client = RequestClients::Jwt.new(base_url: "#{@options[:site]}/#{@options[:api_version]}",
                                                   client_id: @options[:client_id],
@@ -53,7 +53,7 @@ module CirroIOV2
     end
 
     def Gig
-      # TODO
+      Resources::Gig.new(self)
     end
 
     def NotificationBroadcast
