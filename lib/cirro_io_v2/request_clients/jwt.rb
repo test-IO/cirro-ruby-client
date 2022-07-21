@@ -18,7 +18,8 @@ module CirroIOV2
         end
       end
 
-      def make_request(http_method, url, body = nil, params = nil, _headers = {})
+      def make_request(http_method, url, body: nil, params: nil, _headers: {})
+        # TODO: why do you use underscore here?
         @connection.send(http_method, url) do |request|
           request.params = params if params
           request.body = body.to_json if body

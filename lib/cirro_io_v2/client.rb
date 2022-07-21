@@ -8,6 +8,9 @@ require 'cirro_io_v2/request_clients/jwt'
 
 require 'cirro_io_v2/resources/base'
 require 'cirro_io_v2/resources/user'
+require 'cirro_io_v2/resources/gig'
+require 'cirro_io_v2/resources/gig_ivitation'
+# Dir['cirro_io_v2/**/*.rb'].each { |f| require f.partition('/').last }
 
 module CirroIOV2
   class Client
@@ -49,7 +52,7 @@ module CirroIOV2
     end
 
     def GigInvitation
-      # TODO
+      Resources::GigInvitation.new(self)
     end
 
     def Gig
