@@ -2,9 +2,7 @@ RSpec.describe CirroIOV2::Resources::GigInvitation do
   let(:client) { CirroIOV2::Client.new }
 
   describe '#list' do
-    subject do
-      client.GigInvitation.list(params)
-    end
+    subject(:list_gigs) { client.GigInvitation.list(params) }
 
     let(:gig_invitations_list) { FactoryBot.create(:gig_invitations_list) }
     let(:params) do
@@ -14,49 +12,39 @@ RSpec.describe CirroIOV2::Resources::GigInvitation do
         limit: rand(1..10),
         before: SecureRandom.uuid,
         after: SecureRandom.uuid,
-        status: 'accepted'
+        status: 'accepted',
       }
     end
 
     before do
-      allow_any_instance_of(CirroIOV2::RequestClients::Base)
-        .to receive(:request)
-        .and_return(double(body: gig_invitations_list.to_h))
+      allow(client.request_client).to receive(:request).and_return(OpenStruct.new(body: gig_invitations_list.to_h))
     end
 
     it 'sends request' do
-      expect_any_instance_of(CirroIOV2::RequestClients::Base)
-        .to receive(:request)
-        .with(:get, "gig_invitations", { params: params })
-      subject
+      list_gigs
+      expect(client.request_client).to have_received(:request).with(:get, 'gig_invitations', { params: params })
     end
 
     it 'returns gig invitation' do
-      expect(subject).to eq(gig_invitations_list)
+      expect(list_gigs).to eq(gig_invitations_list)
     end
   end
 
   describe '#accept' do
-    subject do
-      client.GigInvitation.accept(id)
-    end
+    subject(:accept_gig) { client.GigInvitation.accept(id) }
 
     let(:gig_invitation) { FactoryBot.create(:gig_invitation) }
     let(:id) { gig_invitation.id }
 
-    before do
-      allow_any_instance_of(CirroIOV2::RequestClients::Base)
-        .to receive(:request)
-        .and_return(double(body: gig_invitation.to_h))
-    end
+    before { allow(client.request_client).to receive(:request).and_return(OpenStruct.new(body: gig_invitation.to_h)) }
 
     it 'sends request' do
-      expect_any_instance_of(CirroIOV2::RequestClients::Base).to receive(:request).with(:post, "gig_invitations/#{id}/accept")
-      subject
+      accept_gig
+      expect(client.request_client).to have_received(:request).with(:post, "gig_invitations/#{id}/accept")
     end
 
     it 'returns gig invitation' do
-      expect(subject).to eq(gig_invitation)
+      expect(accept_gig).to eq(gig_invitation)
     end
   end
 end

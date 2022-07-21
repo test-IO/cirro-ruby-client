@@ -6,11 +6,8 @@ require 'cirro_io_v2/errors/response_not_json_error'
 require 'cirro_io_v2/request_clients/base'
 require 'cirro_io_v2/request_clients/jwt'
 
-require 'cirro_io_v2/resources/base'
-require 'cirro_io_v2/resources/user'
-require 'cirro_io_v2/resources/gig'
-require 'cirro_io_v2/resources/gig_ivitation'
-# Dir['cirro_io_v2/**/*.rb'].each { |f| require f.partition('/').last }
+Dir['lib/cirro_io_v2/resources/**/*.rb'].each { |f| require f.partition('/').last }
+# TODO: Should I import the hole directory?
 
 module CirroIOV2
   class Client
