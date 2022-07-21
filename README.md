@@ -134,7 +134,7 @@ client.User.update_notification_preference({
 client.Gig.create(
   title: "Favourite programming language?",
   description: "Description of gig ...",
-  url: "http://heathcote.co/zina.gibson"
+  url: "http://heathcote.co/zina.gibson",
   start_at: 1652285764,
   end_at: 1653412329,
   total_seats: 2,
