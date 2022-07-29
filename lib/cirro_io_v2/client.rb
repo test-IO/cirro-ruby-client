@@ -8,6 +8,10 @@ require 'cirro_io_v2/request_clients/jwt'
 
 require 'cirro_io_v2/resources/base'
 require 'cirro_io_v2/resources/user'
+require 'cirro_io_v2/resources/notification_locale'
+require 'cirro_io_v2/resources/notification_layout'
+require 'cirro_io_v2/resources/notification_channel'
+require 'cirro_io_v2/resources/notification_broadcast'
 
 module CirroIOV2
   class Client
@@ -57,7 +61,19 @@ module CirroIOV2
     end
 
     def NotificationBroadcast
-      # TODO
+      Resources::NotificationBroadcast.new(self)
+    end
+
+    def NotificationLocale
+      Resources::NotificationLocale.new(self)
+    end
+
+    def NotificationLayout
+      Resources::NotificationLayout.new(self)
+    end
+
+    def NotificationChannel
+      Resources::NotificationChannel.new(self)
     end
 
     def NotificationChannelPreference

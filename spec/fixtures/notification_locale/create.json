@@ -1,0 +1,44 @@
+
+{
+  "id": "1",
+  "object": "notification_locale",
+  "default": false,
+  "locale": "de",
+  "configurations": {
+    "object": "list",
+    "data": [
+      {
+        "id": "1",
+        "object": "notification_configuration",
+        "deliver_by": "email",
+        "format": "html",
+        "kind": "standalone",
+        "locale": "de"
+      },
+      {
+        "id": "2",
+        "object": "notification_configuration",
+        "deliver_by": "email",
+        "format": "text",
+        "kind": "standalone",
+        "locale": "de"
+      },
+      {
+        "id": "3",
+        "object": "notification_configuration",
+        "deliver_by": "email",
+        "format": "html",
+        "kind": "digest",
+        "locale": "de"
+      },
+      {
+        "id": "3",
+        "object": "notification_configuration",
+        "deliver_by": "email",
+        "format": "text",
+        "kind": "digest",
+        "locale": "de"
+      }
+    ]
+  }
+}
