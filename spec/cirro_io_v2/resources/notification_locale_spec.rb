@@ -2,7 +2,6 @@ RSpec.describe CirroIOV2::Resources::NotificationLocale do
   let(:client) { CirroIOV2::Client.new }
   let(:locale) { 'de' }
 
-
   describe '#create' do
     let(:response) do
       { body: File.read('./spec/fixtures/notification_locale/create.json'), headers: { 'Content-Type' => 'application/json' } }
@@ -27,7 +26,7 @@ RSpec.describe CirroIOV2::Resources::NotificationLocale do
       it 'returns error' do
         notification_locale = described_class.new(client)
 
-        expect{ notification_locale.create({ locale: locale, test: 'test' }) }.to raise_error('ParamNotAllowed')
+        expect { notification_locale.create({ locale: locale, test: 'test' }) }.to raise_error('ParamNotAllowed')
       end
     end
   end
