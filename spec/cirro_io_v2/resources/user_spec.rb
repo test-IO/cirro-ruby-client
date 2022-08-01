@@ -13,8 +13,9 @@ RSpec.describe CirroIOV2::Resources::User do
       expect(client.request_client).to have_received(:request).with(:get, "users/#{id}")
     end
 
-    it 'returns user' do
-      expect(find_user).to eq(user)
+    it 'returns user structure' do
+      expect(find_user).to be_a(Struct)
+      expect(find_user.to_h).to eq(user.to_h)
     end
   end
 end

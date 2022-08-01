@@ -13,8 +13,9 @@ RSpec.describe CirroIOV2::Resources::Gig do
       expect(client.request_client).to have_received(:request).with(:post, 'gigs', { body: gig_params })
     end
 
-    it 'returns gig' do
-      expect(create_gig).to eq(gig)
+    it 'returns gig structure' do
+      expect(create_gig).to be_a(Struct)
+      expect(create_gig.to_h).to eq(gig.to_h)
     end
   end
 end

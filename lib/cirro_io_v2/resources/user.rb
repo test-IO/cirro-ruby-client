@@ -3,7 +3,7 @@ module CirroIOV2
     class User < Base
       def find(id)
         response = client.request_client.request(:get, "#{resource_root}/#{id}")
-        OpenStruct.new(response.body)
+        Responses::UserResponce.create(response.body)
       end
     end
   end

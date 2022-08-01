@@ -7,7 +7,6 @@ module CirroIOV2
       attr_reader :base_url, :private_key, :client_id, :connection
 
       def initialize(base_url:, private_key:, client_id:)
-        # TODO: raise errors for wrong input
         @base_url = base_url
         @private_key = private_key
         @client_id = client_id

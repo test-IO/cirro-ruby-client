@@ -4,7 +4,13 @@ RSpec.describe CirroIOV2::Resources::GigInvitation do
   describe '#list' do
     subject(:list_gigs) { client.GigInvitation.list(params) }
 
-    let(:gig_invitations_list) { FactoryBot.create(:gig_invitations_list) }
+    let(:gig_invitations_list) { FactoryBot.create(:gig_invitations_list).to_h }
+    let(:gig_invitations_list_responce) do
+      gig_invitations_list_responce = OpenStruct.new(body: gig_invitations_list.to_h)
+      gig_invitations_list_responce.body[:data].map!(&:to_h)
+      gig_invitations_list_responce
+    end
+
     let(:params) do
       {
         user_id: SecureRandom.uuid,
@@ -17,7 +23,8 @@ RSpec.describe CirroIOV2::Resources::GigInvitation do
     end
 
     before do
-      allow(client.request_client).to receive(:request).and_return(OpenStruct.new(body: gig_invitations_list.to_h))
+      allow(client.request_client).to receive(:request).and_return(gig_invitations_list_responce)
+      expect_any_instance_of(described_class).to receive(:validate_list_params)
     end
 
     it 'sends request' do
@@ -26,7 +33,9 @@ RSpec.describe CirroIOV2::Resources::GigInvitation do
     end
 
     it 'returns gig invitation' do
-      expect(list_gigs).to eq(gig_invitations_list)
+      expect(list_gigs).to be_a(Struct)
+      expect(list_gigs.to_h.excluding(:data)).to eq(gig_invitations_list.excluding(:data))
+      expect(list_gigs.to_h[:data].map!(&:to_h)).to eq(gig_invitations_list[:data])
     end
   end
 
@@ -44,7 +53,8 @@ RSpec.describe CirroIOV2::Resources::GigInvitation do
     end
 
     it 'returns gig invitation' do
-      expect(accept_gig).to eq(gig_invitation)
+      expect(accept_gig).to be_a(Struct)
+      expect(accept_gig.to_h).to eq(gig_invitation.to_h)
     end
   end
 end
