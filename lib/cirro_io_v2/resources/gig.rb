@@ -1,5 +1,3 @@
-require 'cirro_io_v2/responses/gig_response'
-
 module CirroIOV2
   module Resources
     class Gig < Base
