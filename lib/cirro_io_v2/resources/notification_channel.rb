@@ -1,7 +1,7 @@
 module CirroIOV2
   module Resources
     class NotificationChannel < Base
-      ALLOWED_PARAMS = %i[name notification_layout_id preferences templates].freeze
+      ALLOWED_PARAMS = [:name, :notification_layout_id, :preferences, :templates].freeze
 
       def create(params)
         params_allowed?(params, ALLOWED_PARAMS)

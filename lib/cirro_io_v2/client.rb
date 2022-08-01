@@ -28,7 +28,7 @@ module CirroIOV2
       auth_type: :jwt,
     }.freeze
 
-    DEFINED_OPTIONS = (DEFAULT_OPTIONS.keys + %i[private_key private_key_path client_id]).freeze
+    DEFINED_OPTIONS = (DEFAULT_OPTIONS.keys + [:private_key, :private_key_path, :client_id]).freeze
 
     def initialize(options = {})
       @options = DEFAULT_OPTIONS.merge(options)

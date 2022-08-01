@@ -122,3 +122,9 @@ RSpec/EmptyExampleGroup:
 
 RSpec/MultipleExpectations:
   Enabled: false
+
+Style/SymbolArray:
+  EnforcedStyle: brackets
+
+Style/WordArray:
+  EnforcedStyle: brackets

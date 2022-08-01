@@ -1,7 +1,7 @@
 module CirroIOV2
   module Resources
     class NotificationLayoutTemplate < Base
-      UPDATE_ALLOWED_PARAMS = %i[notification_configuration_id body].freeze
+      UPDATE_ALLOWED_PARAMS = [:notification_configuration_id, :body].freeze
 
       def update(params)
         params_allowed?(params, ALLOWED_PARAMS)

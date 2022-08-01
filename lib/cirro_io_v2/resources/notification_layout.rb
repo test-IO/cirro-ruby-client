@@ -1,8 +1,8 @@
 module CirroIOV2
   module Resources
     class NotificationLayout < Base
-      CREATE_ALLOWED_PARAMS = %i[name templates].freeze
-      CREATE_TEMPLATE_ALLOWED_PARAMS = %i[notification_configuration_id body].freeze
+      CREATE_ALLOWED_PARAMS = [:name, :templates].freeze
+      CREATE_TEMPLATE_ALLOWED_PARAMS = [:notification_configuration_id, :body].freeze
 
       def create(params)
         params_allowed?(params, ALLOWED_PARAMS)

@@ -1,8 +1,8 @@
 module CirroIOV2
   module Resources
     class NotificationTemplate < Base
-      CREATE_ALLOWED_PARAMS = %i[notification_configuration_id notification_channel_id limit before after].freeze
-      UPDATE_ALLOWED_PARAMS = %i[subject body].freeze
+      CREATE_ALLOWED_PARAMS = [:notification_configuration_id, :notification_channel_id, :limit, :before, :after].freeze
+      UPDATE_ALLOWED_PARAMS = [:subject, :body].freeze
 
       def create(params = nil)
         params_allowed?(params, ALLOWED_PARAMS) if params
