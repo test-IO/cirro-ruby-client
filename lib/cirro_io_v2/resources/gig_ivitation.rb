@@ -1,3 +1,5 @@
+require 'cirro_io_v2/responses/gig_invitation_response'
+
 module CirroIOV2
   module Resources
     class GigInvitation < Base
@@ -6,12 +8,12 @@ module CirroIOV2
       def list(params)
         validate_list_params(params)
         response = client.request_client.request(:get, resource_root, params: params)
-        Responses::GigInvitationListResponce.create(response.body)
+        Responses::GigInvitationListResponse.build(response.body)
       end
 
       def accept(id)
         response = client.request_client.request(:post, "#{resource_root}/#{id}/accept")
-        Responses::GigInvitationResponce.create(response.body)
+        Responses::GigInvitationResponse.build(response.body)
       end
 
       private

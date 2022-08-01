@@ -5,10 +5,10 @@ RSpec.describe CirroIOV2::Resources::GigInvitation do
     subject(:list_gigs) { client.GigInvitation.list(params) }
 
     let(:gig_invitations_list) { FactoryBot.create(:gig_invitations_list).to_h }
-    let(:gig_invitations_list_responce) do
-      gig_invitations_list_responce = OpenStruct.new(body: gig_invitations_list.to_h)
-      gig_invitations_list_responce.body[:data].map!(&:to_h)
-      gig_invitations_list_responce
+    let(:gig_invitations_list_response) do
+      gig_invitations_list_response = OpenStruct.new(body: gig_invitations_list.to_h)
+      gig_invitations_list_response.body[:data].map!(&:to_h)
+      gig_invitations_list_response
     end
 
     let(:params) do
@@ -23,7 +23,7 @@ RSpec.describe CirroIOV2::Resources::GigInvitation do
     end
 
     before do
-      allow(client.request_client).to receive(:request).and_return(gig_invitations_list_responce)
+      allow(client.request_client).to receive(:request).and_return(gig_invitations_list_response)
       expect_any_instance_of(described_class).to receive(:validate_list_params)
     end
 
