@@ -10,7 +10,7 @@ module CirroIOV2
       end
 
       def resource_root
-        self.class.name.demodulize.downcase.pluralize
+        self.class.name.demodulize.underscore.pluralize
       end
     end
   end

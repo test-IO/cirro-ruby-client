@@ -26,6 +26,8 @@ GEM
     concurrent-ruby (1.1.10)
     crack (0.4.4)
     diff-lcs (1.4.4)
+    factory_bot (6.2.1)
+      activesupport (>= 5.0.0)
     faker (2.14.0)
       i18n (>= 1.6, < 2)
     faraday (1.1.0)
@@ -101,6 +103,7 @@ PLATFORMS
 
 DEPENDENCIES
   cirro-ruby-client!
+  factory_bot
   faker
   pry
   rake (~> 12.0)
