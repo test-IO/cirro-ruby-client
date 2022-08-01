@@ -8,10 +8,14 @@ require 'cirro_io_v2/request_clients/jwt'
 
 require 'cirro_io_v2/resources/base'
 require 'cirro_io_v2/resources/user'
-require 'cirro_io_v2/resources/notification_locale'
-require 'cirro_io_v2/resources/notification_layout'
-require 'cirro_io_v2/resources/notification_channel'
 require 'cirro_io_v2/resources/notification_broadcast'
+require 'cirro_io_v2/resources/notification_channel_preference'
+require 'cirro_io_v2/resources/notification_channel'
+require 'cirro_io_v2/resources/notification_configuration'
+require 'cirro_io_v2/resources/notification_layout_template'
+require 'cirro_io_v2/resources/notification_layout'
+require 'cirro_io_v2/resources/notification_locale'
+require 'cirro_io_v2/resources/notification_template'
 
 module CirroIOV2
   class Client
@@ -64,21 +68,34 @@ module CirroIOV2
       Resources::NotificationBroadcast.new(self)
     end
 
-    def NotificationLocale
-      Resources::NotificationLocale.new(self)
-    end
-
-    def NotificationLayout
-      Resources::NotificationLayout.new(self)
+    def NotificationChannelPreference
+      Resources::NotificationChannelPreference.new(self)
     end
 
     def NotificationChannel
       Resources::NotificationChannel.new(self)
     end
 
-    def NotificationChannelPreference
-      # TODO
+    def NotificationConfiguration
+      Resources::NotificationConfiguration.new(self)
     end
+
+    def NotificationLayoutTemplate
+      Resources::NotificationLayoutTemplate.new(self)
+    end
+
+    def NotificationLayout
+      Resources::NotificationLayout.new(self)
+    end
+
+    def NotificationLocale
+      Resources::NotificationLocale.new(self)
+    end
+
+    def NotificationTemplate
+      Resources::NotificationTemplate.new(self)
+    end
+
     # rubocop:enable Naming/MethodName
   end
 end
