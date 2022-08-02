@@ -18,7 +18,7 @@ module CirroIOV2
       end
 
       def response_object(response)
-        JSON.parse(response[:body], object_class: OpenStruct)
+        result = JSON.parse(response.body.to_json, object_class: OpenStruct)
       end
     end
   end

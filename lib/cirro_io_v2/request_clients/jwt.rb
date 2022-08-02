@@ -15,6 +15,7 @@ module CirroIOV2
         @connection = Faraday.new(url: base_url) do |conn|
           conn.request :json
           conn.response :json
+          conn.use Faraday::Adapter::NetHttp
         end
       end
 
