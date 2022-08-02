@@ -8,7 +8,6 @@ module CirroIO
       has_many :gig_results
       has_many :gig_time_activities
 
-      # rubocop:disable Metrics/AbcSize
       def bulk_create_with(worker_filter, gig_tasks)
         payload = { data: { attributes: attributes, relationships: {} } }
         payload[:data][:relationships][:gig_tasks] = gig_tasks.map(&:attributes)
@@ -35,7 +34,6 @@ module CirroIO
 
         self.class.parser.parse(self.class, response).first
       end
-      # rubocop:enable Metrics/AbcSize
     end
   end
 end
