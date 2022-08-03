@@ -1,21 +1,6 @@
 require 'cirro_io/client/version'
 
-require 'cirro_io_v2/errors/http_error'
-require 'cirro_io_v2/errors/response_not_json_error'
-
-require 'cirro_io_v2/request_clients/base'
-require 'cirro_io_v2/request_clients/jwt'
-
-require 'cirro_io_v2/resources/base'
-require 'cirro_io_v2/resources/user'
-require 'cirro_io_v2/resources/notification_broadcast'
-require 'cirro_io_v2/resources/notification_channel_preference'
-require 'cirro_io_v2/resources/notification_channel'
-require 'cirro_io_v2/resources/notification_configuration'
-require 'cirro_io_v2/resources/notification_layout_template'
-require 'cirro_io_v2/resources/notification_layout'
-require 'cirro_io_v2/resources/notification_locale'
-require 'cirro_io_v2/resources/notification_template'
+Dir['lib/cirro_io_v2/**/**/*.rb'].each { |f| require f.partition('/').last }
 
 module CirroIOV2
   class Client
@@ -57,11 +42,11 @@ module CirroIOV2
     end
 
     def GigInvitation
-      # TODO
+      Resources::GigInvitation.new(self)
     end
 
     def Gig
-      # TODO
+      Resources::Gig.new(self)
     end
 
     def NotificationBroadcast

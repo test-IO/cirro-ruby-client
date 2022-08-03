@@ -7,7 +7,6 @@ module CirroIOV2
       attr_reader :base_url, :private_key, :client_id, :connection
 
       def initialize(base_url:, private_key:, client_id:)
-        # TODO: raise errors for wrong input
         @base_url = base_url
         @private_key = private_key
         @client_id = client_id
@@ -19,7 +18,7 @@ module CirroIOV2
         end
       end
 
-      def make_request(http_method, url, body = nil, params = nil, _headers = {})
+      def make_request(http_method, url, body: nil, params: nil, _headers: {})
         @connection.send(http_method, url) do |request|
           request.params = params if params
           request.body = body.to_json if body
