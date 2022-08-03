@@ -4,8 +4,8 @@ module CirroIOV2
       UPDATE_ALLOWED_PARAMS = [:notification_configuration_id, :body].freeze
 
       def update(params)
-        params_allowed?(params, ALLOWED_PARAMS)
-        response_object(client.request_client.request(:post, resource_root, params))
+        params_allowed?(params, UPDATE_ALLOWED_PARAMS)
+        response_object(client.request_client.request(:post, resource_root, body: params))
       end
 
       def delete(id)

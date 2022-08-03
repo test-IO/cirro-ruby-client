@@ -5,7 +5,7 @@ module CirroIOV2
 
       def list(params = nil)
         params_allowed?(params, ALLOWED_PARAMS) if params
-        response_object(client.request_client.request(:get, resource_root, params))
+        response_object(client.request_client.request(:get, resource_root, params: params))
       end
     end
   end
