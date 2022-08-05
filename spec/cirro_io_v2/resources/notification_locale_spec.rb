@@ -17,7 +17,6 @@ RSpec.describe CirroIOV2::Resources::NotificationLocale do
         notification_locale = described_class.new(client)
         created_notification_locale = notification_locale.create(locale: locale)
 
-        expect(notification_locale).to be_valid
         expect(created_notification_locale.object).to eq('notification_locale')
         expect(created_notification_locale.locale).to eq('de')
       end
@@ -46,7 +45,6 @@ RSpec.describe CirroIOV2::Resources::NotificationLocale do
       notification_locale = described_class.new(client)
       list_notification_locale = notification_locale.list
 
-      expect(notification_locale).to be_valid
       expect(list_notification_locale.object).to eq('list')
       expect(list_notification_locale.data.size).to eq 1
       expect(list_notification_locale.data.first.locale).to eq(locale)

@@ -2,7 +2,7 @@ require 'active_support/core_ext/string/inflections'
 
 module CirroIOV2
   module Resources
-    class Base < JsonApiClient::Resource
+    class Base
       attr_reader :client
 
       def initialize(client)
