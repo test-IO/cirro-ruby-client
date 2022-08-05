@@ -1,7 +1,7 @@
 module CirroIOV2
   module Responses
     class GigInvitationResponse
-      GIG_INVITATION_PARAMS = %i[id object status gig_id user_id].freeze
+      GIG_INVITATION_PARAMS = [:id, :object, :status, :gig_id, :user_id].freeze
 
       def self.build(body)
         gig_invitation = Struct.new(*GIG_INVITATION_PARAMS)
@@ -10,7 +10,7 @@ module CirroIOV2
     end
 
     class GigInvitationListResponse
-      GIG_INVITATION_PARAMS = %i[object url has_more data].freeze
+      GIG_INVITATION_PARAMS = [:object, :url, :has_more, :data].freeze
 
       def self.build(body)
         gig_invitation_list = Struct.new(*GIG_INVITATION_PARAMS)

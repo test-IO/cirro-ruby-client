@@ -4,7 +4,8 @@ RSpec.describe CirroIOV2::Resources::NotificationLocale do
 
   describe '#create' do
     let(:response) do
-      { body: File.read('./spec/fixtures/notification_locale/create.json'), headers: { 'Content-Type' => 'application/json' } }
+      OpenStruct.new({ body: JSON.parse(File.read('./spec/fixtures/notification_locale/create.json')),
+                       headers: { 'Content-Type' => 'application/json' } })
     end
 
     before do
@@ -33,7 +34,8 @@ RSpec.describe CirroIOV2::Resources::NotificationLocale do
 
   describe '#list' do
     let(:response) do
-      { body: File.read('./spec/fixtures/notification_locale/list.json'), headers: { 'Content-Type' => 'application/json' } }
+      OpenStruct.new({ body: JSON.parse(File.read('./spec/fixtures/notification_locale/list.json')),
+                       headers: { 'Content-Type' => 'application/json' } })
     end
 
     before do

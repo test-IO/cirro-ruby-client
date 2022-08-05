@@ -1,7 +1,7 @@
 module CirroIOV2
   module Resources
     class GigInvitation < Base
-      LIST_REQUEST_PARAMS = %w[user_id gig_id limit before after status].freeze
+      LIST_REQUEST_PARAMS = ['user_id', 'gig_id', 'limit', 'before', 'after', 'status'].freeze
 
       def list(params)
         validate_list_params(params)

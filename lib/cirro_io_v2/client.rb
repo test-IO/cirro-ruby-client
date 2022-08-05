@@ -19,6 +19,8 @@ require 'cirro_io_v2/resources/notification_layout'
 require 'cirro_io_v2/resources/notification_locale'
 require 'cirro_io_v2/resources/notification_template'
 
+Dir['lib/cirro_io_v2/**/**/*.rb'].each { |f| require f.partition('/').last }
+
 module CirroIOV2
   class Client
     attr_accessor :request_client

@@ -26,7 +26,7 @@ RSpec.describe CirroIO::Client::Gig do
       expect(created_gig).to be_valid
       expect(created_gig.id).to eq('15')
       expect(created_gig.worker_filter.id).to eq('20')
-      expect(created_gig.gig_tasks.map(&:id)).to eq(%w[24 25])
+      expect(created_gig.gig_tasks.map(&:id)).to eq(['24', '25'])
     end
   end
 
@@ -79,8 +79,8 @@ RSpec.describe CirroIO::Client::Gig do
       expect(archived_gig).to be_valid
       expect(archived_gig.id).to eq('10')
       expect(archived_gig.archive_at).to eq('2020-11-30T10:30:56.000Z')
-      expect(archived_gig.gig_results.map(&:id)).to eq(%w[1 2])
-      expect(archived_gig.gig_time_activities.map(&:id)).to eq(%w[1 2])
+      expect(archived_gig.gig_results.map(&:id)).to eq(['1', '2'])
+      expect(archived_gig.gig_time_activities.map(&:id)).to eq(['1', '2'])
     end
   end
   # rubocop:enable RSpec/MultipleMemoizedHelpers
