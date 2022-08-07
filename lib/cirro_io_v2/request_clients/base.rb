@@ -4,8 +4,8 @@ module CirroIOV2
       # Interface of all request clients. It returns the response if the request was successful (HTTP::2xx) and
       # raises a CirroIOV2::HTTPError together with the response if the request was not successful
 
-      def request(*args)
-        response = make_request(*args)
+      def request(*args, **named_args)
+        response = make_request(*args, **named_args)
         raise Errors::HTTPError, response unless response.success?
 
         response
