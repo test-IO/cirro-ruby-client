@@ -27,14 +27,11 @@ RSpec.describe CirroIOV2::Resources::GigInvitation do
     end
 
     it 'sends request' do
-      expect_any_instance_of(described_class).to receive(:validate_list_params) # rubocop:disable RSpec/AnyInstance
-
       list_gigs
       expect(client.request_client).to have_received(:request).with(:get, 'gig_invitations', { params: params })
     end
 
     it 'returns gig invitation' do
-      expect_any_instance_of(described_class).to receive(:validate_list_params) # rubocop:disable RSpec/AnyInstance
       expect(list_gigs).to be_a(Struct)
       expect(list_gigs.to_h.excluding(:data)).to eq(gig_invitations_list.excluding(:data))
       expect(list_gigs.to_h[:data].map!(&:to_h)).to eq(gig_invitations_list[:data])

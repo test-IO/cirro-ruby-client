@@ -3,7 +3,7 @@ module CirroIOV2
     class User < Base
       def find(id)
         response = client.request_client.request(:get, "#{resource_root}/#{id}")
-        CirroIOV2::Responses::UserResponse.build(response.body)
+        CirroIOV2::Responses::UserResponse.new(response.body)
       end
 
       def notification_preferences(id, params)

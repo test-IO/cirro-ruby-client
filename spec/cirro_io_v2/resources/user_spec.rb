@@ -14,7 +14,7 @@ RSpec.describe CirroIOV2::Resources::User do
     end
 
     it 'returns user structure' do
-      expect(find_user).to be_a(Struct)
+      expect(find_user).to be_a(CirroIOV2::Responses::UserResponse)
       expect(find_user.to_h).to eq(user.to_h)
     end
   end

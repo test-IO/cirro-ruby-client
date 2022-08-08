@@ -2,7 +2,7 @@ module CirroIOV2
   module Responses
     module Base
       def initialize(body)
-        body = body.with_indifferent_access
+        body = body.deep_symbolize_keys
 
         if body[:object] == 'list'
           list_item_class = self.class.name.gsub('List', '').constantize

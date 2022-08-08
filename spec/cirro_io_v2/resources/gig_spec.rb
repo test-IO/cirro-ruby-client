@@ -14,8 +14,8 @@ RSpec.describe CirroIOV2::Resources::Gig do
     end
 
     it 'returns gig structure' do
-      expect(create_gig).to be_a(Struct)
-      expect(create_gig.to_h).to eq(gig.to_h)
+      expect(create_gig).to be_a(CirroIOV2::Responses::GigResponse)
+      expect(create_gig.to_h).to match_array(gig.to_h)
     end
   end
 end
