@@ -3,6 +3,8 @@ module CirroIOV2
     LIST_RESPONSES = [
       :GigInvitationListResponse,
       :NotificationChannelPreferenceListResponse,
+      :NotificationLocaleListResponse,
+      :NotificationConfigurationListResponse
     ].freeze
 
     UserResponse = Struct.new(:id, :object, :first_name, :last_name, :time_zone, :screen_name, :country_code, :epam, :worker) do
@@ -30,6 +32,14 @@ module CirroIOV2
     end
 
     NotificationChannelPreferenceResponse = Struct.new(:id, :object, :preferences, :notification_channel_id, :user_id) do
+      include Base
+    end
+
+    NotificationLocaleResponse = Struct.new(:id, :object, :locale, :default, :configurations) do
+      include Base
+    end
+
+    NotificationConfigurationResponse = Struct.new(:id, :object, :deliver_by, :format, :kind, :locale) do
       include Base
     end
 

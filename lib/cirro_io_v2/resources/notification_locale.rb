@@ -5,11 +5,13 @@ module CirroIOV2
 
       def create(params)
         params_allowed?(params, ALLOWED_PARAMS)
-        response_object(client.request_client.request(:post, resource_root, body: params))
+        response = client.request_client.request(:post, resource_root, body: params)
+        Responses::NotificationLocaleResponse.new(response.body)
       end
 
       def list
-        response_object(client.request_client.request(:get, resource_root))
+        response = client.request_client.request(:get, resource_root)
+        Responses::NotificationLocaleListResponse.new(response.body)
       end
     end
   end
