@@ -6,6 +6,8 @@ module CirroIOV2
       :NotificationLocaleListResponse,
       :NotificationConfigurationListResponse,
       :NotificationLayoutTemplateListResponse,
+      :NotificationChannelListResponse,
+      :NotificationTemplateListResponse
     ].freeze
 
     UserResponse = Struct.new(:id, :object, :first_name, :last_name, :time_zone, :screen_name, :country_code, :epam, :worker) do
@@ -49,6 +51,14 @@ module CirroIOV2
     end
 
     NotificationLayoutTemplateResponse = Struct.new(:id, :notification_configuration_id, :notification_layout_id, :body) do
+      include Base
+    end
+
+    NotificationChannelResponse = Struct.new(:id, :object, :name, :notification_layout_id, :preferences, :templates) do
+      include Base
+    end
+
+    NotificationTemplateResponse = Struct.new(:id, :object, :notification_configuration_id, :notification_channel_id, :subject, :body) do
       include Base
     end
 

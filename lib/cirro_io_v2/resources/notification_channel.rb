@@ -5,7 +5,8 @@ module CirroIOV2
 
       def create(params)
         params_allowed?(params, ALLOWED_PARAMS)
-        response_object(client.request_client.request(:post, resource_root, body: params))
+        response = client.request_client.request(:post, resource_root, body: params)
+        Responses::NotificationChannelResponse.new(response.body)
       end
     end
   end
