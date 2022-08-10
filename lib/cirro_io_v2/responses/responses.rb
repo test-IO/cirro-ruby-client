@@ -14,6 +14,11 @@ module CirroIOV2
       include Base
     end
 
+    UserNotificationPreferenceResponse = Struct.new(:id, :object, :locale, :channels) do
+      self::NESTED_RESPONSES = { channels: :NotificationChannelListResponse }.freeze
+      include Base
+    end
+
     GigResponse = Struct.new(:id,
                              :object,
                              :title,
@@ -35,10 +40,12 @@ module CirroIOV2
     end
 
     NotificationChannelPreferenceResponse = Struct.new(:id, :object, :preferences, :notification_channel_id, :user_id) do
+      self::NESTED_RESPONSES = { preferences: :NotificationChannelPreferenceListResponse }.freeze
       include Base
     end
 
     NotificationLocaleResponse = Struct.new(:id, :object, :locale, :default, :configurations) do
+      self::NESTED_RESPONSES = { configurations: :NotificationConfigurationListResponse }.freeze
       include Base
     end
 
@@ -47,6 +54,7 @@ module CirroIOV2
     end
 
     NotificationLayoutResponse = Struct.new(:id, :object, :name, :templates) do
+      self::NESTED_RESPONSES = { templates: :NotificationLayoutTemplateListResponse }.freeze
       include Base
     end
 
@@ -55,12 +63,19 @@ module CirroIOV2
     end
 
     NotificationChannelResponse = Struct.new(:id, :object, :name, :notification_layout_id, :preferences, :templates) do
+      self::NESTED_RESPONSES = { templates: :NotificationChannelPreferenceListResponse }.freeze
       include Base
     end
 
     NotificationTemplateResponse = Struct.new(:id, :object, :notification_configuration_id, :notification_channel_id, :subject, :body) do
       include Base
     end
+
+    NotificationBroadcastResponse = Struct.new(:id, :object, :payload, :recipients, :notification_channel_id) do
+      include Base
+    end
+
+    
 
     # cover the list responses
     def self.const_missing(name)

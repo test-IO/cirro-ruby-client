@@ -7,7 +7,8 @@ module CirroIOV2
       end
 
       def notification_preferences(id, params)
-        client.request_client.request(:post, "#{resource_root}/#{id}/notification_preferences", body: params)
+        response = client.request_client.request(:post, "#{resource_root}/#{id}/notification_preferences", body: params)
+        CirroIOV2::Responses::UserNotificationPreferenceResponse.new(response.body)
       end
     end
   end
