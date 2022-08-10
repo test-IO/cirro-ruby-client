@@ -62,12 +62,20 @@ module CirroIOV2
       include Base
     end
 
+    NotificationLayoutTemplateDeleteResponse = Struct.new(:id, :object, :deleted) do
+      include Base
+    end
+
     NotificationChannelResponse = Struct.new(:id, :object, :name, :notification_layout_id, :preferences, :templates) do
       self::NESTED_RESPONSES = { templates: :NotificationChannelPreferenceListResponse }.freeze
       include Base
     end
 
     NotificationTemplateResponse = Struct.new(:id, :object, :notification_configuration_id, :notification_channel_id, :subject, :body) do
+      include Base
+    end
+
+    NotificationTemplateDeleteResponse = Struct.new(:id, :object, :deleted) do
       include Base
     end
 
