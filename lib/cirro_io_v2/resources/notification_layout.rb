@@ -6,12 +6,14 @@ module CirroIOV2
 
       def create(params)
         params_allowed?(params, CREATE_ALLOWED_PARAMS)
-        response_object(client.request_client.request(:post, resource_root, body: params))
+        response = client.request_client.request(:post, resource_root, body: params)
+        Responses::NotificationLayoutResponse.new(response.body)
       end
 
       def create_template(params)
         params_allowed?(params, CREATE_TEMPLATE_ALLOWED_PARAMS)
-        response_object(client.request_client.request(:post, resource_root, body: params))
+        response = client.request_client.request(:post, resource_root, body: params)
+        Responses::NotificationLayoutTemplateResponse.new(response.body)
       end
     end
   end
