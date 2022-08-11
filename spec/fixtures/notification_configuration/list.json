@@ -1,0 +1,23 @@
+{
+    "object": "list",
+    "url": "/notification_configurations",
+    "has_more": false,
+    "data": [
+      {
+        "id": "1",
+        "object": "notification_configuration",
+        "deliver_by": "email",
+        "format": "html",
+        "kind": "digest",
+        "locale": "de"
+      },
+      {
+        "id": "2",
+        "object": "notification_configuration",
+        "deliver_by": "email",
+        "format": "text",
+        "kind": "digest",
+        "locale": "de"
+      }
+    ]
+  }

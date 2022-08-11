@@ -24,8 +24,8 @@ RSpec.describe CirroIOV2::Resources::NotificationChannel do
 
   describe '#create' do
     it 'creates a new notification channel' do
-      stub_api = stub_request(:post, "#{site}/v2/notification_channels").
-                 to_return(body: File.read('./spec/fixtures/notification_channel/create.json'))
+      stub_api = stub_request(:post, "#{site}/v2/notification_channels")
+                 .to_return(body: File.read('./spec/fixtures/notification_channel/create.json'))
 
       notification_channel = described_class.new(client).create(params)
 
