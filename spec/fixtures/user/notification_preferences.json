@@ -1,0 +1,18 @@
+
+{
+    "id": "1",
+    "object": "notification_preference",
+    "locale": "de",
+    "channels": {
+      "object": "list",
+      "data": [
+        {
+          "id": "1",
+          "object": "notification_topic_preference",
+          "preferences": {
+            "email": "immediately"
+          }
+        }
+      ]
+    }
+  }
