@@ -7,7 +7,7 @@ module CirroIOV2
       :NotificationConfigurationListResponse,
       :NotificationLayoutTemplateListResponse,
       :NotificationChannelListResponse,
-      :NotificationTemplateListResponse
+      :NotificationTemplateListResponse,
     ].freeze
 
     UserResponse = Struct.new(:id, :object, :first_name, :last_name, :time_zone, :screen_name, :country_code, :epam, :worker) do
@@ -67,7 +67,7 @@ module CirroIOV2
     end
 
     NotificationChannelResponse = Struct.new(:id, :object, :name, :notification_layout_id, :preferences, :templates) do
-      self::NESTED_RESPONSES = { templates: :NotificationChannelPreferenceListResponse }.freeze
+      self::NESTED_RESPONSES = { templates: :NotificationTemplateListResponse }.freeze
       include Base
     end
 
