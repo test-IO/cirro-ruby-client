@@ -7,20 +7,20 @@ module CirroIOV2
 
           list_item_class = self.class.name.gsub('List', '').constantize
           values_hash = body.slice(*members.excluding(:data)).merge(
-            data: body[:data].map { |list_item| list_item_class.new(list_item) }
+            data: body[:data].map { |list_item| list_item_class.new(list_item) },
           )
-          super(*self.members.map { |attr| values_hash[attr] })
-        elsif has_list?(body)
+          super(*members.map { |attr| values_hash[attr] })
+        elsif list_attribute(body)
           super(
-            *body.slice(*members.excluding(has_list?(body))).values,
-            create_sub_resource(has_list?(body), body[has_list?(body)])
+            *body.slice(*members.excluding(list_attribute(body))).values,
+            create_sub_resource(list_attribute(body), body[list_attribute(body)])
           )
         else
           super(*body.slice(*members).values)
         end
       end
 
-      def has_list?(data)
+      def list_attribute(data)
         data.keys.find { |key| data[key].is_a?(Hash) && data[key][:object] == 'list' }
       end
 

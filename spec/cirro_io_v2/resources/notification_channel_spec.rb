@@ -1,29 +1,31 @@
 RSpec.describe CirroIOV2::Resources::NotificationChannel do
   let(:site) { 'http://api.cirro.io' }
-  let(:client) { CirroIOV2::Client.new(private_key: File.read('./spec/fixtures/private_key.pem'),
-                                        client_id: 1,
-                                        site: site) }
+  let(:client) do
+    CirroIOV2::Client.new(private_key: File.read('./spec/fixtures/private_key.pem'),
+                          client_id: 1,
+                          site: site)
+  end
   let(:params) do
     {
-      "name": "new_gig_invitation",
-      "notification_layout_id": "1",
+      "name": 'new_gig_invitation',
+      "notification_layout_id": '1',
       "preferences": {
-        "email": "immediately",
+        "email": 'immediately',
       },
       "templates": [
         {
-          "notification_configuration_id": "1",
-          "subject": "New Bug Comment",
-          "body": "Hello {{recipient_first_name}}, you got {{#pluralize count, 'new comments'}}new comment{{/pluralize}}"
-        }
-      ]
+          "notification_configuration_id": '1',
+          "subject": 'New Bug Comment',
+          "body": "Hello {{recipient_first_name}}, you got {{#pluralize count, 'new comments'}}new comment{{/pluralize}}",
+        },
+      ],
     }
   end
 
   describe '#create' do
     it 'creates a new notification channel' do
       stub_api = stub_request(:post, "#{site}/v2/notification_channels").
-                    to_return(body: File.read('./spec/fixtures/notification_channel/create.json'))
+                 to_return(body: File.read('./spec/fixtures/notification_channel/create.json'))
 
       notification_channel = described_class.new(client).create(params)
 

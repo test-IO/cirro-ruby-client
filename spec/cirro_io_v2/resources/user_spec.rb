@@ -1,23 +1,25 @@
 RSpec.describe CirroIOV2::Resources::User do
   let(:site) { 'http://api.cirro.io' }
-  let(:client) { CirroIOV2::Client.new(private_key: File.read('./spec/fixtures/private_key.pem'),
-                                       client_id: 1,
-                                       site: site) }
+  let(:client) do
+    CirroIOV2::Client.new(private_key: File.read('./spec/fixtures/private_key.pem'),
+                          client_id: 1,
+                          site: site)
+  end
   let(:user_id) { '1' }
   let(:params) do
     {
-      "locale": "de",
+      "locale": 'de',
       "channels": [
         {
-          "id": "1",
+          "id": '1',
           "preferences": {
-            "email": "immediately"
-          }
-        }
-      ]
+            "email": 'immediately',
+          },
+        },
+      ],
     }
   end
-                                    
+
   describe '#find' do
     it 'finds user' do
       stub_api = stub_request(:get, "#{site}/v2/users/#{user_id}").
