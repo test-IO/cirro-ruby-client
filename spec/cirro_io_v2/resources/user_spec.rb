@@ -8,7 +8,7 @@ RSpec.describe CirroIOV2::Resources::User do
   let(:params) do
     {
       "locale": "de",
-      "topics": [
+      "channels": [
         {
           "id": "1",
           "preferences": {
@@ -16,7 +16,7 @@ RSpec.describe CirroIOV2::Resources::User do
           }
         }
       ]
-    }.to_json
+    }
   end
 
   before do
