@@ -37,7 +37,6 @@ module CirroIOV2
 
     def initialize(options = {})
       @options = DEFAULT_OPTIONS.merge(options)
-      @site = site
 
       unknown_options = @options.keys.reject { |o| DEFINED_OPTIONS.include?(o) }
       raise ArgumentError, "Unknown option(s) given: #{unknown_options}" unless unknown_options.empty?
