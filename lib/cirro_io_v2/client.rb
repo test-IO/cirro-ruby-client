@@ -28,7 +28,7 @@ module CirroIOV2
     attr_reader :options
 
     DEFAULT_OPTIONS = {
-      site: 'https://api.cirro.io'
+      site: 'https://api.cirro.io',
       api_version: 'v2',
       auth_type: :jwt,
     }.freeze
