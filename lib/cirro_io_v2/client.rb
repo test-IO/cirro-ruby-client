@@ -28,7 +28,7 @@ module CirroIOV2
     attr_reader :options
 
     DEFAULT_OPTIONS = {
-      site: 'https://api.cirro.io',
+      site: 'https://api.cirro.io'
       api_version: 'v2',
       auth_type: :jwt,
     }.freeze
@@ -37,6 +37,7 @@ module CirroIOV2
 
     def initialize(options = {})
       @options = DEFAULT_OPTIONS.merge(options)
+      @site = site
 
       unknown_options = @options.keys.reject { |o| DEFINED_OPTIONS.include?(o) }
       raise ArgumentError, "Unknown option(s) given: #{unknown_options}" unless unknown_options.empty?
@@ -46,7 +47,7 @@ module CirroIOV2
       when :jwt
         private_key = OpenSSL::PKey::RSA.new(@options[:private_key]) if @options[:private_key]
         private_key = OpenSSL::PKey::RSA.new(File.read(@options[:private_key_path])) if @options[:private_key_path]
-        @request_client = RequestClients::Jwt.new(base_url: "#{@options[:site]}/#{@options[:api_version]}",
+        @request_client = RequestClients::Jwt.new(base_url: "#{@site}/#{@options[:api_version]}",
                                                   client_id: @options[:client_id],
                                                   private_key: private_key)
       else
