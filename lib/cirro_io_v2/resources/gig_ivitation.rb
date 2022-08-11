@@ -3,8 +3,8 @@ module CirroIOV2
     class GigInvitation < Base
       ALLOWED_PARAMS = [:user_id, :gig_id, :limit, :before, :after, :status].freeze
 
-      def list(params)
-        params_allowed?(params, ALLOWED_PARAMS)
+      def list(params = nil)
+        params_allowed?(params, ALLOWED_PARAMS) if params
         response = client.request_client.request(:get, resource_root, params: params)
         Responses::GigInvitationListResponse.new(response.body)
       end

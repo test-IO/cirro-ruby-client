@@ -1,6 +1,7 @@
 module CirroIOV2
   module Responses
     LIST_RESPONSES = [
+      :GigTaskListResponse,
       :GigInvitationListResponse,
       :NotificationChannelPreferenceListResponse,
       :NotificationLocaleListResponse,
@@ -32,6 +33,11 @@ module CirroIOV2
                              :tasks,
                              :notification_payload,
                              :epam_options) do
+      self::NESTED_RESPONSES = { tasks: :GigTaskListResponse }.freeze
+      include Base
+    end
+
+    GigTaskResponse = Struct.new(:id, :object, :title, :base_price) do
       include Base
     end
 

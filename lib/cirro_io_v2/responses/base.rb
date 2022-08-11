@@ -4,17 +4,16 @@ module CirroIOV2
       def initialize(body)
         body = body.deep_symbolize_keys
         if body[:object] == 'list'
-
           list_item_class = self.class.name.gsub('List', '').constantize
           values_hash = body.slice(*members.excluding(:data)).merge(
             data: body[:data].map { |list_item| list_item_class.new(list_item) },
           )
           super(*members.map { |attr| values_hash[attr] })
         elsif list_attribute(body)
-          super(
-            *body.slice(*members.excluding(list_attribute(body))).values,
-            create_sub_resource(list_attribute(body), body[list_attribute(body)])
+          values_hash = body.slice(*members.excluding(list_attribute(body))).merge(
+            list_attribute(body) => create_sub_resource(list_attribute(body), body[list_attribute(body)]),
           )
+          super(*body.slice(*members).keys.map { |attr| values_hash[attr] })
         else
           super(*body.slice(*members).values)
         end
