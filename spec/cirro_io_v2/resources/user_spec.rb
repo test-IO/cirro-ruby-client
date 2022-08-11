@@ -1,7 +1,6 @@
 RSpec.describe CirroIOV2::Resources::User do
   let(:site) { 'http://api.cirro.io' }
-  let(:open_ssl_pub_key) { instance_double('OpenSSL::PKey::RSA') }
-  let(:client) { CirroIOV2::Client.new(private_key: 'private_key',
+  let(:client) { CirroIOV2::Client.new(private_key: File.read('./spec/fixtures/private_key.pem'),
                                        client_id: 1,
                                        site: site) }
   let(:user_id) { '1' }
@@ -17,11 +16,6 @@ RSpec.describe CirroIOV2::Resources::User do
         }
       ]
     }
-  end
-
-  before do
-    allow(OpenSSL::PKey::RSA).to receive(:new).with(any_args).and_return(open_ssl_pub_key)
-    allow(JWT).to receive(:encode).with(any_args).and_return('private string')
   end
                                     
   describe '#find' do
