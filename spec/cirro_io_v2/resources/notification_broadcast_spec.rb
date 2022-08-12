@@ -21,7 +21,7 @@ RSpec.describe CirroIOV2::Resources::NotificationBroadcast do
 
   describe '#create' do
     context 'when all params are allowed' do
-      it 'creates a new locale' do
+      it 'creates a new NotificationBroadcast' do
         stub_api = stub_request(:post, "#{site}/v2/notification_broadcasts")
                    .to_return(body: File.read('./spec/fixtures/notification_broadcast/create.json'))
 

@@ -7,7 +7,7 @@ RSpec.describe CirroIOV2::Resources::NotificationChannelPreference do
   end
 
   describe '#create' do
-    it 'creates a new locale' do
+    it 'creates a new NotificationChannelPreference' do
       stub_api = stub_request(:get, "#{site}/v2/notification_channel_preferences")
                  .to_return(body: File.read('./spec/fixtures/notification_channel_preference/list.json'))
 
