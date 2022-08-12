@@ -11,8 +11,8 @@ RSpec.describe CirroIO::Client::AppUser do
     let(:time_zone) { 'Berlin' }
 
     it 'creates a app user' do
-      stub_request(:post, "#{test_site}/v1/app-users").
-        to_return(body: File.read('./spec/fixtures/app_user.json'), headers: { 'Content-Type' => 'application/json' })
+      stub_request(:post, "#{test_site}/v1/app-users")
+        .to_return(body: File.read('./spec/fixtures/app_user.json'), headers: { 'Content-Type' => 'application/json' })
 
       app_user = described_class.new(email: email,
                                      first_name: first_name,
@@ -33,8 +33,8 @@ RSpec.describe CirroIO::Client::AppUser do
     end
 
     it 'finds a app user' do
-      stub_request(:get, "#{test_site}/v1/app-users/3").
-        to_return(body: File.read('./spec/fixtures/app_user.json'), headers: { 'Content-Type' => 'application/json' })
+      stub_request(:get, "#{test_site}/v1/app-users/3")
+        .to_return(body: File.read('./spec/fixtures/app_user.json'), headers: { 'Content-Type' => 'application/json' })
 
       app_user = described_class.find(3).first
 
@@ -42,8 +42,8 @@ RSpec.describe CirroIO::Client::AppUser do
     end
 
     it 'returns app user with app-worker and gig invitations' do
-      stub_request(:get, "#{test_site}/v1/app-users/30?include=app-worker.gig-invitations").
-        to_return(body: File.read('./spec/fixtures/app_user_with_app_worker_and_gig_invitations.json'), headers: { 'Content-Type' => 'application/json' })
+      stub_request(:get, "#{test_site}/v1/app-users/30?include=app-worker.gig-invitations")
+        .to_return(body: File.read('./spec/fixtures/app_user_with_app_worker_and_gig_invitations.json'), headers: { 'Content-Type' => 'application/json' })
 
       app_user = described_class.includes('app_worker.gig_invitations').find(30).first
 
