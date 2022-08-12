@@ -6,7 +6,7 @@ RSpec.describe CirroIOV2::Resources::NotificationConfiguration do
                           site: site)
   end
 
-  describe '#create' do
+  describe '#list' do
     it 'returns a new notification configurations' do
       stub_api = stub_request(:get, "#{site}/v2/notification_configurations")
                  .to_return(body: File.read('./spec/fixtures/notification_configuration/list.json'))
