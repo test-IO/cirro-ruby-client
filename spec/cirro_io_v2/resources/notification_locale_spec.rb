@@ -10,8 +10,8 @@ RSpec.describe CirroIOV2::Resources::NotificationLocale do
   describe '#create' do
     context 'when all params are allowed' do
       it 'creates a new locale' do
-        stub_api = stub_request(:post, "#{site}/v2/notification_locales").
-                   to_return(body: File.read('./spec/fixtures/notification_locale/create.json'))
+        stub_api = stub_request(:post, "#{site}/v2/notification_locales")
+                   .to_return(body: File.read('./spec/fixtures/notification_locale/create.json'))
 
         created_notification_locale = described_class.new(client).create(locale: locale)
 
@@ -32,8 +32,8 @@ RSpec.describe CirroIOV2::Resources::NotificationLocale do
 
   describe '#list' do
     it 'returns locales' do
-      stub_api = stub_request(:get, "#{site}/v2/notification_locales").
-                 to_return(body: File.read('./spec/fixtures/notification_locale/list.json'))
+      stub_api = stub_request(:get, "#{site}/v2/notification_locales")
+                 .to_return(body: File.read('./spec/fixtures/notification_locale/list.json'))
 
       list_notification_locale = described_class.new(client).list
 

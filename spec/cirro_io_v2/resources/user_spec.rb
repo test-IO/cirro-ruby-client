@@ -22,8 +22,8 @@ RSpec.describe CirroIOV2::Resources::User do
 
   describe '#find' do
     it 'finds user' do
-      stub_api = stub_request(:get, "#{site}/v2/users/#{user_id}").
-                 to_return(body: File.read('./spec/fixtures/user/find.json'))
+      stub_api = stub_request(:get, "#{site}/v2/users/#{user_id}")
+                 .to_return(body: File.read('./spec/fixtures/user/find.json'))
 
       user = described_class.new(client).find(user_id)
 
@@ -37,8 +37,8 @@ RSpec.describe CirroIOV2::Resources::User do
 
   describe '#notification_preferences' do
     it 'creates notification_preferences' do
-      stub_api = stub_request(:post, "#{site}/v2/users/#{user_id}/notification_preferences").
-                 to_return(body: File.read('./spec/fixtures/user/notification_preferences.json'))
+      stub_api = stub_request(:post, "#{site}/v2/users/#{user_id}/notification_preferences")
+                 .to_return(body: File.read('./spec/fixtures/user/notification_preferences.json'))
 
       notification_preferences = described_class.new(client).notification_preferences(user_id, params)
 
