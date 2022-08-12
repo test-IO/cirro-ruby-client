@@ -70,6 +70,10 @@ Metrics/BlockLength:
 Layout/HeredocIndentation:
   Enabled: false
 
+Layout/DotPosition:
+  Enabled: true
+  EnforcedStyle: trailing
+
 Gemspec/OrderedDependencies:
   Enabled: false
 
