@@ -1,62 +1,45 @@
 RSpec.describe CirroIOV2::Resources::GigInvitation do
-  let(:client) { CirroIOV2::Client.new }
+  let(:site) { 'http://api.cirro.io' }
+  let(:client) do
+    CirroIOV2::Client.new(private_key: File.read('./spec/fixtures/private_key.pem'),
+                          client_id: 1,
+                          site: site)
+  end
+  let(:id) { '1' }
 
   describe '#list' do
-    subject(:list_gigs) { client.GigInvitation.list(params) }
+    it 'returns gig_invitations' do
+      stub_api = stub_request(:get, "#{site}/v2/gig_invitations")
+                 .to_return(body: File.read('./spec/fixtures/gig_invitations/list.json'))
 
-    let(:gig_invitations_list) { FactoryBot.create(:gig_invitations_list).to_h }
-    let(:gig_invitations_list_response) do
-      gig_invitations_list_response = OpenStruct.new(body: gig_invitations_list.to_h)
-      gig_invitations_list_response.body[:data].map!(&:to_h)
-      gig_invitations_list_response
-    end
+      gig_invitations = described_class.new(client).list
 
-    let(:params) do
-      {
-        user_id: SecureRandom.uuid,
-        gig_id: SecureRandom.uuid,
-        limit: rand(1..10),
-        before: SecureRandom.uuid,
-        after: SecureRandom.uuid,
-        status: 'accepted',
-      }
-    end
-
-    before do
-      allow(client.request_client).to receive(:request).and_return(gig_invitations_list_response)
-    end
-
-    it 'sends request' do
-      expect_any_instance_of(described_class).to receive(:validate_list_params) # rubocop:disable RSpec/AnyInstance
-
-      list_gigs
-      expect(client.request_client).to have_received(:request).with(:get, 'gig_invitations', { params: params })
-    end
-
-    it 'returns gig invitation' do
-      expect_any_instance_of(described_class).to receive(:validate_list_params) # rubocop:disable RSpec/AnyInstance
-      expect(list_gigs).to be_a(Struct)
-      expect(list_gigs.to_h.excluding(:data)).to eq(gig_invitations_list.excluding(:data))
-      expect(list_gigs.to_h[:data].map!(&:to_h)).to eq(gig_invitations_list[:data])
+      expect(stub_api).to have_been_made
+      expect(gig_invitations.class).to eq(CirroIOV2::Responses::GigInvitationListResponse)
+      expect(gig_invitations.object).to eq('list')
+      expect(gig_invitations.data.first.class).to eq(CirroIOV2::Responses::GigInvitationResponse)
+      expect(gig_invitations.data.first.id).to eq('45')
+      expect(gig_invitations.data.first.object).to eq('gig_invitation')
+      expect(gig_invitations.data.first.status).to eq('pending')
+      expect(gig_invitations.data.first.gig_id).to eq('1')
+      expect(gig_invitations.data.first.user_id).to eq('1')
     end
   end
 
   describe '#accept' do
-    subject(:accept_gig) { client.GigInvitation.accept(id) }
+    it 'accepts gig_invitations' do
+      stub_api = stub_request(:post, "#{site}/v2/gig_invitations/#{id}/accept")
+                 .to_return(body: File.read('./spec/fixtures/gig_invitations/accept.json'))
 
-    let(:gig_invitation) { FactoryBot.create(:gig_invitation) }
-    let(:id) { gig_invitation.id }
+      accepted_gig_invitations = described_class.new(client).accept(id)
 
-    before { allow(client.request_client).to receive(:request).and_return(OpenStruct.new(body: gig_invitation.to_h)) }
-
-    it 'sends request' do
-      accept_gig
-      expect(client.request_client).to have_received(:request).with(:post, "gig_invitations/#{id}/accept")
-    end
-
-    it 'returns gig invitation' do
-      expect(accept_gig).to be_a(Struct)
-      expect(accept_gig.to_h).to eq(gig_invitation.to_h)
+      expect(stub_api).to have_been_made
+      expect(accepted_gig_invitations.class).to eq(CirroIOV2::Responses::GigInvitationResponse)
+      expect(accepted_gig_invitations.id).to eq(id)
+      expect(accepted_gig_invitations.object).to eq('gig_invitation')
+      expect(accepted_gig_invitations.status).to eq('accepted')
+      expect(accepted_gig_invitations.gig_id).to eq('1')
+      expect(accepted_gig_invitations.user_id).to eq('1')
     end
   end
 end

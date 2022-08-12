@@ -1,0 +1,14 @@
+{
+    "id": "1",
+    "object": "notification_broadcast",
+    "payload": {
+      "key": "value"
+    },
+    "recipients": {
+      "user_ids": [
+        "1",
+        "2"
+      ]
+    },
+    "notification_channel_id": "1"
+  }

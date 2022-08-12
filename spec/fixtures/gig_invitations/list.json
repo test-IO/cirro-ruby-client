@@ -1,0 +1,14 @@
+{
+    "object": "list",
+    "url": "/gig_invitations",
+    "has_more": false,
+    "data": [
+      {
+        "id": "45",
+        "object": "gig_invitation",
+        "status": "pending",
+        "gig_id": "1",
+        "user_id": "1"
+      }
+    ]
+  }

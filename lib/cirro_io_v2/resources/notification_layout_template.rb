@@ -3,13 +3,15 @@ module CirroIOV2
     class NotificationLayoutTemplate < Base
       UPDATE_ALLOWED_PARAMS = [:notification_configuration_id, :body].freeze
 
-      def update(params)
+      def update(id, params)
         params_allowed?(params, UPDATE_ALLOWED_PARAMS)
-        response_object(client.request_client.request(:post, resource_root, body: params))
+        response = client.request_client.request(:post, "#{resource_root}/#{id}", body: params)
+        Responses::NotificationLayoutTemplateResponse.new(response.body)
       end
 
       def delete(id)
-        response_object(client.request_client.request(:delete, "#{resource_root}/#{id}"))
+        response = client.request_client.request(:delete, "#{resource_root}/#{id}")
+        Responses::NotificationLayoutTemplateDeleteResponse.new(response.body)
       end
     end
   end

@@ -3,7 +3,7 @@ module CirroIOV2
     class Gig < Base
       def create(params)
         response = client.request_client.request(:post, resource_root, body: params)
-        Responses::GigResponse.build(response.body)
+        Responses::GigResponse.new(response.body)
       end
     end
   end

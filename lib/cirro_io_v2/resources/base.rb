@@ -16,10 +16,6 @@ module CirroIOV2
       def params_allowed?(params, allowed)
         raise 'ParamNotAllowed' if (params.keys - allowed).any?
       end
-
-      def response_object(response)
-        JSON.parse(response.body.to_json, object_class: OpenStruct)
-      end
     end
   end
 end

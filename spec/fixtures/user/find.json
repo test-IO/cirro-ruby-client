@@ -1,0 +1,33 @@
+{
+    "id": "13",
+    "object": "user",
+    "first_name": "Grazyna",
+    "last_name": "Buckridge",
+    "time_zone": "Asia/Bangkok",
+    "screen_name": "13lavenia",
+    "country_code": "RO",
+    "epam": {
+      "id": "12345",
+      "skills_last_synced_at": 1653955199,
+      "primary_skill": "EDID of user's primary skill",
+      "skills": [
+        {
+          "id": "skill EDID",
+          "name": "Ruby"
+        },
+        {
+          "id": "skill EDID",
+          "name": "RoR"
+        }
+      ]
+    },
+    "worker": {
+      "billable": false,
+      "document": {
+        "id": "13",
+        "foo": {
+          "bar": 30
+        }
+      }
+    }
+  }

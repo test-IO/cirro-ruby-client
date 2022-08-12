@@ -1,0 +1,16 @@
+{
+    "id": "1",
+    "object": "notification_layout",
+    "name": "new_tester_layout",
+    "templates": {
+      "object": "list",
+      "data": [
+        {
+          "id": "1",
+          "notification_configuration_id": "1",
+          "notification_layout_id": "1",
+          "body": "<p>Hello {{recipient_first_name}},</p>{{yield content}}<footer></footer>"
+        }
+      ]
+    }
+  }

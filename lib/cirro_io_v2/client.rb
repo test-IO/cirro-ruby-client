@@ -10,6 +10,9 @@ require 'cirro_io_v2/resources/gig'
 require 'cirro_io_v2/resources/gig_ivitation'
 require 'cirro_io_v2/resources/user'
 
+require 'cirro_io_v2/responses/base'
+require 'cirro_io_v2/responses/responses'
+
 require 'cirro_io_v2/resources/notification_broadcast'
 require 'cirro_io_v2/resources/notification_channel_preference'
 require 'cirro_io_v2/resources/notification_channel'
@@ -18,8 +21,6 @@ require 'cirro_io_v2/resources/notification_layout_template'
 require 'cirro_io_v2/resources/notification_layout'
 require 'cirro_io_v2/resources/notification_locale'
 require 'cirro_io_v2/resources/notification_template'
-
-Dir['lib/cirro_io_v2/**/**/*.rb'].each { |f| require f.partition('/').last }
 
 module CirroIOV2
   class Client
