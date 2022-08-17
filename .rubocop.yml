@@ -10,18 +10,26 @@ AllCops:
     - 'vendor/**/*'
     - 'spec/fixtures/**/*'
 
-Metrics/MethodLength:
-  Max: 25
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
 
 Layout/LineLength:
   Max: 160
 
-# Details:
-#   http://c2.com/cgi/wiki?AbcMetric
-Metrics/AbcSize:
-  # The ABC size is a calculated magnitude, so this number can be a Fixnum or
-  # a Float.
-  Max: 20
+Metrics/ModuleLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
 
 Style/StringLiterals:
   EnforcedStyle: single_quotes
@@ -34,9 +42,6 @@ Style/NumericLiterals:
 
 Style/SignalException:
   EnforcedStyle: only_raise
-
-Metrics/ClassLength:
-  Max: 120
 
 # TODO: enable this when Ruby 3.0 is out.
 Style/FrozenStringLiteralComment:
@@ -107,6 +112,9 @@ Style/HashTransformValues:
 RSpec/FilePath:
   Enabled: true
   IgnoreMethods: true
+  Exclude:
+    - "spec/cirro_io_v2/**/*_spec.rb"
+
 
 Style/Documentation:
   Enabled: false
@@ -114,5 +122,14 @@ Style/Documentation:
 RSpec/ExampleLength:
   Enabled: false
 
+RSpec/EmptyExampleGroup:
+  Enabled: false
+
 RSpec/MultipleExpectations:
   Enabled: false
+
+Style/SymbolArray:
+  EnforcedStyle: brackets
+
+Style/WordArray:
+  EnforcedStyle: brackets

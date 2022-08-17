@@ -1,0 +1,23 @@
+
+{
+    "id": "1",
+    "object": "notification_channel",
+    "name": "new_gig_invitation",
+    "notification_layout_id": "1",
+    "preferences": {
+        "email": "immediately"
+    },
+    "templates": {
+        "object": "list",
+        "data": [
+            {
+                "id": "1",
+                "object": "notification_template",
+                "notification_configuration_id": "1",
+                "notification_channel_id": "1",
+                "subject": "New Bug Comment",
+                "body": "Hello {{recipient_first_name}}, you got {{#pluralize count, 'new comments'}}new comment{{/pluralize}}"
+            }
+        ]
+    }
+}

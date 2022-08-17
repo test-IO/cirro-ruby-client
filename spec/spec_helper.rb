@@ -2,6 +2,8 @@ require 'bundler/setup'
 require 'pry'
 require 'faker'
 require 'cirro_io/client'
+require 'cirro_io_v2/client'
+Dir['spec/**/factories/**/*.rb'].each { |f| require f.partition('/').last }
 
 # comment out below line and change values below to run test against actual API server
 require 'webmock/rspec'

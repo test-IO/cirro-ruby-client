@@ -1,0 +1,32 @@
+{
+  "object": "list",
+  "data": [
+    {
+      "id": "1",
+      "object": "notification_locale",
+      "default": true,
+      "locale": "de",
+      "configurations": {
+        "object": "list",
+        "data": [
+          {
+            "id": "1",
+            "object": "notification_configuration",
+            "deliver_by": "email",
+            "format": "html",
+            "kind": "standalone",
+            "locale": "de"
+          },
+          {
+            "id": "2",
+            "object": "notification_configuration",
+            "deliver_by": "email",
+            "format": "text",
+            "kind": "standalone",
+            "locale": "de"
+          }
+        ]
+      }
+    }
+  ]
+}
