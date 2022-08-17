@@ -1,7 +1,11 @@
 module CirroIOV2
   module Resources
-    class NotificationChannelPreference < Base
+    class NotificationTopicPreference < Base
       ALLOWED_PARAMS = [:user_id, :notification_channel_id, :limit, :before, :after].freeze
+
+      def resource_root
+        'notification_channel_preferences'
+      end
 
       def list(params = nil)
         params_allowed?(params, ALLOWED_PARAMS) if params

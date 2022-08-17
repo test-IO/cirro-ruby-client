@@ -1,4 +1,4 @@
-RSpec.describe CirroIOV2::Resources::NotificationChannel do
+RSpec.describe CirroIOV2::Resources::NotificationTopic do
   let(:site) { 'http://api.cirro.io' }
   let(:client) do
     CirroIOV2::Client.new(private_key: File.read('./spec/fixtures/private_key.pem'),

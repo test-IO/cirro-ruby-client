@@ -1,7 +1,11 @@
 module CirroIOV2
   module Resources
-    class NotificationChannel < Base
+    class NotificationTopic < Base
       ALLOWED_PARAMS = [:name, :notification_layout_id, :preferences, :templates].freeze
+
+      def resource_root
+        'notification_channels'
+      end
 
       def create(params)
         params_allowed?(params, ALLOWED_PARAMS)
