@@ -98,7 +98,11 @@ module CirroIOV2
     end
 
     def NotificationTemplate
-      Resources::NotificationTemplate.new(self)
+      Resources::NotificationTopic.new(self)
+    end
+
+    def NotificationTopic
+      Resources::NotificationTopic.new(self)
     end
 
     # rubocop:enable Naming/MethodName

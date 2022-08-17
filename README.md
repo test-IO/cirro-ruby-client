@@ -112,7 +112,7 @@ preference.locale
 # => 'de'
 
 preference.channels
-# => Array of NotificationChannelPreference objects
+# => Array of NotificationTopicPreference objects
 ```
 
 ### Update notification preferences for a user
@@ -288,30 +288,30 @@ client.NotificationLayoutTemplate.update(
 client.NotificationLayoutTemplate.delete('1')
 ```
 
-## Notification Channel
-### List all notification channels
+## Notification Topic
+### List all notification topics
 
 ```ruby
-list = client.NotificationChannel
+list = client.NotificationTopic
 # => ListObject
 
 list.has_more?
 # => true
 
 list.data
-# => Array of NotificationChannel objects
+# => Array of NotificationTopic objects
 
 # filter by layout_id
-client.NotificationChannel.list(notification_layout_id: 1)
+client.NotificationTopic.list(notification_layout_id: 1)
 
 # pagination
-client.NotificationChannel.list(limit: 10, after: 10)
+client.NotificationTopic.list(limit: 10, after: 10)
 ```
 
 ### Create a notification channel
 
 ```ruby
-client.NotificationChannel.create(
+client.NotificationTopic.create(
   name: 'new_bug_comment',
   notification_layout_id: 1,
   preferences: {
@@ -374,23 +374,23 @@ client.NotificationTemplate.delete('1')
 ### List all
 
 ```ruby
-list = client.NotificationChannelPreference.list
+list = client.NotificationTopicPreference.list
 # => ListObject
 
 list.has_more?
 # => true
 
 list.data
-# => Array of NotificationChannelPreference objects
+# => Array of NotificationTopicPreference objects
 
 # filter by channel id
-client.NotificationChannelPreference.list(notification_channel_id: 1)
+client.NotificationTopicPreference.list(notification_channel_id: 1)
 
 # filter by user id
-client.NotificationChannelPreference.list(user_id: 1)
+client.NotificationTopicPreference.list(user_id: 1)
 
 # pagination
-client.NotificationChannelPreference.list(limit: 10, after: 10)
+client.NotificationTopicPreference.list(limit: 10, after: 10)
 ```
 
 ## Notifcation Broadcast
