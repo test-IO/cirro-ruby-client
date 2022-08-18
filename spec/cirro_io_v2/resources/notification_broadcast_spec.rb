@@ -15,7 +15,7 @@ RSpec.describe CirroIOV2::Resources::NotificationBroadcast do
       "recipients": {
         "user_ids": ['1', '2'],
       },
-      "notification_channel_id": '1',
+      "notification_topic_id": '1',
     }
   end
 
@@ -30,7 +30,7 @@ RSpec.describe CirroIOV2::Resources::NotificationBroadcast do
         expect(stub_api).to have_been_made
         expect(created_notification_broadcast.class).to eq(CirroIOV2::Responses::NotificationBroadcastResponse)
         expect(created_notification_broadcast.object).to eq('notification_broadcast')
-        expect(created_notification_broadcast.notification_channel_id).to eq('1')
+        expect(created_notification_broadcast.notification_topic_id).to eq('1')
       end
     end
 

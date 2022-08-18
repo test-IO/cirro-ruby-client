@@ -42,7 +42,7 @@ RSpec.describe CirroIOV2::Resources::NotificationTemplate do
       expect(updated_notification_template.object).to eq('notification_template')
       expect(updated_notification_template.id).to eq(id)
       expect(updated_notification_template.notification_configuration_id).to eq('1')
-      expect(updated_notification_template.notification_channel_id).to eq('1')
+      expect(updated_notification_template.notification_topic_id).to eq('1')
       expect(updated_notification_template.subject).to eq(update_params[:subject])
       expect(updated_notification_template.body).to eq(update_params[:body])
     end

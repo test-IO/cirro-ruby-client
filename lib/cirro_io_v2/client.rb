@@ -73,11 +73,11 @@ module CirroIOV2
       Resources::NotificationBroadcast.new(self)
     end
 
-    def NotificationChannelPreference
+    def NotificationTopicPreference
       Resources::NotificationChannelPreference.new(self)
     end
 
-    def NotificationChannel
+    def NotificationTopic
       Resources::NotificationChannel.new(self)
     end
 
@@ -98,10 +98,6 @@ module CirroIOV2
     end
 
     def NotificationTemplate
-      Resources::NotificationTopic.new(self)
-    end
-
-    def NotificationTopic
       Resources::NotificationTopic.new(self)
     end
 

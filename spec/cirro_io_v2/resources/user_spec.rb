@@ -9,7 +9,7 @@ RSpec.describe CirroIOV2::Resources::User do
   let(:params) do
     {
       "locale": 'de',
-      "channels": [
+      "topics": [
         {
           "id": '1',
           "preferences": {
@@ -46,8 +46,8 @@ RSpec.describe CirroIOV2::Resources::User do
       expect(notification_preferences.class).to eq(CirroIOV2::Responses::UserNotificationPreferenceResponse)
       expect(notification_preferences.object).to eq('notification_preference')
       expect(notification_preferences.locale).to eq('de')
-      expect(notification_preferences.channels.class).to eq(CirroIOV2::Responses::NotificationChannelListResponse)
-      expect(notification_preferences.channels.data.first.class).to eq(CirroIOV2::Responses::NotificationChannelResponse)
+      expect(notification_preferences.topics.class).to eq(CirroIOV2::Responses::NotificationTopicListResponse)
+      expect(notification_preferences.topics.data.first.class).to eq(CirroIOV2::Responses::NotificationTopicResponse)
     end
   end
 end

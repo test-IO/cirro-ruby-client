@@ -1,7 +1,7 @@
 module CirroIOV2
   module Resources
     class NotificationTemplate < Base
-      LIST_ALLOWED_PARAMS = [:notification_configuration_id, :notification_channel_id, :limit, :before, :after].freeze
+      LIST_ALLOWED_PARAMS = [:notification_configuration_id, :notification_topic_id, :limit, :before, :after].freeze
       UPDATE_ALLOWED_PARAMS = [:subject, :body].freeze
 
       def list(params = nil)

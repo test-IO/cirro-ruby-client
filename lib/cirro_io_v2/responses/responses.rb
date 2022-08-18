@@ -3,11 +3,11 @@ module CirroIOV2
     LIST_RESPONSES = [
       :GigTaskListResponse,
       :GigInvitationListResponse,
-      :NotificationChannelPreferenceListResponse,
+      :NotificationTopicPreferenceListResponse,
       :NotificationLocaleListResponse,
       :NotificationConfigurationListResponse,
       :NotificationLayoutTemplateListResponse,
-      :NotificationChannelListResponse,
+      :NotificationTopicListResponse,
       :NotificationTemplateListResponse,
     ].freeze
 
@@ -15,8 +15,8 @@ module CirroIOV2
       include Base
     end
 
-    UserNotificationPreferenceResponse = Struct.new(:id, :object, :locale, :channels) do
-      self::NESTED_RESPONSES = { channels: :NotificationChannelListResponse }.freeze
+    UserNotificationPreferenceResponse = Struct.new(:id, :object, :locale, :topics) do
+      self::NESTED_RESPONSES = { topics: :NotificationTopicListResponse }.freeze
       include Base
     end
 
@@ -45,8 +45,8 @@ module CirroIOV2
       include Base
     end
 
-    NotificationChannelPreferenceResponse = Struct.new(:id, :object, :preferences, :notification_channel_id, :user_id) do
-      self::NESTED_RESPONSES = { preferences: :NotificationChannelPreferenceListResponse }.freeze
+    NotificationTopicPreferenceResponse = Struct.new(:id, :object, :preferences, :notification_topic_id, :user_id) do
+      self::NESTED_RESPONSES = { preferences: :NotificationTopicPreferenceListResponse }.freeze
       include Base
     end
 
@@ -72,12 +72,12 @@ module CirroIOV2
       include Base
     end
 
-    NotificationChannelResponse = Struct.new(:id, :object, :name, :notification_layout_id, :preferences, :templates) do
+    NotificationTopicResponse = Struct.new(:id, :object, :name, :notification_layout_id, :preferences, :templates) do
       self::NESTED_RESPONSES = { templates: :NotificationTemplateListResponse }.freeze
       include Base
     end
 
-    NotificationTemplateResponse = Struct.new(:id, :object, :notification_configuration_id, :notification_channel_id, :subject, :body) do
+    NotificationTemplateResponse = Struct.new(:id, :object, :notification_configuration_id, :notification_topic_id, :subject, :body) do
       include Base
     end
 
@@ -85,7 +85,7 @@ module CirroIOV2
       include Base
     end
 
-    NotificationBroadcastResponse = Struct.new(:id, :object, :payload, :recipients, :notification_channel_id) do
+    NotificationBroadcastResponse = Struct.new(:id, :object, :payload, :recipients, :notification_topic_id) do
       include Base
     end
 

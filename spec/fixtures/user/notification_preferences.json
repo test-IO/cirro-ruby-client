@@ -3,7 +3,7 @@
     "id": "1",
     "object": "notification_preference",
     "locale": "de",
-    "channels": {
+    "topics": {
       "object": "list",
       "data": [
         {

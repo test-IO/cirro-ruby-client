@@ -1,6 +1,6 @@
 module CirroIO
   module Client
-    class NotificationsChannel < Base
+    class NotificationsTopic < Base
     end
   end
 end
