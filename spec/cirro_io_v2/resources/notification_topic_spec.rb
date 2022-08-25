@@ -27,14 +27,14 @@ RSpec.describe CirroIOV2::Resources::NotificationTopic do
       stub_api = stub_request(:get, "#{site}/v2/notification_topics")
                  .to_return(body: File.read('./spec/fixtures/notification_topic/list.json'))
 
-      notification_topic = described_class.new(client).list(params)
+      notification_topic = described_class.new(client).list
 
       expect(stub_api).to have_been_made
       expect(notification_topic.class).to eq(CirroIOV2::Responses::NotificationTopicListResponse)
       expect(notification_topic.object).to eq('list')
       expect(notification_topic.data.first.class).to eq(CirroIOV2::Responses::NotificationTopicResponse)
-      expect(notification_topic_preferences.url).to eq('/notification_topics')
-      expect(notification_topic_preferences.has_more).to be_falsey
+      expect(notification_topic.url).to eq('/notification_topics')
+      expect(notification_topic.has_more).to be_falsey
     end
   end
 
