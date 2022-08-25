@@ -7,7 +7,7 @@ RSpec.describe CirroIOV2::Resources::NotificationTopicPreference do
   end
 
   describe '#list' do
-    it 'creates a new NotificationTopicPreference' do
+    it 'returns notification_topic_preferences' do
       stub_api = stub_request(:get, "#{site}/v2/notification_topic_preferences")
                  .to_return(body: File.read('./spec/fixtures/notification_topic_preference/list.json'))
 

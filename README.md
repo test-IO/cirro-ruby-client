@@ -292,7 +292,7 @@ client.NotificationLayoutTemplate.delete('1')
 ### List all notification topics
 
 ```ruby
-list = client.NotificationTopic
+list = client.NotificationTopic.list
 # => ListObject
 
 list.has_more?
@@ -336,7 +336,7 @@ client.NotificationTopic.create(
 ### List all
 
 ```ruby
-list = client.NotificationTemplate
+list = client.NotificationTemplate.list
 # => ListObject
 
 list.has_more?
