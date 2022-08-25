@@ -15,8 +15,8 @@ RSpec.describe CirroIO::Client::Payout do
     let(:payout) { described_class.create app_worker: app_worker, **attributes }
     let(:attributes) do
       {
-        title: Faker::Hipster.sentence,
-        description: Faker::Hipster.paragraph,
+        title: Faker::Lorem.sentence,
+        description: Faker::Lorem.paragraph,
         'billing-date': Date.today.to_s,
         amount: 100,
       }

@@ -13,6 +13,7 @@ module CirroIOV2
 
         @connection = Faraday.new(url: base_url) do |conn|
           conn.request :json
+          conn.response :raise_error
           conn.response :json
           conn.adapter Faraday.default_adapter # testIO App is on older version of faraday and needs this line
         end

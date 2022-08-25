@@ -111,7 +111,7 @@ preference.id
 preference.locale
 # => 'de'
 
-preference.channels
+preference.topics
 # => Array of NotificationTopicPreference objects
 ```
 
@@ -120,7 +120,7 @@ preference.channels
 ```ruby
 client.User.update_notification_preference({
   locale: 'de',
-  channels: [
+  topics: [
     { id: '1', preferences: { email: 'immediately' } },
     { id: '2', preferences: { email: 'digest_daily' } }
   ]
@@ -292,7 +292,7 @@ client.NotificationLayoutTemplate.delete('1')
 ### List all notification topics
 
 ```ruby
-list = client.NotificationTopic
+list = client.NotificationTopic.list
 # => ListObject
 
 list.has_more?
@@ -308,7 +308,7 @@ client.NotificationTopic.list(notification_layout_id: 1)
 client.NotificationTopic.list(limit: 10, after: 10)
 ```
 
-### Create a notification channel
+### Create a notification topic
 
 ```ruby
 client.NotificationTopic.create(
@@ -332,11 +332,11 @@ client.NotificationTopic.create(
 )
 ```
 
-## Notification (Channel) Template
+## Notification (Topic) Template
 ### List all
 
 ```ruby
-list = client.NotificationTemplate
+list = client.NotificationTemplate.list
 # => ListObject
 
 list.has_more?
@@ -345,8 +345,8 @@ list.has_more?
 list.data
 # => Array of NotificationTemplate objects
 
-# filter by channel id
-client.NotificationTemplate.list(notification_channel_id: 1)
+# filter by topic id
+client.NotificationTemplate.list(notification_topic_id: 1)
 
 # filter by configuration id
 client.NotificationTemplate.list(notification_configuration_id: 1)
@@ -370,7 +370,7 @@ client.NotificationTemplate.update(
 ```ruby
 client.NotificationTemplate.delete('1')
 ``` 
-## Notifcation Channel Preference
+## Notifcation Topic Preference
 ### List all
 
 ```ruby
@@ -383,8 +383,8 @@ list.has_more?
 list.data
 # => Array of NotificationTopicPreference objects
 
-# filter by channel id
-client.NotificationTopicPreference.list(notification_channel_id: 1)
+# filter by topic id
+client.NotificationTopicPreference.list(notification_topic_id: 1)
 
 # filter by user id
 client.NotificationTopicPreference.list(user_id: 1)
@@ -405,6 +405,6 @@ client.NotificationBroadcast.create(
   recipients: {
     user_ids: [1, 2, 3]
   },
-  notification_channel_id: 1
+  notification_topic_id: 1
 )
 ```

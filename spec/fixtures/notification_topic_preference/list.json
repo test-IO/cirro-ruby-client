@@ -1,6 +1,6 @@
 {
     "object": "list",
-    "url": "/notification_channel_preferences",
+    "url": "/notification_topic_preferences",
     "has_more": true,
     "data": [
         {
@@ -9,7 +9,7 @@
             "preferences": {
                 "email": "immediately"
             },
-            "notification_channel_id": "1",
+            "notification_topic_id": "1",
             "user_id": "1"
         }
     ]

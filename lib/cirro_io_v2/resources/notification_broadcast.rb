@@ -1,7 +1,7 @@
 module CirroIOV2
   module Resources
     class NotificationBroadcast < Base
-      ALLOWED_PARAMS = [:payload, :recipients, :notification_channel_id].freeze
+      ALLOWED_PARAMS = [:payload, :recipients, :notification_topic_id].freeze
 
       def create(params)
         params_allowed?(params, ALLOWED_PARAMS)

@@ -16,7 +16,7 @@ require 'cirro_io/client/gig_time_activity'
 require 'cirro_io/client/gig'
 require 'cirro_io/client/payout'
 require 'cirro_io/client/notifications_broadcast'
-require 'cirro_io/client/notifications_channel'
+require 'cirro_io/client/notifications_topic'
 require 'cirro_io/client/notifications_template'
 
 module CirroIO

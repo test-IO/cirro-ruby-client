@@ -7,7 +7,7 @@ require 'cirro_io_v2/request_clients/jwt'
 
 require 'cirro_io_v2/resources/base'
 require 'cirro_io_v2/resources/gig'
-require 'cirro_io_v2/resources/gig_ivitation'
+require 'cirro_io_v2/resources/gig_invitation'
 require 'cirro_io_v2/resources/user'
 
 require 'cirro_io_v2/responses/base'
@@ -73,12 +73,12 @@ module CirroIOV2
       Resources::NotificationBroadcast.new(self)
     end
 
-    def NotificationChannelPreference
-      Resources::NotificationChannelPreference.new(self)
+    def NotificationTopicPreference
+      Resources::NotificationTopicPreference.new(self)
     end
 
-    def NotificationChannel
-      Resources::NotificationChannel.new(self)
+    def NotificationTopic
+      Resources::NotificationTopic.new(self)
     end
 
     def NotificationConfiguration
@@ -98,10 +98,6 @@ module CirroIOV2
     end
 
     def NotificationTemplate
-      Resources::NotificationTopic.new(self)
-    end
-
-    def NotificationTopic
       Resources::NotificationTopic.new(self)
     end
 

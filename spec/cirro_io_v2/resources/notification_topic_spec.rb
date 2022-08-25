@@ -22,19 +22,35 @@ RSpec.describe CirroIOV2::Resources::NotificationTopic do
     }
   end
 
-  describe '#create' do
-    it 'creates a new notification channel' do
-      stub_api = stub_request(:post, "#{site}/v2/notification_channels")
-                 .to_return(body: File.read('./spec/fixtures/notification_channel/create.json'))
+  describe '#list' do
+    it 'returns notification_topics' do
+      stub_api = stub_request(:get, "#{site}/v2/notification_topics")
+                 .to_return(body: File.read('./spec/fixtures/notification_topic/list.json'))
 
-      notification_channel = described_class.new(client).create(params)
+      notification_topic = described_class.new(client).list
 
       expect(stub_api).to have_been_made
-      expect(notification_channel.class).to eq(CirroIOV2::Responses::NotificationChannelResponse)
-      expect(notification_channel.object).to eq('notification_channel')
-      expect(notification_channel.name).to eq('new_gig_invitation')
-      expect(notification_channel.templates.class).to eq(CirroIOV2::Responses::NotificationTemplateListResponse)
-      expect(notification_channel.templates.data.first.class).to eq(CirroIOV2::Responses::NotificationTemplateResponse)
+      expect(notification_topic.class).to eq(CirroIOV2::Responses::NotificationTopicListResponse)
+      expect(notification_topic.object).to eq('list')
+      expect(notification_topic.data.first.class).to eq(CirroIOV2::Responses::NotificationTopicResponse)
+      expect(notification_topic.url).to eq('/notification_topics')
+      expect(notification_topic.has_more).to be_falsey
+    end
+  end
+
+  describe '#create' do
+    it 'creates a new notification topic' do
+      stub_api = stub_request(:post, "#{site}/v2/notification_topics")
+                 .to_return(body: File.read('./spec/fixtures/notification_topic/create.json'))
+
+      notification_topic = described_class.new(client).create(params)
+
+      expect(stub_api).to have_been_made
+      expect(notification_topic.class).to eq(CirroIOV2::Responses::NotificationTopicResponse)
+      expect(notification_topic.object).to eq('notification_topic')
+      expect(notification_topic.name).to eq('new_gig_invitation')
+      expect(notification_topic.templates.class).to eq(CirroIOV2::Responses::NotificationTemplateListResponse)
+      expect(notification_topic.templates.data.first.class).to eq(CirroIOV2::Responses::NotificationTemplateResponse)
     end
   end
 end
