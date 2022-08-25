@@ -7,7 +7,7 @@ require 'cirro_io_v2/request_clients/jwt'
 
 require 'cirro_io_v2/resources/base'
 require 'cirro_io_v2/resources/gig'
-require 'cirro_io_v2/resources/gig_ivitation'
+require 'cirro_io_v2/resources/gig_invitation'
 require 'cirro_io_v2/resources/user'
 
 require 'cirro_io_v2/responses/base'
