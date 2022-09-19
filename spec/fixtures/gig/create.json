@@ -6,6 +6,7 @@
     "url": "http://heathcote.co/zina.gibson",
     "start_at": 1652285764,
     "end_at": 1653412329,
+    "archived_at": null,
     "total_seats": 2,
     "invitation_mode": "auto",
     "filter_query": {
@@ -15,7 +16,7 @@
     "tasks": {
         "object": "list",
         "data": [
-            { 
+            {
                 "id": "1",
                 "object": "gig_task",
                 "title": "Ah, Wilderness!",

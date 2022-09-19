@@ -27,6 +27,7 @@ module CirroIOV2
                              :url,
                              :start_at,
                              :end_at,
+                             :archived_at,
                              :total_seats,
                              :invitation_mode,
                              :filter_query,
@@ -42,6 +43,38 @@ module CirroIOV2
     end
 
     GigInvitationResponse = Struct.new(:id, :object, :status, :gig_id, :user_id) do
+      include Base
+    end
+
+    GigTimeActivityResponse = Struct.new(:id, :object, :gig_id, :user_id, :description, :duration_in_ms, :date) do
+      include Base
+    end
+
+    GigResultResponse = Struct.new(:id,
+                                   :object,
+                                   :gig_task_id,
+                                   :user_id,
+                                   :title,
+                                   :description,
+                                   :quantity,
+                                   :multiplier,
+                                   :delivery_date,
+                                   :cost_center_key,
+                                   :cost_center_data) do
+      include Base
+    end
+
+    PayoutResponse = Struct.new(:id,
+                                :object,
+                                :amount,
+                                :title,
+                                :description,
+                                :billing_date,
+                                :reference_id,
+                                :reference_type,
+                                :user_id,
+                                :cost_center_key,
+                                :cost_center_data) do
       include Base
     end
 

@@ -1,0 +1,13 @@
+{
+  "id": "1",
+  "object": "payout",
+  "amount": 1000,
+  "title": "The Golden Bowl",
+  "description": "Language designers want to design the perfect language.",
+  "billing_date": "2022-06-05",
+  "cost_center_key": "EPM-CRWD",
+  "cost_center_data": null,
+  "reference_id": null,
+  "reference_type": null,
+  "user_id": 1
+}

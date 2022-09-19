@@ -5,7 +5,7 @@ RSpec.describe CirroIOV2::Resources::User do
                           client_id: 1,
                           site: site)
   end
-  let(:user_id) { '1' }
+  let(:user_id) { '13' }
   let(:params) do
     {
       "locale": 'de',
@@ -29,6 +29,7 @@ RSpec.describe CirroIOV2::Resources::User do
 
       expect(stub_api).to have_been_made
       expect(user.class).to eq(CirroIOV2::Responses::UserResponse)
+      expect(user.id).to eq(user_id)
       expect(user.object).to eq('user')
       expect(user.first_name).to eq('Grazyna')
       expect(user.epam[:id]).to eq('12345')
@@ -48,6 +49,33 @@ RSpec.describe CirroIOV2::Resources::User do
       expect(notification_preferences.locale).to eq('de')
       expect(notification_preferences.topics.class).to eq(CirroIOV2::Responses::NotificationTopicListResponse)
       expect(notification_preferences.topics.data.first.class).to eq(CirroIOV2::Responses::NotificationTopicResponse)
+    end
+  end
+
+  describe '#worker' do
+    let(:params) do
+      {
+        document: {
+          age: 42,
+          foo: {
+            bar: '42',
+          },
+        },
+      }
+    end
+
+    it 'update/create worker document' do
+      stub_api = stub_request(:post, "#{site}/v2/users/#{user_id}/worker")
+                 .to_return(body: File.read('./spec/fixtures/user/worker.json'))
+
+      user = described_class.new(client).worker(user_id, params)
+
+      expect(stub_api).to have_been_made
+      expect(user.class).to eq(CirroIOV2::Responses::UserResponse)
+      expect(user.id).to eq(user_id)
+      expect(user.object).to eq('user')
+      expect(user.first_name).to eq('Grazyna')
+      expect(user.worker[:document]).to eq(params[:document])
     end
   end
 end

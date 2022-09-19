@@ -1,0 +1,35 @@
+{
+	"id": "1",
+	"object": "gig",
+	"title": "Favourite programming language?",
+	"description": "Description of gig ...",
+	"url": "http://heathcote.co/zina.gibson",
+	"start_at": 1652285764,
+	"end_at": 1653412329,
+	"archived_at": 1653412330,
+	"total_seats": 2,
+	"invitation_mode": "auto",
+	"filter_query": {
+		"status": "active",
+		"segment": "my_favorite_testers"
+	},
+	"tasks": {
+		"object": "list",
+		"data": [
+			{
+				"id": "1",
+				"object": "gig_task",
+				"title": "Ah, Wilderness!",
+				"base_price": 300
+			}
+		]
+	},
+	"notification_payload": {
+		"project_title": "Corporate Tax",
+		"task_title": "Add dataset",
+		"task_type": "Review"
+	},
+	"epam_options": {
+		"extra_mile": true
+	}
+}
