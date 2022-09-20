@@ -21,16 +21,16 @@ RSpec.describe CirroIOV2::Resources::GigTimeActivity do
       stub_api = stub_request(:post, "#{site}/v2/gig_time_activities")
                  .to_return(body: File.read('./spec/fixtures/gig_time_activity/create.json'))
 
-      payout = described_class.new(client).create(params)
+      gig_time_activity = described_class.new(client).create(params)
 
       expect(stub_api).to have_been_made
-      expect(payout.class).to eq(CirroIOV2::Responses::GigTimeActivityResponse)
-      expect(payout.object).to eq('gig_time_activity')
-      expect(payout.gig_id).to eq(params[:gig_id])
-      expect(payout.user_id).to eq(params[:user_id])
-      expect(payout.description).to eq(params[:description])
-      expect(payout.duration_in_ms).to eq(params[:duration_in_ms])
-      expect(payout.date).to eq(params[:date])
+      expect(gig_time_activity.class).to eq(CirroIOV2::Responses::GigTimeActivityResponse)
+      expect(gig_time_activity.object).to eq('gig_time_activity')
+      expect(gig_time_activity.gig_id).to eq(params[:gig_id])
+      expect(gig_time_activity.user_id).to eq(params[:user_id])
+      expect(gig_time_activity.description).to eq(params[:description])
+      expect(gig_time_activity.duration_in_ms).to eq(params[:duration_in_ms])
+      expect(gig_time_activity.date).to eq(params[:date])
     end
   end
 end

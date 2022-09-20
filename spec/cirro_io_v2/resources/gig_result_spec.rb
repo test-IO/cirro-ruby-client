@@ -25,24 +25,24 @@ RSpec.describe CirroIOV2::Resources::GigResult do
       }
     end
 
-    it 'creates a gig time activity' do
+    it 'creates a gig result' do
       stub_api = stub_request(:post, "#{site}/v2/gig_results")
                  .to_return(body: File.read('./spec/fixtures/gig_result/create.json'))
 
-      payout = described_class.new(client).create(params)
+      gig_result = described_class.new(client).create(params)
 
       expect(stub_api).to have_been_made
-      expect(payout.class).to eq(CirroIOV2::Responses::GigResultResponse)
-      expect(payout.object).to eq('gig_result')
-      expect(payout.title).to eq(params[:title])
-      expect(payout.user_id).to eq(params[:user_id])
-      expect(payout.gig_task_id).to eq(params[:gig_task_id])
-      expect(payout.description).to eq(params[:description])
-      expect(payout.quantity).to eq(params[:quantity])
-      expect(payout.multiplier).to eq(params[:multiplier])
-      expect(payout.delivery_date).to eq(params[:delivery_date])
-      expect(payout.cost_center_data).to eq(params[:cost_center_data])
-      expect(payout.cost_center_key).to be_nil
+      expect(gig_result.class).to eq(CirroIOV2::Responses::GigResultResponse)
+      expect(gig_result.object).to eq('gig_result')
+      expect(gig_result.title).to eq(params[:title])
+      expect(gig_result.user_id).to eq(params[:user_id])
+      expect(gig_result.gig_task_id).to eq(params[:gig_task_id])
+      expect(gig_result.description).to eq(params[:description])
+      expect(gig_result.quantity).to eq(params[:quantity])
+      expect(gig_result.multiplier).to eq(params[:multiplier])
+      expect(gig_result.delivery_date).to eq(params[:delivery_date])
+      expect(gig_result.cost_center_data).to eq(params[:cost_center_data])
+      expect(gig_result.cost_center_key).to be_nil
     end
   end
 end
