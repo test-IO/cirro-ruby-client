@@ -28,12 +28,31 @@ RSpec.describe CirroIOV2::Resources::Payout do
       expect(payout.class).to eq(CirroIOV2::Responses::PayoutResponse)
       expect(payout.object).to eq('payout')
       expect(payout.title).to eq(params[:title])
-      expect(payout.user_id).to eq(params[:user_id])
+      expect(payout.user_id).to eq(params[:user_id].to_s)
       expect(payout.amount).to eq(params[:amount])
       expect(payout.description).to eq(params[:description])
       expect(payout.billing_date).to eq(params[:billing_date])
       expect(payout.cost_center_key).to eq(params[:cost_center_key])
       expect(payout.cost_center_data).to be_nil
+    end
+  end
+
+  describe '#list' do
+    it 'returns gig results' do
+      stub_api = stub_request(:get, "#{site}/v2/payouts")
+                 .to_return(body: File.read('./spec/fixtures/payout/list.json'))
+
+      payouts = described_class.new(client).list
+
+      expect(stub_api).to have_been_made
+      expect(payouts.class).to eq(CirroIOV2::Responses::PayoutListResponse)
+      expect(payouts.object).to eq('list')
+      expect(payouts.data.first.class).to eq(CirroIOV2::Responses::PayoutResponse)
+      expect(payouts.data.first.id).to eq('1')
+      expect(payouts.data.first.object).to eq('payout')
+      expect(payouts.data.first.reference_id).to eq('42')
+      expect(payouts.data.first.reference_type).to eq('Gig')
+      expect(payouts.data.first.user_id).to eq('1')
     end
   end
 end

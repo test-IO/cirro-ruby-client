@@ -103,4 +103,27 @@ RSpec.describe CirroIOV2::Resources::Gig do
       expect(gig_task.base_price).to eq(params[:base_price])
     end
   end
+
+  describe '#update_task' do
+    let(:task_id) { '1' }
+    let(:params) do
+      {
+        title: 'New Title',
+        base_price: 420,
+      }
+    end
+
+    it 'creates task for gig' do
+      stub_api = stub_request(:post, "#{site}/v2/gigs/#{id}/tasks/#{task_id}")
+                 .to_return(body: File.read('./spec/fixtures/gig/update_task.json'))
+
+      gig_task = described_class.new(client).update_task(id, task_id, params)
+
+      expect(stub_api).to have_been_made
+      expect(gig_task.class).to eq(CirroIOV2::Responses::GigTaskResponse)
+      expect(gig_task.object).to eq('gig_task')
+      expect(gig_task.title).to eq(params[:title])
+      expect(gig_task.base_price).to eq(params[:base_price])
+    end
+  end
 end

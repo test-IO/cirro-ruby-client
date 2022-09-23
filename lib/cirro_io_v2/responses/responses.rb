@@ -2,7 +2,10 @@ module CirroIOV2
   module Responses
     LIST_RESPONSES = [
       :GigTaskListResponse,
+      :GigResultListResponse,
       :GigInvitationListResponse,
+      :GigTimeActivityListResponse,
+      :PayoutListResponse,
       :NotificationTopicPreferenceListResponse,
       :NotificationLocaleListResponse,
       :NotificationConfigurationListResponse,

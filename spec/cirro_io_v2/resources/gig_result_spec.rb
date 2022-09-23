@@ -45,4 +45,22 @@ RSpec.describe CirroIOV2::Resources::GigResult do
       expect(gig_result.cost_center_key).to be_nil
     end
   end
+
+  describe '#list' do
+    it 'returns gig results' do
+      stub_api = stub_request(:get, "#{site}/v2/gig_results")
+                 .to_return(body: File.read('./spec/fixtures/gig_result/list.json'))
+
+      gig_results = described_class.new(client).list
+
+      expect(stub_api).to have_been_made
+      expect(gig_results.class).to eq(CirroIOV2::Responses::GigResultListResponse)
+      expect(gig_results.object).to eq('list')
+      expect(gig_results.data.first.class).to eq(CirroIOV2::Responses::GigResultResponse)
+      expect(gig_results.data.first.id).to eq('1')
+      expect(gig_results.data.first.object).to eq('gig_result')
+      expect(gig_results.data.first.gig_task_id).to eq('1')
+      expect(gig_results.data.first.user_id).to eq('1')
+    end
+  end
 end

@@ -33,4 +33,22 @@ RSpec.describe CirroIOV2::Resources::GigTimeActivity do
       expect(gig_time_activity.date).to eq(params[:date])
     end
   end
+
+  describe '#list' do
+    it 'returns gig results' do
+      stub_api = stub_request(:get, "#{site}/v2/gig_time_activities")
+                 .to_return(body: File.read('./spec/fixtures/gig_time_activity/list.json'))
+
+      gig_time_activities = described_class.new(client).list
+
+      expect(stub_api).to have_been_made
+      expect(gig_time_activities.class).to eq(CirroIOV2::Responses::GigTimeActivityListResponse)
+      expect(gig_time_activities.object).to eq('list')
+      expect(gig_time_activities.data.first.class).to eq(CirroIOV2::Responses::GigTimeActivityResponse)
+      expect(gig_time_activities.data.first.id).to eq('1')
+      expect(gig_time_activities.data.first.object).to eq('gig_time_activity')
+      expect(gig_time_activities.data.first.gig_id).to eq('1')
+      expect(gig_time_activities.data.first.user_id).to eq('1')
+    end
+  end
 end
