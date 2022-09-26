@@ -7,6 +7,9 @@ require 'cirro_io_v2/request_clients/jwt'
 
 require 'cirro_io_v2/resources/base'
 require 'cirro_io_v2/resources/gig'
+require 'cirro_io_v2/resources/gig_result'
+require 'cirro_io_v2/resources/gig_time_activity'
+require 'cirro_io_v2/resources/payout'
 require 'cirro_io_v2/resources/gig_invitation'
 require 'cirro_io_v2/resources/user'
 
@@ -69,6 +72,18 @@ module CirroIOV2
       Resources::Gig.new(self)
     end
 
+    def GigResult
+      Resources::GigResult.new(self)
+    end
+
+    def GigTimePayout
+      Resources::GigTimePayout.new(self)
+    end
+
+    def Payout
+      Resources::Payout.new(self)
+    end
+
     def NotificationBroadcast
       Resources::NotificationBroadcast.new(self)
     end
@@ -98,7 +113,7 @@ module CirroIOV2
     end
 
     def NotificationTemplate
-      Resources::NotificationTopic.new(self)
+      Resources::NotificationTemplate.new(self)
     end
 
     # rubocop:enable Naming/MethodName

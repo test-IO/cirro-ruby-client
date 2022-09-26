@@ -1,0 +1,16 @@
+{
+  "object": "list",
+  "url": "/gig_time_activities",
+  "has_more": false,
+  "data": [
+    {
+      "id": "1",
+      "object": "gig_time_activity",
+      "gig_id": "1",
+      "user_id": "1",
+      "description": "Commodi excepturi et eum.",
+      "duration_in_ms": 7200000,
+      "date": "2022-06-19"
+    }
+  ]
+}

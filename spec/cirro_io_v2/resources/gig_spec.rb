@@ -1,11 +1,13 @@
 RSpec.describe CirroIOV2::Resources::Gig do
+  let(:site) { 'http://api.cirro.io' }
+  let(:id) { '1' }
+  let(:client) do
+    CirroIOV2::Client.new(private_key: File.read('./spec/fixtures/private_key.pem'),
+                          client_id: 1,
+                          site: site)
+  end
+
   describe '#create' do
-    let(:site) { 'http://api.cirro.io' }
-    let(:client) do
-      CirroIOV2::Client.new(private_key: File.read('./spec/fixtures/private_key.pem'),
-                            client_id: 1,
-                            site: site)
-    end
     let(:params) do
       {
         "title": 'Favourite programming language?',
@@ -43,6 +45,7 @@ RSpec.describe CirroIOV2::Resources::Gig do
       expect(gig.class).to eq(CirroIOV2::Responses::GigResponse)
       expect(gig.object).to eq('gig')
       expect(gig.title).to eq(params[:title])
+      expect(gig.archived_at).to be_nil
       expect(gig.tasks.class).to eq(CirroIOV2::Responses::GigTaskListResponse)
       expect(gig.tasks.object).to eq('list')
       expect(gig.tasks.data.first.class).to eq(CirroIOV2::Responses::GigTaskResponse)
@@ -50,6 +53,77 @@ RSpec.describe CirroIOV2::Resources::Gig do
       expect(gig.tasks.data.first.object).to eq('gig_task')
       expect(gig.tasks.data.first.title).to eq(params[:tasks].first[:title])
       expect(gig.tasks.data.first.base_price).to eq(params[:tasks].first[:base_price])
+    end
+  end
+
+  describe '#archive' do
+    let(:params) do
+      { archived_at: 1653412330 }
+    end
+
+    it 'archives a gig' do
+      stub_api = stub_request(:post, "#{site}/v2/gigs/#{id}/archive")
+                 .to_return(body: File.read('./spec/fixtures/gig/archive.json'))
+
+      gig = described_class.new(client).archive(id, params)
+
+      expect(stub_api).to have_been_made
+      expect(gig.class).to eq(CirroIOV2::Responses::GigResponse)
+      expect(gig.object).to eq('gig')
+      expect(gig.title).to eq('Favourite programming language?')
+      expect(gig.archived_at).to eq(params[:archived_at])
+      expect(gig.tasks.class).to eq(CirroIOV2::Responses::GigTaskListResponse)
+      expect(gig.tasks.object).to eq('list')
+      expect(gig.tasks.data.first.class).to eq(CirroIOV2::Responses::GigTaskResponse)
+      expect(gig.tasks.data.first.id).to eq('1')
+      expect(gig.tasks.data.first.object).to eq('gig_task')
+      expect(gig.tasks.data.first.title).to eq('Ah, Wilderness!')
+      expect(gig.tasks.data.first.base_price).to eq(300)
+    end
+  end
+
+  describe '#tasks' do
+    let(:params) do
+      {
+        title: 'All Passion Spent',
+        base_price: 400,
+      }
+    end
+
+    it 'creates task for gig' do
+      stub_api = stub_request(:post, "#{site}/v2/gigs/#{id}/tasks")
+                 .to_return(body: File.read('./spec/fixtures/gig/tasks.json'))
+
+      gig_task = described_class.new(client).tasks(id, params)
+
+      expect(stub_api).to have_been_made
+      expect(gig_task.class).to eq(CirroIOV2::Responses::GigTaskResponse)
+      expect(gig_task.object).to eq('gig_task')
+      expect(gig_task.title).to eq(params[:title])
+      expect(gig_task.base_price).to eq(params[:base_price])
+    end
+  end
+
+  describe '#update_task' do
+    let(:task_id) { '1' }
+    let(:params) do
+      {
+        title: 'New Title',
+        base_price: 420,
+      }
+    end
+
+    it 'creates task for gig' do
+      stub_api = stub_request(:post, "#{site}/v2/gigs/#{id}/tasks/#{task_id}")
+                 .to_return(body: File.read('./spec/fixtures/gig/update_task.json'))
+
+      gig_task = described_class.new(client).update_task(id, task_id, params)
+
+      expect(stub_api).to have_been_made
+      expect(gig_task.class).to eq(CirroIOV2::Responses::GigTaskResponse)
+      expect(gig_task.object).to eq('gig_task')
+      expect(gig_task.title).to eq(params[:title])
+      expect(gig_task.base_price).to eq(params[:base_price])
     end
   end
 end
