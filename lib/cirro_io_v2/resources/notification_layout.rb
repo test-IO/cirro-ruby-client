@@ -5,6 +5,11 @@ module CirroIOV2
       UPDATE_ALLOWED_PARAMS = [:name].freeze
       CREATE_TEMPLATE_ALLOWED_PARAMS = [:notification_configuration_id, :body].freeze
 
+      def list(params = nil)
+        response = client.request_client.request(:get, resource_root, params: params)
+        Responses::NotificationLayoutListResponse.new(response.body)
+      end
+
       def create(params)
         params_allowed?(params, CREATE_ALLOWED_PARAMS)
         response = client.request_client.request(:post, resource_root, body: params)
