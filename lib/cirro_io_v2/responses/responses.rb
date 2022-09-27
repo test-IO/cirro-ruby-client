@@ -8,6 +8,7 @@ module CirroIOV2
       :PayoutListResponse,
       :NotificationTopicPreferenceListResponse,
       :NotificationLocaleListResponse,
+      :NotificationLayoutListResponse,
       :NotificationConfigurationListResponse,
       :NotificationLayoutTemplateListResponse,
       :NotificationTopicListResponse,

@@ -7,6 +7,28 @@ RSpec.describe CirroIOV2::Resources::NotificationLayout do
   end
   let(:id) { '1' }
 
+  describe '#list' do
+    it 'returns list of a notifications layouts' do
+      stub_api = stub_request(:get, "#{site}/v2/notification_layouts")
+                 .to_return(body: File.read('./spec/fixtures/notification_layout/list.json'))
+
+      layouts = described_class.new(client).list
+
+      expect(stub_api).to have_been_made
+      expect(layouts.class).to eq(CirroIOV2::Responses::NotificationLayoutListResponse)
+      expect(layouts.object).to eq('list')
+      expect(layouts.data.first.class).to eq(CirroIOV2::Responses::NotificationLayoutResponse)
+      expect(layouts.data.first.id).to eq('1')
+      expect(layouts.data.first.object).to eq('notification_layout')
+      expect(layouts.data.first.name).to eq('tester_layout')
+      expect(layouts.data.first.templates.class).to eq(CirroIOV2::Responses::NotificationLayoutTemplateListResponse)
+      expect(layouts.data.first.templates.data.first.id).to eq('1')
+      expect(layouts.data.first.templates.data.first.notification_configuration_id).to eq('1')
+      expect(layouts.data.first.templates.data.first.notification_layout_id).to eq('1')
+      expect(layouts.data.first.templates.data.first.body).not_to be_nil
+    end
+  end
+
   describe '#create' do
     let(:params) do
       {
