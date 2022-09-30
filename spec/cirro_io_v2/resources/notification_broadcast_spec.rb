@@ -33,11 +33,5 @@ RSpec.describe CirroIOV2::Resources::NotificationBroadcast do
         expect(created_notification_broadcast.notification_topic_id).to eq('1')
       end
     end
-
-    context 'when some params are not allowed' do
-      it 'returns error' do
-        expect { described_class.new(client).create({ locale: locale, test: 'test' }) }.to raise_error('ParamNotAllowed')
-      end
-    end
   end
 end

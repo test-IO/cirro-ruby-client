@@ -1,14 +1,11 @@
 module CirroIOV2
   module Resources
     class NotificationTopicPreference < Base
-      ALLOWED_PARAMS = [:user_id, :notification_topic_id, :limit, :before, :after].freeze
-
       def resource_root
         'notification_topic_preferences'
       end
 
       def list(params = nil)
-        params_allowed?(params, ALLOWED_PARAMS) if params
         response = client.request_client.request(:get, resource_root, params: params)
         Responses::NotificationTopicPreferenceListResponse.new(response.body)
       end

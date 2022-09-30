@@ -22,12 +22,6 @@ RSpec.describe CirroIOV2::Resources::NotificationLocale do
         expect(created_notification_locale.configurations.class).to eq(CirroIOV2::Responses::NotificationConfigurationListResponse)
       end
     end
-
-    context 'when some params are not allowed' do
-      it 'returns error' do
-        expect { described_class.new(client).create({ locale: locale, test: 'test' }) }.to raise_error('ParamNotAllowed')
-      end
-    end
   end
 
   describe '#list' do
