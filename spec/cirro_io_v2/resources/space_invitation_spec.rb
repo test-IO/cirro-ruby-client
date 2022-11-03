@@ -15,7 +15,7 @@ RSpec.describe CirroIOV2::Resources::SpaceInvitation do
         "name": 'New User',
         "inviter_name": 'Generous Inviter',
         "skip_background_check": false,
-        "expires_in": 3
+        "expires_in": 3,
       }
     end
 

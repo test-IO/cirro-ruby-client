@@ -12,7 +12,7 @@ module CirroIOV2
       :NotificationConfigurationListResponse,
       :NotificationLayoutTemplateListResponse,
       :NotificationTopicListResponse,
-      :NotificationTemplateListResponse
+      :NotificationTemplateListResponse,
     ].freeze
 
     UserResponse = Struct.new(:id, :object, :first_name, :last_name, :time_zone, :screen_name, :country_code, :epam, :worker) do
