@@ -8,6 +8,9 @@
 /tmp/
 .idea/
 
+.ruby-version
+.ruby-gemset
+
 # rspec failure tracking
 .rspec_status
 
