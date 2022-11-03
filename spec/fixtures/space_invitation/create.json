@@ -1,0 +1,11 @@
+{
+    "id": "1",
+    "object": "space_invitation",
+    "token": "3w984zncfg9w8erzcfgnowez8",
+    "subject": "A-Team",
+    "email": "new.user@example.com",
+    "name": "New User",
+    "inviter_name": "Generous Inviter",
+    "skip_background_check": false,
+    "expires_at": "2023-05-12T00:00:00Z"
+}

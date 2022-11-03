@@ -12,7 +12,7 @@ module CirroIOV2
       :NotificationConfigurationListResponse,
       :NotificationLayoutTemplateListResponse,
       :NotificationTopicListResponse,
-      :NotificationTemplateListResponse,
+      :NotificationTemplateListResponse
     ].freeze
 
     UserResponse = Struct.new(:id, :object, :first_name, :last_name, :time_zone, :screen_name, :country_code, :epam, :worker) do
@@ -21,6 +21,10 @@ module CirroIOV2
 
     UserNotificationPreferenceResponse = Struct.new(:id, :object, :locale, :topics) do
       self::NESTED_RESPONSES = { topics: :NotificationTopicListResponse }.freeze
+      include Base
+    end
+
+    SpaceInvitationResponse = Struct.new(:id, :object, :token, :subject, :email, :name, :inviter_name, :skip_background_check, :expires_at) do
       include Base
     end
 
