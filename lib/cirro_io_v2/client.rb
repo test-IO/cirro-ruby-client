@@ -81,8 +81,8 @@ module CirroIOV2
       Resources::GigResult.new(self)
     end
 
-    def GigTimePayout
-      Resources::GigTimePayout.new(self)
+    def GigTimeActivity
+      Resources::GigTimeActivity.new(self)
     end
 
     def Payout
