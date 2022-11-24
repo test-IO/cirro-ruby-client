@@ -58,8 +58,8 @@ RSpec.describe CirroIOV2::Resources::User do
       expect(notification_preferences.class).to eq(CirroIOV2::Responses::UserNotificationPreferenceResponse)
       expect(notification_preferences.object).to eq('notification_preference')
       expect(notification_preferences.locale).to eq('de')
-      expect(notification_preferences.topics.class).to eq(CirroIOV2::Responses::NotificationTopicListResponse)
-      expect(notification_preferences.topics.data.first.class).to eq(CirroIOV2::Responses::NotificationTopicResponse)
+      expect(notification_preferences.topics.class).to eq(CirroIOV2::Responses::NotificationTopicPreferenceListResponse)
+      expect(notification_preferences.topics.data.first.class).to eq(CirroIOV2::Responses::NotificationTopicPreferenceResponse)
     end
   end
 
