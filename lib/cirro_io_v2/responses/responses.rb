@@ -15,7 +15,7 @@ module CirroIOV2
       :NotificationTemplateListResponse,
     ].freeze
 
-    UserResponse = Struct.new(:id, :object, :first_name, :last_name, :time_zone, :screen_name, :country_code, :epam, :worker) do
+    UserResponse = Struct.new(:id, :object, :first_name, :last_name, :time_zone, :birthday, :country_code, :epam, :worker) do
       include Base
     end
 
