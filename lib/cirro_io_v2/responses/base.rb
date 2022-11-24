@@ -15,7 +15,8 @@ module CirroIOV2
           )
           super(*body.slice(*members).keys.map { |attr| values_hash[attr] })
         else
-          super(*body.slice(*members).values)
+          super
+          members.each { |attr| public_send("#{attr}=", body[attr]) }
         end
       end
 

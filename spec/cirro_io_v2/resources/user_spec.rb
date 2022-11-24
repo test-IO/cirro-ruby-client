@@ -34,6 +34,17 @@ RSpec.describe CirroIOV2::Resources::User do
       expect(user.first_name).to eq('Grazyna')
       expect(user.epam[:id]).to eq('12345')
     end
+
+    it 'correctly sets attributes when any attribute is nil' do
+      fixture_body = JSON.parse(File.read('./spec/fixtures/user/find.json'))
+      fixture_body['epam'] = nil
+      stub_request(:get, "#{site}/v2/users/#{user_id}").to_return(body: fixture_body.to_json)
+
+      user = described_class.new(client).find(user_id)
+
+      expect(user.epam).to be_nil
+      expect(user.worker[:billable]).to eq(false)
+    end
   end
 
   describe '#notification_preferences' do
