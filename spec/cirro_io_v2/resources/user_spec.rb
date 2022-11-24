@@ -34,6 +34,17 @@ RSpec.describe CirroIOV2::Resources::User do
       expect(user.first_name).to eq('Grazyna')
       expect(user.epam[:id]).to eq('12345')
     end
+
+    it 'correctly sets attributes when any attribute is nil' do
+      fixture_body = JSON.parse(File.read('./spec/fixtures/user/find.json'))
+      fixture_body['epam'] = nil
+      stub_request(:get, "#{site}/v2/users/#{user_id}").to_return(body: fixture_body.to_json)
+
+      user = described_class.new(client).find(user_id)
+
+      expect(user.epam).to be_nil
+      expect(user.worker[:billable]).to eq(false)
+    end
   end
 
   describe '#notification_preferences' do
@@ -47,8 +58,8 @@ RSpec.describe CirroIOV2::Resources::User do
       expect(notification_preferences.class).to eq(CirroIOV2::Responses::UserNotificationPreferenceResponse)
       expect(notification_preferences.object).to eq('notification_preference')
       expect(notification_preferences.locale).to eq('de')
-      expect(notification_preferences.topics.class).to eq(CirroIOV2::Responses::NotificationTopicListResponse)
-      expect(notification_preferences.topics.data.first.class).to eq(CirroIOV2::Responses::NotificationTopicResponse)
+      expect(notification_preferences.topics.class).to eq(CirroIOV2::Responses::NotificationTopicPreferenceListResponse)
+      expect(notification_preferences.topics.data.first.class).to eq(CirroIOV2::Responses::NotificationTopicPreferenceResponse)
     end
   end
 
