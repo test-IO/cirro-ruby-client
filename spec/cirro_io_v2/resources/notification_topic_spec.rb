@@ -5,6 +5,7 @@ RSpec.describe CirroIOV2::Resources::NotificationTopic do
                           client_id: 1,
                           site: site)
   end
+  let(:id) { 1 }
   let(:params) do
     {
       "name": 'new_gig_invitation',
@@ -20,6 +21,39 @@ RSpec.describe CirroIOV2::Resources::NotificationTopic do
         },
       ],
     }
+  end
+
+  describe '#find' do
+    it 'returns a notification topic' do
+      stub_api = stub_request(:get, "#{site}/v2/notification_topics/#{id}")
+                 .to_return(body: File.read('./spec/fixtures/notification_topic/find.json'))
+
+      notification_topic = described_class.new(client).find(id)
+
+      expect(stub_api).to have_been_made
+      expect(notification_topic.class).to eq(CirroIOV2::Responses::NotificationTopicResponse)
+      expect(notification_topic.object).to eq('notification_topic')
+      expect(notification_topic.name).to eq('new_gig_invitation')
+      expect(notification_topic.templates.class).to eq(CirroIOV2::Responses::NotificationTemplateListResponse)
+      expect(notification_topic.templates.data.first.class).to eq(CirroIOV2::Responses::NotificationTemplateResponse)
+    end
+  end
+
+  describe '#update' do
+    it 'returns an updated notification topic' do
+      stub_api = stub_request(:post, "#{site}/v2/notification_topics/#{id}")
+                 .to_return(body: File.read('./spec/fixtures/notification_topic/update.json'))
+
+      notification_topic = described_class.new(client).update(id, params)
+
+      expect(stub_api).to have_been_made
+      expect(notification_topic.class).to eq(CirroIOV2::Responses::NotificationTopicResponse)
+      expect(notification_topic.object).to eq('notification_topic')
+      expect(notification_topic.name).to eq('new_gig_invitation')
+      expect(notification_topic.preferences[:email]).to eq('never')
+      expect(notification_topic.templates.class).to eq(CirroIOV2::Responses::NotificationTemplateListResponse)
+      expect(notification_topic.templates.data.first.class).to eq(CirroIOV2::Responses::NotificationTemplateResponse)
+    end
   end
 
   describe '#list' do

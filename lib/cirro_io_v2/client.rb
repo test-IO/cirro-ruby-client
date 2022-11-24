@@ -12,6 +12,7 @@ require 'cirro_io_v2/resources/gig_time_activity'
 require 'cirro_io_v2/resources/payout'
 require 'cirro_io_v2/resources/gig_invitation'
 require 'cirro_io_v2/resources/user'
+require 'cirro_io_v2/resources/space_invitation'
 
 require 'cirro_io_v2/responses/base'
 require 'cirro_io_v2/responses/responses'
@@ -64,6 +65,10 @@ module CirroIOV2
       Resources::User.new(self)
     end
 
+    def SpaceInvitation
+      Resources::SpaceInvitation.new(self)
+    end
+
     def GigInvitation
       Resources::GigInvitation.new(self)
     end
@@ -76,8 +81,8 @@ module CirroIOV2
       Resources::GigResult.new(self)
     end
 
-    def GigTimePayout
-      Resources::GigTimePayout.new(self)
+    def GigTimeActivity
+      Resources::GigTimeActivity.new(self)
     end
 
     def Payout
