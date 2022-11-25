@@ -1,0 +1,140 @@
+{
+    "content": [
+        {
+            "id": "3222559",
+            "url": "https://example.com/api/employees/4060741400379310643/badges/3222559",
+            "badge": {
+                "id": "4926",
+                "url": "https://example.com/api/badges/4926"
+            },
+            "assigner": {
+                "id": "4060741400362773504",
+                "url": "https://example.com/api/employees/4060741400362773504"
+            },
+            "assignerType": "EMPLOYEE",
+            "toEmployee": {
+                "id": "4060741400379310643",
+                "url": "https://example.com/api/employees/4060741400379310643"
+            },
+            "status": "CONFIRMED",
+            "comment": "MyComment",
+            "assigned": "2021-04-16 11:41:46 +0000",
+            "notificationCCEmails": [],
+            "points": 29,
+            "newsId": 3541738,
+            "news": {
+                "visibility": "PUBLIC",
+                "assigneeName": ""
+            },
+            "badgeWeight": 29
+        }
+    ],
+    "errors": [],
+    "refs": {
+        "https://heroes-stag.epm-ppa.projects.epam.com/api/employees/4060741400379310643": {
+            "id": "4060741400379310643",
+            "url": "https://example.com/api/employees/4060741400379310643",
+            "firstName": "Name",
+            "lastName": "Surname",
+            "name": "Name Surname",
+            "photo": "https://example.com/avatar/b162c8968cdda3d063bcf0a078716451.jpg",
+            "position": "Software Engineer",
+            "office": "Address",
+            "location": "Address",
+            "email": "Name_Surname@example.com",
+            "fired": false,
+            "roles": [],
+            "badgeAssignerType": "EMPLOYEE"
+        },
+        "https://heroes-stag.epm-ppa.projects.epam.com/api/badges/4926": {
+            "id": "4926",
+            "url": "https://example.com/api/badges/4926",
+            "name": "Testing as a Service - Thank You!",
+            "description": "For participation in crowd tests which brings value.",
+            "descriptionLink": "",
+            "category": {
+                "id": "5",
+                "url": "https://example.com/api/categories/5"
+            },
+            "type": "SYSTEM",
+            "weightLabel": {
+                "id": "7",
+                "url": "https://example.com/api/badges/weights/7"
+            },
+            "weight": 29,
+            "badgeWeightComponents": {
+                "effort": 290,
+                "coverage": 290,
+                "effect": 290,
+                "novelty": 290,
+                "extra": 290
+            },
+            "assignmentRule": "UNRESTRICTED",
+            "metaInfo": [],
+            "image": {
+                "id": "11923",
+                "url": "https://heroes-stag.epm-ppa.projects.epam.com/api/images/11923",
+                "title": "Testing as a Service - Thank You!.image",
+                "imageUrl": "https://example.com/api/images/11923/content",
+                "imageSourceUrl": "https://example.com/heroes-epam/stag/static-site/1000000/badge/4926/S220_220.png?v=f8cc866fa35a4f0990b37e21b433c2c5"
+            },
+            "structure": "SINGLE",
+            "sendNotification": true,
+            "created": "2020-12-03 16:04:54 +0000",
+            "enabled": true,
+            "disablePublicNews": false,
+            "disableSuggestedNews": false,
+            "disableComment": false,
+            "limited": false,
+            "availableOutsideAccount": false,
+            "approvable": false,
+            "notifications": {},
+            "comment": "comment",
+            "tags": [],
+            "events": [],
+            "optionalSettings": {
+                "requiresLink": false,
+                "requiresProject": false,
+                "requiresSummary": false
+            },
+            "backgroundGradient": {
+                "colorFrom": "#B0F4FF",
+                "colorTo": "#39C2D7"
+            },
+            "defaultPoints": {}
+        },
+        "https://heroes-stag.epm-ppa.projects.epam.com/api/employees/4060741400362773504": {
+            "id": "4060741400362773504",
+            "url": "https://example.com/api/employees/4060741400362773504",
+            "firstName": "Name",
+            "lastName": "Surname",
+            "name": "Name Surname",
+            "photo": "https://example.com/avatar/5fc3074e753889a97bfb52a8636292f2.jpg",
+            "position": "Software Engineer",
+            "office": "office",
+            "location": "location",
+            "email": "Name_Surname@example.com",
+            "fired": false,
+            "roles": [],
+            "badgeAssignerType": "EMPLOYEE"
+        },
+        "https://heroes-stag.epm-ppa.projects.epam.com/api/badges/weights/7": {
+            "id": "7",
+            "url": "https://example.com/api/badges/weights/7",
+            "name": "Casual",
+            "weight": 20,
+            "description": "e.g. everyday thank you badge"
+        },
+        "https://heroes-stag.epm-ppa.projects.epam.com/api/categories/5": {
+            "id": "5",
+            "url": "https://example.com/api/categories/5",
+            "name": "Appreciations",
+            "color": "#39c2d7",
+            "orderIndex": 4,
+            "opportunityName": "Appreciations",
+            "displayStub": false
+        }
+    },
+    "paging": null,
+    "hasMoreResults": null
+}

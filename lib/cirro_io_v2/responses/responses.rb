@@ -137,5 +137,9 @@ module CirroIOV2
       klass = Class.new(Struct.new(:object, :url, :has_more, :data)) { include Base }
       const_set(name, klass)
     end
+
+    EPAMHeroesResponse = Struct.new(:employee_id, :comment, :event, :assigner_type, :assigner_id, :cc_emails) do
+      include Base
+    end
   end
 end
