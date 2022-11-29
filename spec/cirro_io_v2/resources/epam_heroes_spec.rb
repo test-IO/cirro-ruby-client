@@ -24,14 +24,15 @@ RSpec.describe CirroIOV2::Resources::EpamHeroes do
 
     it 'creates a epam_heroes' do
       epam_heroes = described_class.new(client).create(params)
+      json = JSON.parse(stub_api.response.body)
+      json_symbolized_keys = json.deep_symbolize_keys
 
       expect(stub_api).to have_been_made
       expect(epam_heroes.class).to eq(CirroIOV2::Responses::EpamHeroesResponse)
-      expect(epam_heroes.content).to be_present
-      expect(epam_heroes.refs).to be_present
-
-      expect(epam_heroes.paging).to eq(nil)
-      expect(epam_heroes.hasMoreResults).to eq(nil)
+      expect(epam_heroes.content).to eq(json_symbolized_keys[:content])
+      expect(epam_heroes.refs).to eq(json_symbolized_keys[:refs])
+      expect(epam_heroes.paging).to eq(json_symbolized_keys[:paging])
+      expect(epam_heroes.hasMoreResults).to eq(json_symbolized_keys[:hasMoreResults])
     end
   end
 end
