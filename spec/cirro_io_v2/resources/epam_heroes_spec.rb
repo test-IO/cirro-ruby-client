@@ -14,7 +14,10 @@ RSpec.describe CirroIOV2::Resources::EpamHeroes do
         comment: 'MyComment',
         event: 'MyEvent',
         grantor_id: '2',
-        cc_emails: ['Name_Surname@example.com', 'test@test.com']
+        cc_emails: [
+          'Name_Surname@example.com',
+          'test@test.com',
+        ]
       }
     end
 
