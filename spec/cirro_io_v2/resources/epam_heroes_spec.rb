@@ -5,10 +5,6 @@ RSpec.describe CirroIOV2::Resources::EpamHeroes do
                           client_id: 1,
                           site: site)
   end
-  let(:stub_api) do
-    stub_request(:post, "#{site}/v2/epam_heroes")
-      .to_return(body: File.read('./spec/fixtures/epam_heroes/create.json'))
-  end
 
   describe '#create' do
     let(:params) do
@@ -19,6 +15,11 @@ RSpec.describe CirroIOV2::Resources::EpamHeroes do
         grantor_id: '2',
         cc_emails: ['Name_Surname@example.com', 'test@test.com']
       }
+    end
+
+    let(:stub_api) do
+      stub_request(:post, "#{site}/v2/epam_heroes")
+        .to_return(body: File.read('./spec/fixtures/epam_heroes/create.json'))
     end
 
     it 'creates a epam_heroes' do
