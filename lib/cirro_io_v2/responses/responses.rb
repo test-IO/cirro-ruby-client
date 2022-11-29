@@ -138,7 +138,7 @@ module CirroIOV2
       const_set(name, klass)
     end
 
-    EPAMHeroesResponse = Struct.new(:employee_id, :comment, :event, :assigner_type, :assigner_id, :cc_emails) do
+    EpamHeroesResponse = Struct.new(:content, :refs, :paging, :hasMoreResults) do
       include Base
     end
   end

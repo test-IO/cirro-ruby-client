@@ -122,8 +122,8 @@ module CirroIOV2
       Resources::NotificationTemplate.new(self)
     end
 
-    def EPAMHeroes
-      Resources::EPAMHeroes.new(self)
+    def EpamHeroes
+      Resources::EpamHeroes.new(self)
     end
 
     # rubocop:enable Naming/MethodName

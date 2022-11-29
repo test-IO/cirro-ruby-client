@@ -10,11 +10,11 @@ RSpec.describe CirroIOV2::Resources::EPAMHeroes do
   describe '#create' do
     let(:params) do
       {
-        "comment": 'MyComment',
-        "event": 'MyEvent',
-        "assigner_type": 'ACCOUNT',
-        "assigner_id": '4060741400362773504',
-        "cc_emails": 'Name_Surname@example.com',
+        grantee_id: '1',
+        comment: 'MyComment',
+        event: 'MyEvent',
+        grantor_id: '2',
+        cc_emails: ['Name_Surname@example.com', 'test@test.com']
       }
     end
 
