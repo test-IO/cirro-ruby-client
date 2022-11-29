@@ -1,0 +1,13 @@
+{
+  "id": "1",
+  "object": "user",
+  "first_name": "Maynard",
+  "last_name": "Keenan",
+  "email": "mjk@test.io",
+  "time_zone": "Berlin",
+  "birthday": "1975-11-22",
+  "country_code": "DE",
+  "password": "@123456abc@",
+  "epam": null,
+  "worker": null
+}

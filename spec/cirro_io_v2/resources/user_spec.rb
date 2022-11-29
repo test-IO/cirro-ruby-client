@@ -20,6 +20,47 @@ RSpec.describe CirroIOV2::Resources::User do
     }
   end
 
+  describe '#create' do
+    let(:params) do
+      {
+        "first_name": 'Maynard',
+        "last_name": 'Keenan',
+        "email": 'mjk@test.io',
+        "time_zone": 'Berlin',
+        "birthday": '1975-11-22',
+        "country_code": 'DE',
+        "password": '@123456abc@',
+      }
+    end
+
+    it 'creates user with params' do
+      stub_api = stub_request(:post, "#{site}/v2/users")
+                 .to_return(body: File.read('./spec/fixtures/user/create.json'))
+
+      user = described_class.new(client).create(params)
+
+      expect(stub_api).to have_been_made
+      expect(user.class).to eq(CirroIOV2::Responses::UserResponse)
+      expect(user.object).to eq('user')
+      expect(user.first_name).to eq(params[:first_name])
+      expect(user.last_name).to eq(params[:last_name])
+      expect(user.time_zone).to eq(params[:time_zone])
+      expect(user.country_code).to eq(params[:country_code])
+      expect(user.birthday).to eq(params[:birthday])
+    end
+
+    it 'creates user without params' do
+      stub_api = stub_request(:post, "#{site}/v2/users")
+                 .to_return(body: File.read('./spec/fixtures/user/create.json'))
+
+      user = described_class.new(client).create
+
+      expect(stub_api).to have_been_made
+      expect(user.class).to eq(CirroIOV2::Responses::UserResponse)
+      expect(user.object).to eq('user')
+    end
+  end
+
   describe '#find' do
     it 'finds user' do
       stub_api = stub_request(:get, "#{site}/v2/users/#{user_id}")

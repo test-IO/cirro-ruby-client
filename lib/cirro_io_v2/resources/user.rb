@@ -1,6 +1,11 @@
 module CirroIOV2
   module Resources
     class User < Base
+      def create(params = nil)
+        response = client.request_client.request(:post, resource_root, body: params)
+        CirroIOV2::Responses::UserResponse.new(response.body)
+      end
+
       def find(id)
         response = client.request_client.request(:get, "#{resource_root}/#{id}")
         CirroIOV2::Responses::UserResponse.new(response.body)
