@@ -129,6 +129,10 @@ module CirroIOV2
       include Base
     end
 
+    EpamHeroesResponse = Struct.new(:content, :refs, :paging, :hasMoreResults) do
+      include Base
+    end
+
     # cover the list responses
     def self.const_missing(name)
       return const_get(name) if const_defined? name
@@ -136,10 +140,6 @@ module CirroIOV2
 
       klass = Class.new(Struct.new(:object, :url, :has_more, :data)) { include Base }
       const_set(name, klass)
-    end
-
-    EpamHeroesResponse = Struct.new(:content, :refs, :paging, :hasMoreResults) do
-      include Base
     end
   end
 end
