@@ -1,10 +1,13 @@
-RSpec.describe CirroIOV2::Resources::EPAMHeroes do
+RSpec.describe CirroIOV2::Resources::EpamHeroes do
   let(:site) { 'http://api.cirro.io' }
-  let(:employee_id) { '1' }
   let(:client) do
     CirroIOV2::Client.new(private_key: File.read('./spec/fixtures/private_key.pem'),
                           client_id: 1,
                           site: site)
+  end
+  let(:stub_api) do
+    stub_request(:post, "#{site}/v2/epam_heroes")
+      .to_return(body: File.read('./spec/fixtures/epam_heroes/create.json'))
   end
 
   describe '#create' do
@@ -19,9 +22,6 @@ RSpec.describe CirroIOV2::Resources::EPAMHeroes do
     end
 
     it 'creates a epam_heroes' do
-      stub_api = stub_request(:post, "#{site}/v2/epam_heroes")
-                   .to_return(body: File.read('./spec/fixtures/epam_heroes/create.json'))
-
       epam_heroes = described_class.new(client).create(params)
 
       expect(stub_api).to have_been_made
