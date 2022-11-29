@@ -17,7 +17,7 @@ RSpec.describe CirroIOV2::Resources::EpamHeroes do
       }
     end
 
-    let(:stub_api) do
+    let!(:stub_api) do
       stub_request(:post, "#{site}/v2/epam_heroes")
         .to_return(body: File.read('./spec/fixtures/epam_heroes/create.json'))
     end
@@ -26,15 +26,12 @@ RSpec.describe CirroIOV2::Resources::EpamHeroes do
       epam_heroes = described_class.new(client).create(params)
 
       expect(stub_api).to have_been_made
-      expect(epam_heroes.class).to eq(CirroIOV2::Responses::EPAMHeroesResponse)
-      expect(epam_heroes.object).to eq('epam_heroes')
-      expect(epam_heroes.token).to be_present
-      expect(epam_heroes.comment).to eq(params[:comment])
-      expect(epam_heroes.comment).to be_present
-      expect(epam_heroes.event).to eq(params[:event])
-      expect(epam_heroes.event).to be_present
-      expect(epam_heroes.assigner_type).to eq(params[:assigner_type])
-      expect(epam_heroes.cc_emails).to eq(params[:cc_emails])
+      expect(epam_heroes.class).to eq(CirroIOV2::Responses::EpamHeroesResponse)
+      expect(epam_heroes.content).to be_present
+      expect(epam_heroes.refs).to be_present
+
+      expect(epam_heroes.paging).to eq(nil)
+      expect(epam_heroes.hasMoreResults).to eq(nil)
     end
   end
 end
