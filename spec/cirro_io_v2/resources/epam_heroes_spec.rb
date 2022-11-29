@@ -5,6 +5,7 @@ RSpec.describe CirroIOV2::Resources::EpamHeroes do
                           client_id: 1,
                           site: site)
   end
+  let(:json_symbolized_keys) { JSON.parse(File.read('./spec/fixtures/epam_heroes/create.json')).deep_symbolize_keys }
 
   describe '#create' do
     let(:params) do
@@ -24,8 +25,6 @@ RSpec.describe CirroIOV2::Resources::EpamHeroes do
 
     it 'creates a epam_heroes' do
       epam_heroes = described_class.new(client).create(params)
-      json = JSON.parse(stub_api.response.body)
-      json_symbolized_keys = json.deep_symbolize_keys
 
       expect(stub_api).to have_been_made
       expect(epam_heroes.class).to eq(CirroIOV2::Responses::EpamHeroesResponse)
