@@ -129,7 +129,7 @@ module CirroIOV2
       include Base
     end
 
-    EpamHeroesResponse = Struct.new(:content, :refs, :paging, :hasMoreResults) do
+    EpamHeroesBadgeResponse = Struct.new(:content, :refs, :paging, :hasMoreResults) do
       include Base
     end
 
