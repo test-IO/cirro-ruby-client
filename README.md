@@ -127,6 +127,28 @@ client.User.update_notification_preference({
 })
 ```
 
+### Seed user (staging/dev only)
+
+```ruby
+# With params (all of them optional)
+# Password must include at least: 2 letters, 2 digits, 2 special characters
+# Email must be unique
+client.User.create(
+  first_name: 'Human',
+  last_name: 'Being',
+  email: 'iamhuman@test.io',
+  time_zone: 'Berlin',
+  country_code: 'DE',
+  birthday: '1975-11-22',
+  password: '@123456abc@'
+)
+# => User object
+
+# Without params (nimbus-style, all params are seeded by Cirro)
+client.User.create
+# => User object
+```
+
 ## Gig
 ### Create a gig
 
