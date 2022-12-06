@@ -129,6 +129,10 @@ module CirroIOV2
       include Base
     end
 
+    EpamHeroesBadgeResponse = Struct.new(:content, :refs, :paging, :hasMoreResults) do
+      include Base
+    end
+
     # cover the list responses
     def self.const_missing(name)
       return const_get(name) if const_defined? name

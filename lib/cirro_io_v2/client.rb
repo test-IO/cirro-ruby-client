@@ -13,6 +13,7 @@ require 'cirro_io_v2/resources/payout'
 require 'cirro_io_v2/resources/gig_invitation'
 require 'cirro_io_v2/resources/user'
 require 'cirro_io_v2/resources/space_invitation'
+require 'cirro_io_v2/resources/epam_heroes/badges'
 
 require 'cirro_io_v2/responses/base'
 require 'cirro_io_v2/responses/responses'
@@ -119,6 +120,10 @@ module CirroIOV2
 
     def NotificationTemplate
       Resources::NotificationTemplate.new(self)
+    end
+
+    def EpamHeroesBadges
+      Resources::EpamHeroes::Badges.new(self)
     end
 
     # rubocop:enable Naming/MethodName
