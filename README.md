@@ -150,6 +150,12 @@ client.User.create
 ```
 
 ## Gig
+### Find a gig
+
+```ruby
+client.Gig.find(ID)
+# => Gig object
+```
 ### Create a gig
 
 ```ruby
@@ -385,13 +391,13 @@ client.NotificationTemplate.update(
   "subject": "New Bug Comment",
   "body": "Hello {{recipient_first_name}}, you got {{pluralize count, 'new comment', 'new comments'}}"
 )
-``` 
+```
 
 ### Delete a notification template
 
 ```ruby
 client.NotificationTemplate.delete('1')
-``` 
+```
 ## Notifcation Topic Preference
 ### List all
 
