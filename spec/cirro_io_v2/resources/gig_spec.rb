@@ -7,6 +7,19 @@ RSpec.describe CirroIOV2::Resources::Gig do
                           site: site)
   end
 
+  describe '#find' do
+    it 'finds and renders a gig' do
+      stub_api = stub_request(:get, "#{site}/v2/gigs/#{id}")
+        .to_return(body: File.read('./spec/fixtures/gig/create.json'))
+
+      gig = described_class.new(client).find(id)
+
+      expect(stub_api).to have_been_made
+      expect(gig.class).to eq(CirroIOV2::Responses::GigResponse)
+      expect(gig.object).to eq('gig')
+    end
+  end
+
   describe '#create' do
     let(:params) do
       {

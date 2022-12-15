@@ -2,9 +2,8 @@ module CirroIOV2
   module Resources
     class Gig < Base
       def find(id)
-        Responses::GigResponse.new(
-          client.request_client.request(:get, [resource_root, id].join('/')).body,
-        )
+        response = client.request_client.request(:get, [resource_root, id].join('/'))
+        Responses::GigResponse.new(response.body)
       end
 
       def create(params)
