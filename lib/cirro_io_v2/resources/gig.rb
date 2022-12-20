@@ -16,6 +16,11 @@ module CirroIOV2
         Responses::GigResponse.new(response.body)
       end
 
+      def delete(id)
+        response = client.request_client.request(:delete, "#{resource_root}/#{id}")
+        Responses::GigDeleteResponse.new(response.body)
+      end
+
       def tasks(id, params)
         response = client.request_client.request(:post, "#{resource_root}/#{id}/tasks", body: params)
         Responses::GigTaskResponse.new(response.body)

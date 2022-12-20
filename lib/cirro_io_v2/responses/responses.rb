@@ -46,6 +46,10 @@ module CirroIOV2
       include Base
     end
 
+    GigDeleteResponse = Struct.new(:id, :object, :deleted) do
+      include Base
+    end
+
     GigTaskResponse = Struct.new(:id, :object, :title, :base_price) do
       include Base
     end
