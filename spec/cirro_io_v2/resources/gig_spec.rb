@@ -95,6 +95,21 @@ RSpec.describe CirroIOV2::Resources::Gig do
     end
   end
 
+  describe '#delete' do
+    it 'deletes a gig' do
+      stub_api = stub_request(:delete, "#{site}/v2/gigs/#{id}")
+                 .to_return(body: File.read('./spec/fixtures/gig/delete.json'))
+
+      deleted_gig = described_class.new(client).delete(id)
+
+      expect(stub_api).to have_been_made
+      expect(deleted_gig.class).to eq(CirroIOV2::Responses::GigDeleteResponse)
+      expect(deleted_gig.id).to eq(id)
+      expect(deleted_gig.object).to eq('gig')
+      expect(deleted_gig.deleted).to eq(true)
+    end
+  end
+
   describe '#tasks' do
     let(:params) do
       {
