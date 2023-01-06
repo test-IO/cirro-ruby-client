@@ -23,6 +23,7 @@ RSpec.describe CirroIOV2::Resources::GigInvitation do
       expect(gig_invitations.data.first.status).to eq('pending')
       expect(gig_invitations.data.first.gig_id).to eq('1')
       expect(gig_invitations.data.first.user_id).to eq('1')
+      expect(gig_invitations.data.first.no_reward).to eq(false)
     end
   end
 
@@ -31,15 +32,26 @@ RSpec.describe CirroIOV2::Resources::GigInvitation do
       stub_api = stub_request(:post, "#{site}/v2/gig_invitations/#{id}/accept")
                  .to_return(body: File.read('./spec/fixtures/gig_invitation/accept.json'))
 
-      accepted_gig_invitations = described_class.new(client).accept(id)
+      accepted_gig_invitation = described_class.new(client).accept(id)
 
       expect(stub_api).to have_been_made
-      expect(accepted_gig_invitations.class).to eq(CirroIOV2::Responses::GigInvitationResponse)
-      expect(accepted_gig_invitations.id).to eq(id)
-      expect(accepted_gig_invitations.object).to eq('gig_invitation')
-      expect(accepted_gig_invitations.status).to eq('accepted')
-      expect(accepted_gig_invitations.gig_id).to eq('1')
-      expect(accepted_gig_invitations.user_id).to eq('1')
+      expect(accepted_gig_invitation.class).to eq(CirroIOV2::Responses::GigInvitationResponse)
+      expect(accepted_gig_invitation.id).to eq(id)
+      expect(accepted_gig_invitation.object).to eq('gig_invitation')
+      expect(accepted_gig_invitation.status).to eq('accepted')
+      expect(accepted_gig_invitation.gig_id).to eq('1')
+      expect(accepted_gig_invitation.user_id).to eq('1')
+      expect(accepted_gig_invitation.no_reward).to eq(false)
+    end
+
+    it 'accepts `no_reward` as param' do
+      stub_api = stub_request(:post, "#{site}/v2/gig_invitations/#{id}/accept")
+                 .with(body: { no_reward: true })
+                 .to_return(body: File.read('./spec/fixtures/gig_invitation/accept.json'))
+
+      described_class.new(client).accept(id, no_reward: true)
+
+      expect(stub_api).to have_been_made
     end
   end
 
@@ -48,15 +60,16 @@ RSpec.describe CirroIOV2::Resources::GigInvitation do
       stub_api = stub_request(:post, "#{site}/v2/gig_invitations/#{id}/reject")
                  .to_return(body: File.read('./spec/fixtures/gig_invitation/reject.json'))
 
-      accepted_gig_invitations = described_class.new(client).reject(id)
+      accepted_gig_invitation = described_class.new(client).reject(id)
 
       expect(stub_api).to have_been_made
-      expect(accepted_gig_invitations.class).to eq(CirroIOV2::Responses::GigInvitationResponse)
-      expect(accepted_gig_invitations.id).to eq(id)
-      expect(accepted_gig_invitations.object).to eq('gig_invitation')
-      expect(accepted_gig_invitations.status).to eq('rejected')
-      expect(accepted_gig_invitations.gig_id).to eq('1')
-      expect(accepted_gig_invitations.user_id).to eq('1')
+      expect(accepted_gig_invitation.class).to eq(CirroIOV2::Responses::GigInvitationResponse)
+      expect(accepted_gig_invitation.id).to eq(id)
+      expect(accepted_gig_invitation.object).to eq('gig_invitation')
+      expect(accepted_gig_invitation.status).to eq('rejected')
+      expect(accepted_gig_invitation.gig_id).to eq('1')
+      expect(accepted_gig_invitation.user_id).to eq('1')
+      expect(accepted_gig_invitation.no_reward).to eq(false)
     end
   end
 
@@ -65,15 +78,16 @@ RSpec.describe CirroIOV2::Resources::GigInvitation do
       stub_api = stub_request(:post, "#{site}/v2/gig_invitations/#{id}/expire")
                  .to_return(body: File.read('./spec/fixtures/gig_invitation/expire.json'))
 
-      accepted_gig_invitations = described_class.new(client).expire(id)
+      accepted_gig_invitation = described_class.new(client).expire(id)
 
       expect(stub_api).to have_been_made
-      expect(accepted_gig_invitations.class).to eq(CirroIOV2::Responses::GigInvitationResponse)
-      expect(accepted_gig_invitations.id).to eq(id)
-      expect(accepted_gig_invitations.object).to eq('gig_invitation')
-      expect(accepted_gig_invitations.status).to eq('expired')
-      expect(accepted_gig_invitations.gig_id).to eq('1')
-      expect(accepted_gig_invitations.user_id).to eq('1')
+      expect(accepted_gig_invitation.class).to eq(CirroIOV2::Responses::GigInvitationResponse)
+      expect(accepted_gig_invitation.id).to eq(id)
+      expect(accepted_gig_invitation.object).to eq('gig_invitation')
+      expect(accepted_gig_invitation.status).to eq('expired')
+      expect(accepted_gig_invitation.gig_id).to eq('1')
+      expect(accepted_gig_invitation.user_id).to eq('1')
+      expect(accepted_gig_invitation.no_reward).to eq(false)
     end
   end
 end

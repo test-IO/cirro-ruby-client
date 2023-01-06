@@ -54,7 +54,7 @@ module CirroIOV2
       include Base
     end
 
-    GigInvitationResponse = Struct.new(:id, :object, :status, :gig_id, :user_id) do
+    GigInvitationResponse = Struct.new(:id, :object, :status, :gig_id, :user_id, :no_reward) do
       include Base
     end
 

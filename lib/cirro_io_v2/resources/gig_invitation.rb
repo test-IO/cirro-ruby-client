@@ -6,8 +6,8 @@ module CirroIOV2
         Responses::GigInvitationListResponse.new(response.body)
       end
 
-      def accept(id)
-        response = client.request_client.request(:post, "#{resource_root}/#{id}/accept")
+      def accept(id, params = nil)
+        response = client.request_client.request(:post, "#{resource_root}/#{id}/accept", body: params)
         Responses::GigInvitationResponse.new(response.body)
       end
 
