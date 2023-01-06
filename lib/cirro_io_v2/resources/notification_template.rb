@@ -6,6 +6,11 @@ module CirroIOV2
         Responses::NotificationTemplateListResponse.new(response.body)
       end
 
+      def create(params)
+        response = client.request_client.request(:post, resource_root, body: params)
+        Responses::NotificationTemplateResponse.new(response.body)
+      end
+
       def update(id, params)
         response = client.request_client.request(:post, "#{resource_root}/#{id}", body: params)
         Responses::NotificationTemplateResponse.new(response.body)
