@@ -5,6 +5,11 @@ module CirroIOV2
         response = client.request_client.request(:post, resource_root, body: params)
         Responses::SpaceInvitationResponse.new(response.body)
       end
+
+      def expire(id)
+        response = client.request_client.request(:post, "#{resource_root}/#{id}")
+        Responses::SpaceInvitationResponse.new(response.body)
+      end
     end
   end
 end
