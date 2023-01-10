@@ -40,7 +40,7 @@ RSpec.describe CirroIOV2::Resources::SpaceInvitation do
 
   describe '#expire' do
     it 'expires space_invitations' do
-      stub_api = stub_request(:post, "#{site}/v2/space_invitations/#{id}")
+      stub_api = stub_request(:post, "#{site}/v2/space_invitations/#{id}/expire")
                  .to_return(body: File.read('./spec/fixtures/space_invitation/create.json'))
 
       expired_space_invitations = described_class.new(client).expire(id)
