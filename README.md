@@ -2,7 +2,7 @@
 
 This gem provides access to the [Cirro REST API](https://staging.cirro.io/api-docs/v1#cirro-api-documentation).
 
-[![CircleCI](https://circleci.com/gh/test-IO/cirro-ruby-client/tree/master.svg?style=svg)](https://circleci.com/gh/test-IO/cirro-ruby-client/tree/master)
+[![CircleCI](https://circleci.com/gh/test-IO/cirro-ruby-client/tree/master.svg?style=svg&circle-token=a77e4eac5646768d681283763d2a29a55a221d7c)](https://circleci.com/gh/test-IO/cirro-ruby-client/tree/master)
 
 ## Installation
 

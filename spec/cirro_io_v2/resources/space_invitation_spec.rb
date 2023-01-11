@@ -37,4 +37,18 @@ RSpec.describe CirroIOV2::Resources::SpaceInvitation do
       expect(space_invitation.expires_at).to eq('2023-05-12T00:00:00Z')
     end
   end
+
+  describe '#expire' do
+    it 'expires space_invitations' do
+      stub_api = stub_request(:post, "#{site}/v2/space_invitations/#{id}/expire")
+                 .to_return(body: File.read('./spec/fixtures/space_invitation/create.json'))
+
+      expired_space_invitations = described_class.new(client).expire(id)
+
+      expect(stub_api).to have_been_made
+      expect(expired_space_invitations.class).to eq(CirroIOV2::Responses::SpaceInvitationResponse)
+      expect(expired_space_invitations.id).to eq(id)
+      expect(expired_space_invitations.object).to eq('space_invitation')
+    end
+  end
 end
