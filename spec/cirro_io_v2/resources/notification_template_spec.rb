@@ -23,6 +23,33 @@ RSpec.describe CirroIOV2::Resources::NotificationTemplate do
     end
   end
 
+  describe '#create' do
+    let(:params) do
+      {
+        'notification_topic_id': '1',
+        'notification_configuration_id': '1',
+        'subject': 'New Bug Comment',
+        'body': "Hello {{recipient_first_name}}, you got {{#pluralize count, 'new comments'}}new comment{{/pluralize}}",
+      }
+    end
+
+    it 'creates a notification_template' do
+      stub_api = stub_request(:post, "#{site}/v2/notification_templates")
+                 .to_return(body: File.read('./spec/fixtures/notification_template/create.json'))
+
+      updated_notification_template = described_class.new(client).create(params)
+
+      expect(stub_api).to have_been_made
+      expect(updated_notification_template.class).to eq(CirroIOV2::Responses::NotificationTemplateResponse)
+      expect(updated_notification_template.object).to eq('notification_template')
+      expect(updated_notification_template.id).not_to be_nil
+      expect(updated_notification_template.notification_configuration_id).to eq('1')
+      expect(updated_notification_template.notification_topic_id).to eq('1')
+      expect(updated_notification_template.subject).to eq(params[:subject])
+      expect(updated_notification_template.body).to eq(params[:body])
+    end
+  end
+
   describe '#update' do
     let(:update_params) do
       {
