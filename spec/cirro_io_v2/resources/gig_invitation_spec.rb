@@ -90,4 +90,22 @@ RSpec.describe CirroIOV2::Resources::GigInvitation do
       expect(accepted_gig_invitation.no_reward).to eq(false)
     end
   end
+
+  describe '#reset' do
+    it 'reset gig_invitations' do
+      stub_api = stub_request(:post, "#{site}/v2/gig_invitations/#{id}/reset")
+                 .to_return(body: File.read('./spec/fixtures/gig_invitation/reset.json'))
+
+      accepted_gig_invitation = described_class.new(client).reset(id)
+
+      expect(stub_api).to have_been_made
+      expect(accepted_gig_invitation.class).to eq(CirroIOV2::Responses::GigInvitationResponse)
+      expect(accepted_gig_invitation.id).to eq(id)
+      expect(accepted_gig_invitation.object).to eq('gig_invitation')
+      expect(accepted_gig_invitation.status).to eq('pending')
+      expect(accepted_gig_invitation.gig_id).to eq('1')
+      expect(accepted_gig_invitation.user_id).to eq('1')
+      expect(accepted_gig_invitation.no_reward).to eq(false)
+    end
+  end
 end
