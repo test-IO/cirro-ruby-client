@@ -7,7 +7,9 @@
     "start_at": 1652285764,
     "end_at": 1653412329,
     "archived_at": null,
-    "total_seats": 2,
+    "total_seats": 0,
+    "seats_min": 2,
+    "seats_max": null,
     "invitation_mode": "auto",
     "filter_query": {
         "status": "active",
