@@ -58,6 +58,8 @@ RSpec.describe CirroIOV2::Resources::Gig do
       expect(gig.class).to eq(CirroIOV2::Responses::GigResponse)
       expect(gig.object).to eq('gig')
       expect(gig.title).to eq(params[:title])
+      expect(gig.seats_min).to eq(params[:total_seats])
+      expect(gig.seats_max).to be_nil
       expect(gig.archived_at).to be_nil
       expect(gig.tasks.class).to eq(CirroIOV2::Responses::GigTaskListResponse)
       expect(gig.tasks.object).to eq('list')
@@ -84,6 +86,8 @@ RSpec.describe CirroIOV2::Resources::Gig do
       expect(gig.class).to eq(CirroIOV2::Responses::GigResponse)
       expect(gig.object).to eq('gig')
       expect(gig.title).to eq('Favourite programming language?')
+      expect(gig.seats_min).to eq(2)
+      expect(gig.seats_max).to be_nil
       expect(gig.archived_at).to eq(params[:archived_at])
       expect(gig.tasks.class).to eq(CirroIOV2::Responses::GigTaskListResponse)
       expect(gig.tasks.object).to eq('list')

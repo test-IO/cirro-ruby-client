@@ -37,6 +37,8 @@ module CirroIOV2
                              :end_at,
                              :archived_at,
                              :total_seats,
+                             :seats_min,
+                             :seats_max,
                              :invitation_mode,
                              :filter_query,
                              :tasks,

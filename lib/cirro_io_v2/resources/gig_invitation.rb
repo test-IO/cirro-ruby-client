@@ -20,6 +20,11 @@ module CirroIOV2
         response = client.request_client.request(:post, "#{resource_root}/#{id}/expire")
         Responses::GigInvitationResponse.new(response.body)
       end
+
+      def reset(id, params = nil)
+        response = client.request_client.request(:post, "#{resource_root}/#{id}/reset", body: params)
+        Responses::GigInvitationResponse.new(response.body)
+      end
     end
   end
 end
