@@ -71,6 +71,28 @@ RSpec.describe CirroIOV2::Resources::Gig do
     end
   end
 
+  describe '#update' do
+    let(:params) do
+      {
+        title: 'New Title',
+        end_at: 420,
+      }
+    end
+
+    it 'updates a gig' do
+      stub_api = stub_request(:post, "#{site}/v2/gigs/#{id}")
+                   .to_return(body: File.read('./spec/fixtures/gig/update.json'))
+
+      gig = described_class.new(client).update(id, params)
+
+      expect(stub_api).to have_been_made
+      expect(gig.class).to eq(CirroIOV2::Responses::GigResponse)
+      expect(gig.object).to eq('gig')
+      expect(gig.title).to eq(params[:title])
+      expect(gig.end_at).to eq(params[:end_at])
+    end
+  end
+
   describe '#archive' do
     let(:params) do
       { archived_at: 1653412330 }

@@ -11,6 +11,11 @@ module CirroIOV2
         Responses::GigResponse.new(response.body)
       end
 
+      def update(id, params)
+        response = client.request_client.request(:post, "#{resource_root}/#{id}", body: params)
+        Responses::GigResponse.new(response.body)
+      end
+
       def archive(id, params = nil)
         response = client.request_client.request(:post, "#{resource_root}/#{id}/archive", body: params)
         Responses::GigResponse.new(response.body)
