@@ -81,7 +81,7 @@ RSpec.describe CirroIOV2::Resources::Gig do
 
     it 'updates a gig' do
       stub_api = stub_request(:post, "#{site}/v2/gigs/#{id}")
-                   .to_return(body: File.read('./spec/fixtures/gig/update.json'))
+                 .to_return(body: File.read('./spec/fixtures/gig/update.json'))
 
       gig = described_class.new(client).update(id, params)
 
