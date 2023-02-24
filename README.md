@@ -186,6 +186,26 @@ client.Gig.create(
 # => Gig object
 ```
 
+### Manually invite user to a gig
+
+##### Invite single user
+```ruby
+gig_id = 1
+app_user_id = 1
+
+client.Gig.invite(gig_id, { user_id: app_user_id })
+# => GigInvitation object
+```
+
+##### Invite multiple users and overwrite no_reward
+```ruby
+gig_id = 1
+users = [{ id: 1, no_reward: true }, { id: 2, no_reward: true }]
+
+client.Gig.invite(gig_id, { users: users })
+# => GigInvitationList object
+```
+
 ## GigInvitation
 ### Get list of gig invitations
 

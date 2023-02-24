@@ -1,0 +1,23 @@
+{
+  "object": "list",
+  "data": [
+    {
+      "id": "11",
+      "object": "gig_invitation",
+      "status": "pending",
+      "gig_id": "10",
+      "user_id": "20",
+      "no_reward": false
+    },
+    {
+      "id": "12",
+      "object": "gig_invitation",
+      "status": "pending",
+      "gig_id": "10",
+      "user_id": "14",
+      "no_reward": false
+    }
+  ],
+  "url": "/gig_invitations",
+  "has_more": false
+}
