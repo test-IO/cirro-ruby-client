@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cirro-ruby-client (2.5.9)
+    cirro-ruby-client (2.5.10)
       activesupport
       faraday (< 1.2.0)
       faraday_middleware
@@ -18,7 +18,6 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
-      zeitwerk (~> 2.3)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.1)
@@ -94,7 +93,6 @@ GEM
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
-    zeitwerk (2.6.6)
 
 PLATFORMS
   ruby

@@ -204,7 +204,7 @@ RSpec.describe CirroIOV2::Resources::Gig do
     context 'when invite multiple users' do
       let(:params) do
         {
-          users: [{ id: 20 }, { id: 14 }]
+          users: [{ id: 20 }, { id: 14 }],
         }
       end
 
