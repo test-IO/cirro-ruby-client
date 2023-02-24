@@ -180,4 +180,45 @@ RSpec.describe CirroIOV2::Resources::Gig do
       expect(gig_task.base_price).to eq(params[:base_price])
     end
   end
+
+  describe '#invite' do
+    context 'when invite single user' do
+      let(:params) do
+        { user_id: 20 }
+      end
+
+      it 'creates gig invitation for the user' do
+        stub_api = stub_request(:post, "#{site}/v2/gigs/#{id}/invite")
+                   .to_return(body: File.read('./spec/fixtures/gig/invite_single.json'))
+
+        gig_invitation = described_class.new(client).invite(id, params)
+
+        expect(stub_api).to have_been_made
+        expect(gig_invitation.class).to eq(CirroIOV2::Responses::GigInvitationResponse)
+        expect(gig_invitation.object).to eq('gig_invitation')
+        expect(gig_invitation.gig_id).to eq('10')
+        expect(gig_invitation.user_id).to eq('20')
+      end
+    end
+
+    context 'when invite multiple users' do
+      let(:params) do
+        {
+          users: [{ id: 20 }, { id: 14 }],
+        }
+      end
+
+      it 'creates gig invitation for the user' do
+        stub_api = stub_request(:post, "#{site}/v2/gigs/#{id}/invite")
+                   .to_return(body: File.read('./spec/fixtures/gig/invite_multi.json'))
+
+        gig_invitations = described_class.new(client).invite(id, params)
+
+        expect(stub_api).to have_been_made
+        expect(gig_invitations.class).to eq(CirroIOV2::Responses::GigInvitationListResponse)
+        expect(gig_invitations.object).to eq('list')
+        expect(gig_invitations.data.pluck(:user_id)).to match_array(['20', '14'])
+      end
+    end
+  end
 end

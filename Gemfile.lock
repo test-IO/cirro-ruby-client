@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cirro-ruby-client (2.5.9)
+    cirro-ruby-client (2.5.10)
       activesupport
       faraday (< 1.2.0)
       faraday_middleware
@@ -11,14 +11,13 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    activemodel (6.1.7)
-      activesupport (= 6.1.7)
-    activesupport (6.1.7)
+    activemodel (7.0.4.2)
+      activesupport (= 7.0.4.2)
+    activesupport (7.0.4.2)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
-      zeitwerk (~> 2.3)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.1)
@@ -43,10 +42,10 @@ GEM
       faraday (>= 0.15.2, < 2.0)
       faraday_middleware (>= 0.9.0, < 2.0)
       rack (>= 0.2)
-    jwt (2.6.0)
+    jwt (2.7.0)
     method_source (1.0.0)
     minitest (5.17.0)
-    multipart-post (2.2.3)
+    multipart-post (2.3.0)
     parallel (1.19.2)
     parser (2.7.2.0)
       ast (~> 2.4.1)
@@ -54,7 +53,7 @@ GEM
       coderay (~> 1.1)
       method_source (~> 1.0)
     public_suffix (4.0.6)
-    rack (3.0.3)
+    rack (3.0.4.1)
     rainbow (3.0.0)
     rake (12.3.3)
     regexp_parser (1.8.1)
@@ -87,14 +86,13 @@ GEM
       rubocop (~> 0.87)
     ruby-progressbar (1.10.1)
     ruby2_keywords (0.0.5)
-    tzinfo (2.0.5)
+    tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (1.7.0)
     webmock (3.9.1)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
-    zeitwerk (2.6.6)
 
 PLATFORMS
   ruby
