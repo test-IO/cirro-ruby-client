@@ -74,6 +74,7 @@ RSpec.describe CirroIOV2::Resources::User do
       expect(user.object).to eq('user')
       expect(user.first_name).to eq('Grazyna')
       expect(user.epam[:id]).to eq('12345')
+      expect(user.anonymous_email).to eq('anonymous_email@some.mail')
     end
 
     it 'correctly sets attributes when any attribute is nil' do
