@@ -24,6 +24,7 @@ RSpec.describe CirroIOV2::Resources::GigInvitation do
       expect(gig_invitations.data.first.gig_id).to eq('1')
       expect(gig_invitations.data.first.user_id).to eq('1')
       expect(gig_invitations.data.first.no_reward).to eq(false)
+      expect(gig_invitations.data.first.epam_bench_status).to eq("extra_mile")
     end
   end
 
@@ -42,6 +43,7 @@ RSpec.describe CirroIOV2::Resources::GigInvitation do
       expect(accepted_gig_invitation.gig_id).to eq('1')
       expect(accepted_gig_invitation.user_id).to eq('1')
       expect(accepted_gig_invitation.no_reward).to eq(false)
+      expect(accepted_gig_invitation.epam_bench_status).to eq("extra_mile")
     end
 
     it 'accepts `no_reward` as param' do
@@ -70,6 +72,7 @@ RSpec.describe CirroIOV2::Resources::GigInvitation do
       expect(accepted_gig_invitation.gig_id).to eq('1')
       expect(accepted_gig_invitation.user_id).to eq('1')
       expect(accepted_gig_invitation.no_reward).to eq(false)
+      expect(accepted_gig_invitation.epam_bench_status).to eq("on_bench")
     end
   end
 
@@ -88,6 +91,7 @@ RSpec.describe CirroIOV2::Resources::GigInvitation do
       expect(accepted_gig_invitation.gig_id).to eq('1')
       expect(accepted_gig_invitation.user_id).to eq('1')
       expect(accepted_gig_invitation.no_reward).to eq(false)
+      expect(accepted_gig_invitation.epam_bench_status).to eq("on_bench")
     end
   end
 
@@ -106,6 +110,7 @@ RSpec.describe CirroIOV2::Resources::GigInvitation do
       expect(accepted_gig_invitation.gig_id).to eq('1')
       expect(accepted_gig_invitation.user_id).to eq('1')
       expect(accepted_gig_invitation.no_reward).to eq(false)
+      expect(accepted_gig_invitation.epam_bench_status).to eq("extra_mile")
     end
   end
 end

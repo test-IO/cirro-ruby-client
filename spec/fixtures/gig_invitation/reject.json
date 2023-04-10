@@ -4,5 +4,6 @@
     "status": "rejected",
     "gig_id": "1",
     "user_id": "1",
-    "no_reward": false
+    "no_reward": false,
+    "epam_bench_status": "on_bench"
   }
