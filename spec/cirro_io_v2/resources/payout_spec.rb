@@ -55,4 +55,21 @@ RSpec.describe CirroIOV2::Resources::Payout do
       expect(payouts.data.first.user_id).to eq('1')
     end
   end
+
+  describe '#delete' do
+    let(:id) { '1' }
+
+    it 'deletes a payout' do
+      stub_api = stub_request(:delete, "#{site}/v2/payouts/#{id}")
+                 .to_return(body: File.read('./spec/fixtures/payout/delete.json'))
+
+      deleted_payout = described_class.new(client).delete(id)
+
+      expect(stub_api).to have_been_made
+      expect(deleted_payout.class).to eq(CirroIOV2::Responses::PayoutDeleteResponse)
+      expect(deleted_payout.id).to eq(id)
+      expect(deleted_payout.object).to eq('payout')
+      expect(deleted_payout.deleted).to eq(true)
+    end
+  end
 end

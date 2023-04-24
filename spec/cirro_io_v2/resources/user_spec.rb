@@ -131,4 +131,20 @@ RSpec.describe CirroIOV2::Resources::User do
       expect(user.worker[:document]).to eq(params[:document])
     end
   end
+
+  describe '#notification_preference' do
+    it 'gets the notification preference for a user' do
+      stub_api = stub_request(:get, "#{site}/v2/users/#{user_id}/notification_preference")
+                 .to_return(body: File.read('./spec/fixtures/user/notification_preferences.json')) # same response as create
+
+      notification_preference = described_class.new(client).notification_preference(user_id)
+
+      expect(stub_api).to have_been_made
+      expect(notification_preference.class).to eq(CirroIOV2::Responses::UserNotificationPreferenceResponse)
+      expect(notification_preference.object).to eq('notification_preference')
+      expect(notification_preference.locale).to eq('de')
+      expect(notification_preference.topics.class).to eq(CirroIOV2::Responses::NotificationTopicPreferenceListResponse)
+      expect(notification_preference.topics.data.first.class).to eq(CirroIOV2::Responses::NotificationTopicPreferenceResponse)
+    end
+  end
 end
