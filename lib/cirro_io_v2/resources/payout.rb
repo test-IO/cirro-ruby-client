@@ -10,6 +10,11 @@ module CirroIOV2
         response = client.request_client.request(:post, resource_root, body: params)
         Responses::PayoutResponse.new(response.body)
       end
+
+      def delete(id)
+        response = client.request_client.request(:delete, "#{resource_root}/#{id}")
+        Responses::PayoutDeleteResponse.new(response.body)
+      end
     end
   end
 end

@@ -1,6 +1,6 @@
-# CirroIO::Client
+# CirroIOV2::Client
 
-This gem provides access to the [Cirro REST API](https://staging.cirro.io/api-docs/v1#cirro-api-documentation).
+This gem provides access to the [Cirro REST API v2](https://cirroapiv2.docs.apiary.io).
 
 [![CircleCI](https://circleci.com/gh/test-IO/cirro-ruby-client/tree/master.svg?style=svg&circle-token=a77e4eac5646768d681283763d2a29a55a221d7c)](https://circleci.com/gh/test-IO/cirro-ruby-client/tree/master)
 
@@ -19,59 +19,6 @@ And then execute:
 Or install it yourself as:
 
     $ gem install cirro-ruby-client
-
-
-## Configuration
-
-  You need to create an initializer file in config/initializers.
-
-  ```ruby
-  CirroIO::Client.configure do |c|
-    c.app_id 'WULnc6Y0rlaTBCSiHAb0kGWKFuIxPWBXJysyZeG3Rtw'
-    c.private_key_path './storage/cirro.pem'
-    c.site 'https://api.staging.cirro.io'
-  end
-  ```
-
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then wait for circle CI to complete, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## License
-
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
-
-## Usage
-
-#### Bulk create gig invitations
-
-```ruby
-gig = CirroIO::Client::Gig.load(id: 1)
-filter = CirroIO::Client::WorkerFilter.new(filter_query: '{ "app_worker_id": { "$in": [1,2,3] } }')
-invitation = CirroIO::Client::GigInvitation.new(gig: gig)
-
-invitation.bulk_create_with(filter, auto_accept: true) # by default auto_accept is false
-```
-
-#### Creating Payouts for workers
-
-```ruby
-app_worker = CirroIO::Client::AppWorker.load(id: 1234)
-
-CirroIO::Client::Payout.create(
-  app_worker: app_worker,
-  amount: 100, # € 1.00
-  title: "Bonus for something",
-  description: "Description of the bonus.",
-  cost_center_key: "PROJECT-CODE",
-  billing_date: DateTime.now
-)
-```
-
-# CirroIOV2::Client
 
 ## Configuration
 
@@ -99,26 +46,26 @@ user.worker
 # => { billable: false, document: {...} }
 ```
 
-### Get notification preferences for a user
-
+### Create or update a worker document for a user
+Will automatically create a worker account if not existing
 ```ruby
-preference = client.User.get_notification_preference(1)
-# => NotificationPreference object
+user = client.User.worker(1, document: { foo: :bar })
+# => User object
 
-preference.id
-# => '1'
-
-preference.locale
-# => 'de'
-
-preference.topics
-# => Array of NotificationTopicPreference objects
+user.worker.document
+# => { foo: :bar }
 ```
 
-### Update notification preferences for a user
+### Get notification preference of a user
 
 ```ruby
-client.User.update_notification_preference({
+client.User.notification_preference(1)
+# => NotificationPreference object
+```
+### Create or Update notification preferences for a user
+
+```ruby
+client.User.notification_preferences(1, {
   locale: 'de',
   topics: [
     { id: '1', preferences: { email: 'immediately' } },
@@ -165,11 +112,12 @@ client.Gig.create(
   url: "http://heathcote.co/zina.gibson",
   start_at: 1652285764,
   end_at: 1653412329,
-  total_seats: 2,
+  seats_min: 2,
+  seats_max: 2,
   invitation_mode: "auto",
   filter_query: {
-  status: "active",
-  segment: "my_favorite_testers"
+    status: "active",
+    segment: "my_favorite_testers"
   },
   tasks: [
     { title: "Ah, Wilderness!", base_price: 300 }
@@ -186,9 +134,59 @@ client.Gig.create(
 # => Gig object
 ```
 
+### Update a gig
+When your gig is already started, you can not update start_at anymore
+```ruby
+gig_id = 1
+client.Gig.update(gig_id,
+  title: "Favourite programming language?",
+  description: "Description of gig ...",
+  url: "http://heathcote.co/zina.gibson",
+  start_at: 1652285764,
+  end_at: 1653412329,
+  seats_min: 2,
+  seats_max: 2,
+  invitation_mode: "auto",
+  filter_query: {
+    status: "active",
+    segment: "my_favorite_testers"
+  },
+  notification_payload: {
+    project_title: "Corporate Tax",
+    task_title: "Add dataset",
+    task_type: "Review"
+  },
+  epam_options: {
+    extra_mile: true
+  }
+)
+# => Gig object
+```
+
+### Archive a gig
+
+```ruby
+gig_id = 1
+
+# archive now
+client.Gig.archive(gig_id)
+
+# archive later
+client.Gig.archive(gig_id, archive_at: 1.day.from_now)
+```
+
+### Delete a gig
+
+```ruby
+gig_id = 1
+
+client.Gig.delete(gig_id)
+```
+
 ### Manually invite user to a gig
 
 ##### Invite single user
+
 ```ruby
 gig_id = 1
 app_user_id = 1
@@ -198,12 +196,33 @@ client.Gig.invite(gig_id, { user_id: app_user_id })
 ```
 
 ##### Invite multiple users and overwrite no_reward
+
 ```ruby
 gig_id = 1
 users = [{ id: 1, no_reward: true }, { id: 2, no_reward: true }]
 
 client.Gig.invite(gig_id, { users: users })
 # => GigInvitationList object
+```
+
+### GigTask
+#### Add a new gig task to gig
+
+```ruby
+gig_id = 1
+
+client.Gig.tasks(gig_id, { title: "Critical Bug", base_price: 100 })
+# => GigTask object
+```
+
+#### Update a gig task
+
+```ruby
+gig_id = 1
+gig_task_id = 1
+
+client.Gig.update_task(gig_id, gig_task_id, { base_price: 100 })
+# => GigTask object
 ```
 
 ## GigInvitation
@@ -243,8 +262,143 @@ list.data
 
 ```ruby
 client.GigInvitation.accept(1)
+
+# overwrite no_reward
+client.GigInvitation.accept(1, no_reward: true)
+
 ```
 
+### Reject a gig invitation
+
+```ruby
+client.GigInvitation.reject(1)
+```
+
+### Expire a gig invitation
+
+```ruby
+client.GigInvitation.expire(1)
+```
+
+### Reset an accepted or expired gig invitation
+
+```ruby
+client.GigInvitation.reset(1)
+
+# prevent reset notification
+client.GigInvitation.reset(1, silent: true)
+```
+
+## GigTimeActivity
+### List all gig time activities
+
+```ruby
+list = client.GigTimeActivity.list
+# => ListObject
+
+list.has_more?
+# => true
+
+list.data
+# => Array of GigTimeActivity objects
+
+# filters
+client.GigTimeActivity.list(gig_id: 1, user_id: 1)
+
+# pagination
+client.GigTimeActivity.list(limit: 100, after: 100)
+```
+
+### Create a gig time activity
+You can't create gig time activity if the given user is not in your space or for the given user the gig invitation is set to no_reward
+
+```ruby
+client.GigTimeActivity.create(
+  gig_id: 1,
+  user_id: 1,
+  date: "2023-04-10",
+  description: "Time Report for Space XYZ",
+  duration_in_ms: 1.hour.in_seconds * 1000 # make sure not to report > 8h per day
+)
+```
+
+## GigResult
+### List all gig results
+
+```ruby
+list = client.GigResult.list
+# => ListObject
+
+list.has_more?
+# => true
+
+list.data
+# => Array of GigResult objects
+
+# filters
+client.GigResult.list(gig_id: 1, user_id: 1)
+
+# pagination
+client.GigResult.list(limit: 100, after: 100)
+```
+
+### Create a gig result
+You can't create gig result if the given user is not in your space or for the given user the gig invitation is set to no_reward
+
+```ruby
+client.GigResult.create(
+  gig_task_id: 1,
+  user_id: 1,
+  title: "Work for task1",
+  escription: "Good work for task1",
+  quantity: 2,
+  multiplier: 1.2,
+  delivery_date: "2023-04-10",
+  cost_center_key: "EPMTIO"
+)
+```
+
+## BonusPayout
+### List all payouts
+
+```ruby
+list = client.Payout.list
+# => ListObject
+
+list.has_more?
+# => true
+
+list.data
+# => Array of Payout objects
+
+# filters
+client.Payout.list(reference_id: 1, reference_type: 'Gig', user_id: 1)
+
+# pagination
+client.Payout.list(limit: 100, after: 100)
+```
+
+### Create a bonus payout
+
+```ruby
+client.Payout.create(
+  user_id: 1,
+  title: "Bonus Payment",
+  description: "Good work!",
+  amount: 1000,
+  billing_date: "2023-04-10",
+  cost_center_key: "EPMTIO"
+)
+```
+
+### Delete a bonus payout
+Only allowed for unbilled ones
+
+```ruby
+client.Payout.delete(1)
+```
+
+# Notifications
 ## Notification Locale
 ### Create a notification locale
 
@@ -293,6 +447,21 @@ client.NotificationConfiguration.list(limit: 100, after: 100) # pagination
 ```
 
 ## Notification Layout
+### List all notification layouts
+
+```ruby
+list = client.NotificationLayout.list
+# => ListObject
+
+list.has_more?
+# => true
+
+list.data
+# => Array of NotificationLayout objects
+
+client.NotificationLayout.list(limit: 100, after: 100) # pagination
+```
+
 ### Create a notification layout
 
 ```ruby
@@ -380,6 +549,30 @@ client.NotificationTopic.create(
 )
 ```
 
+### Find a notification topic
+
+```ruby
+client.NotificationTopic.find(1)
+# => NotificationTopic object
+```
+
+### Update a notification topic
+
+```ruby
+client.NotificationTopic.update(1, { name: "NewTopicName", preferences: { email: "daily" } })
+# => NotificationTopic object
+```
+
+### Delete a notification topic
+
+```ruby
+topic = client.NotificationTopic.delete(1)
+# => NotificationTopicDelete object
+
+topic.deleted
+# => true
+```
+
 ## Notification (Topic) Template
 ### List all
 
@@ -416,8 +609,9 @@ client.NotificationTemplate.update(
 ### Delete a notification template
 
 ```ruby
-client.NotificationTemplate.delete('1')
+client.NotificationTemplate.delete(1)
 ```
+
 ## Notifcation Topic Preference
 ### List all
 
@@ -456,3 +650,56 @@ client.NotificationBroadcast.create(
   notification_topic_id: 1
 )
 ```
+
+# CirroIO::Client (DEPRECATED)
+
+## Configuration
+
+  You need to create an initializer file in config/initializers.
+
+  ```ruby
+  CirroIO::Client.configure do |c|
+    c.app_id 'WULnc6Y0rlaTBCSiHAb0kGWKFuIxPWBXJysyZeG3Rtw'
+    c.private_key_path './storage/cirro.pem'
+    c.site 'https://api.staging.cirro.io'
+  end
+  ```
+
+
+
+## Usage
+
+#### Bulk create gig invitations
+
+```ruby
+gig = CirroIO::Client::Gig.load(id: 1)
+filter = CirroIO::Client::WorkerFilter.new(filter_query: '{ "app_worker_id": { "$in": [1,2,3] } }')
+invitation = CirroIO::Client::GigInvitation.new(gig: gig)
+
+invitation.bulk_create_with(filter, auto_accept: true) # by default auto_accept is false
+```
+
+#### Creating Payouts for workers
+
+```ruby
+app_worker = CirroIO::Client::AppWorker.load(id: 1234)
+
+CirroIO::Client::Payout.create(
+  app_worker: app_worker,
+  amount: 100, # € 1.00
+  title: "Bonus for something",
+  description: "Description of the bonus.",
+  cost_center_key: "PROJECT-CODE",
+  billing_date: DateTime.now
+)
+```
+
+# Development
+
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then wait for circle CI to complete, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+
+# License
+
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

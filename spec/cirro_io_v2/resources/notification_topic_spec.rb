@@ -5,7 +5,7 @@ RSpec.describe CirroIOV2::Resources::NotificationTopic do
                           client_id: 1,
                           site: site)
   end
-  let(:id) { 1 }
+  let(:id) { '1' }
   let(:params) do
     {
       "name": 'new_gig_invitation',
@@ -85,6 +85,21 @@ RSpec.describe CirroIOV2::Resources::NotificationTopic do
       expect(notification_topic.name).to eq('new_gig_invitation')
       expect(notification_topic.templates.class).to eq(CirroIOV2::Responses::NotificationTemplateListResponse)
       expect(notification_topic.templates.data.first.class).to eq(CirroIOV2::Responses::NotificationTemplateResponse)
+    end
+  end
+
+  describe '#delete' do
+    it 'deletes a notification topic' do
+      stub_api = stub_request(:delete, "#{site}/v2/notification_topics/#{id}")
+                 .to_return(body: File.read('./spec/fixtures/notification_topic/delete.json'))
+
+      deleted_notification_topic = described_class.new(client).delete(id)
+
+      expect(stub_api).to have_been_made
+      expect(deleted_notification_topic.class).to eq(CirroIOV2::Responses::NotificationTopicDeleteResponse)
+      expect(deleted_notification_topic.id).to eq(id)
+      expect(deleted_notification_topic.object).to eq('notification_topic')
+      expect(deleted_notification_topic.deleted).to eq(true)
     end
   end
 end

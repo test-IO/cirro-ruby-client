@@ -15,6 +15,14 @@ module CirroIOV2
       :NotificationTemplateListResponse,
     ].freeze
 
+    DELETE_RESPONSES = [
+      :GigDeleteResponse,
+      :PayoutDeleteResponse,
+      :NotificationTemplateDeleteResponse,
+      :NotificationLayoutTemplateDeleteResponse,
+      :NotificationTopicDeleteResponse,
+    ].freeze
+
     UserResponse = Struct.new(:id, :object, :first_name, :last_name, :time_zone, :birthday, :country_code, :epam, :worker, :anonymous_email) do
       include Base
     end
@@ -45,10 +53,6 @@ module CirroIOV2
                              :notification_payload,
                              :epam_options) do
       self::NESTED_RESPONSES = { tasks: :GigTaskListResponse }.freeze
-      include Base
-    end
-
-    GigDeleteResponse = Struct.new(:id, :object, :deleted) do
       include Base
     end
 
@@ -114,20 +118,12 @@ module CirroIOV2
       include Base
     end
 
-    NotificationLayoutTemplateDeleteResponse = Struct.new(:id, :object, :deleted) do
-      include Base
-    end
-
     NotificationTopicResponse = Struct.new(:id, :object, :name, :notification_layout_id, :preferences, :templates) do
       self::NESTED_RESPONSES = { templates: :NotificationTemplateListResponse }.freeze
       include Base
     end
 
     NotificationTemplateResponse = Struct.new(:id, :object, :notification_configuration_id, :notification_topic_id, :subject, :body) do
-      include Base
-    end
-
-    NotificationTemplateDeleteResponse = Struct.new(:id, :object, :deleted) do
       include Base
     end
 
@@ -139,12 +135,17 @@ module CirroIOV2
       include Base
     end
 
-    # cover the list responses
+    # cover the list and delete responses
     def self.const_missing(name)
       return const_get(name) if const_defined? name
-      return unless LIST_RESPONSES.include? name
 
-      klass = Class.new(Struct.new(:object, :url, :has_more, :data)) { include Base }
+      struct = nil
+      struct = Struct.new(:object, :url, :has_more, :data) if LIST_RESPONSES.include?(name)
+      struct = Struct.new(:id, :object, :deleted) if DELETE_RESPONSES.include?(name)
+
+      return unless struct.present?
+
+      klass = Class.new(struct) { include Base }
       const_set(name, klass)
     end
   end

@@ -24,6 +24,11 @@ module CirroIOV2
         response = client.request_client.request(:post, resource_root, body: params)
         Responses::NotificationTopicResponse.new(response.body)
       end
+
+      def delete(id)
+        response = client.request_client.request(:delete, "#{resource_root}/#{id}")
+        Responses::NotificationTopicDeleteResponse.new(response.body)
+      end
     end
   end
 end
