@@ -37,6 +37,8 @@ RSpec.describe CirroIOV2::Resources::Payout do
     end
 
     context 'when testing response' do
+      subject { described_class.new(client).create(params) }
+
       let(:fixture_body) { JSON.parse(File.read('./spec/fixtures/payout/create.json')) }
       let(:request_url) { "#{site}/v2/payouts" }
       let(:request_action) { :post }
@@ -44,15 +46,13 @@ RSpec.describe CirroIOV2::Resources::Payout do
       let(:replace_keys) do
         {
           'title' => 'name',
-          'billing_date' => 'delivery_date'
+          'billing_date' => 'delivery_date',
         }
       end
       let(:expected_response_class) { CirroIOV2::Responses::PayoutResponse }
       let(:expected_response) do
         fixture_body.excluding(*replace_keys.values)
       end
-
-      subject { described_class.new(client).create(params) }
 
       include_examples 'responses'
     end

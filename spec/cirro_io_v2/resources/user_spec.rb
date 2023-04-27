@@ -89,6 +89,8 @@ RSpec.describe CirroIOV2::Resources::User do
     end
 
     context 'when testing response' do
+      subject { described_class.new(client).find(user_id) }
+
       let(:fixture_body) { JSON.parse(File.read('./spec/fixtures/user/find.json')) }
       let(:request_url) { "#{site}/v2/users/#{user_id}" }
       let(:request_action) { :get }
@@ -97,7 +99,7 @@ RSpec.describe CirroIOV2::Resources::User do
         {
           'anonymous_email' => 'email',
           'first_name' => 'firstname',
-          'worker' => 'something_else'
+          'worker' => 'something_else',
         }
       end
       let(:expected_response_class) { CirroIOV2::Responses::UserResponse }
@@ -111,8 +113,6 @@ RSpec.describe CirroIOV2::Resources::User do
           country_code: fixture_body['country_code'],
         }
       end
-
-      subject { described_class.new(client).find(user_id) }
 
       include_examples 'responses'
     end
@@ -177,13 +177,15 @@ RSpec.describe CirroIOV2::Resources::User do
     end
 
     context 'when testing response' do
+      subject { described_class.new(client).notification_preference(user_id) }
+
       let(:fixture_body) { JSON.parse(File.read('./spec/fixtures/user/notification_preferences.json')) }
       let(:request_url) { "#{site}/v2/users/#{user_id}/notification_preference" }
       let(:request_action) { :get }
       let(:keys) { fixture_body.keys }
       let(:replace_keys) do
         {
-          'topics' => 'channel'
+          'topics' => 'channel',
         }
       end
       let(:expected_response_class) { CirroIOV2::Responses::UserNotificationPreferenceResponse }
@@ -191,11 +193,9 @@ RSpec.describe CirroIOV2::Resources::User do
         {
           id: '1',
           object: 'notification_preference',
-          locale: fixture_body['locale']
+          locale: fixture_body['locale'],
         }
       end
-
-      subject { described_class.new(client).notification_preference(user_id) }
 
       include_examples 'responses'
     end

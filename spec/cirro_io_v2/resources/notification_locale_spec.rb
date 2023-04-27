@@ -24,21 +24,21 @@ RSpec.describe CirroIOV2::Resources::NotificationLocale do
     end
 
     context 'when testing response' do
+      subject { described_class.new(client).create(locale: locale) }
+
       let(:fixture_body) { JSON.parse(File.read('./spec/fixtures/notification_locale/create.json')) }
       let(:request_url) { "#{site}/v2/notification_locales" }
       let(:request_action) { :post }
       let(:keys) { fixture_body.keys }
       let(:replace_keys) do
         {
-          'configurations' => 'notification_configs'
+          'configurations' => 'notification_configs',
         }
       end
       let(:expected_response_class) { CirroIOV2::Responses::NotificationLocaleResponse }
       let(:expected_response) do
         fixture_body.excluding(*replace_keys.values)
       end
-
-      subject { described_class.new(client).create(locale: locale) }
 
       include_examples 'responses'
     end

@@ -50,21 +50,21 @@ RSpec.describe CirroIOV2::Resources::NotificationTemplate do
     end
 
     context 'when testing response' do
+      subject { described_class.new(client).create(params) }
+
       let(:fixture_body) { JSON.parse(File.read('./spec/fixtures/notification_template/create.json')) }
       let(:request_url) { "#{site}/v2/notification_templates" }
       let(:request_action) { :post }
       let(:keys) { fixture_body.keys }
       let(:replace_keys) do
         {
-          'body' => 'content'
+          'body' => 'content',
         }
       end
       let(:expected_response_class) { CirroIOV2::Responses::NotificationTemplateResponse }
       let(:expected_response) do
         fixture_body.excluding(*replace_keys.values)
       end
-
-      subject { described_class.new(client).create(params) }
 
       include_examples 'responses'
     end

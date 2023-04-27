@@ -32,7 +32,7 @@ module CirroIOV2
       include Base
     end
 
-    SpaceInvitationResponse = Struct.new(:id, :object, :token, :subject, :email, :name, :inviter_name, :skip_background_check, :expires_at, keyword_init: true ) do
+    SpaceInvitationResponse = Struct.new(:id, :object, :token, :subject, :email, :name, :inviter_name, :skip_background_check, :expires_at, keyword_init: true) do
       include Base
     end
 
