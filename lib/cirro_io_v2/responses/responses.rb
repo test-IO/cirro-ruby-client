@@ -23,7 +23,17 @@ module CirroIOV2
       :NotificationTopicDeleteResponse,
     ].freeze
 
-    UserResponse = Struct.new(:id, :object, :first_name, :last_name, :time_zone, :birthday, :country_code, :epam, :worker, :anonymous_email, keyword_init: true) do
+    UserResponse = Struct.new(:id,
+                              :object,
+                              :first_name,
+                              :last_name,
+                              :time_zone,
+                              :birthday,
+                              :country_code,
+                              :epam,
+                              :worker,
+                              :anonymous_email,
+                              keyword_init: true) do
       include Base
     end
 
@@ -32,7 +42,16 @@ module CirroIOV2
       include Base
     end
 
-    SpaceInvitationResponse = Struct.new(:id, :object, :token, :subject, :email, :name, :inviter_name, :skip_background_check, :expires_at, keyword_init: true) do
+    SpaceInvitationResponse = Struct.new(:id,
+                                         :object,
+                                         :token,
+                                         :subject,
+                                         :email,
+                                         :name,
+                                         :inviter_name,
+                                         :skip_background_check,
+                                         :expires_at,
+                                         keyword_init: true) do
       include Base
     end
 

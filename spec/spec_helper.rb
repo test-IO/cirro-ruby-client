@@ -4,7 +4,7 @@ require 'faker'
 require 'cirro_io/client'
 require 'cirro_io_v2/client'
 Dir['spec/**/factories/**/*.rb'].each { |f| require f.partition('/').last }
-Dir['./spec/cirro_io_v2/resources/shared/*.rb'].each { |f| require f }
+Dir['./spec/cirro_io_v2/resources/shared/*.rb'].sort.each { |f| require f }
 
 # comment out below line and change values below to run test against actual API server
 require 'webmock/rspec'
