@@ -87,6 +87,35 @@ RSpec.describe CirroIOV2::Resources::User do
       expect(user.epam).to be_nil
       expect(user.worker[:billable]).to eq(false)
     end
+
+    context 'when testing response' do
+      let(:fixture_body) { JSON.parse(File.read('./spec/fixtures/user/find.json')) }
+      let(:request_url) { "#{site}/v2/users/#{user_id}" }
+      let(:request_action) { :get }
+      let(:keys) { fixture_body.keys }
+      let(:replace_keys) do
+        {
+          'anonymous_email' => 'email',
+          'first_name' => 'firstname',
+          'worker' => 'something_else'
+        }
+      end
+      let(:expected_response_class) { CirroIOV2::Responses::UserResponse }
+      let(:expected_response) do
+        {
+          id: user_id,
+          object: 'user',
+          last_name: fixture_body['last_name'],
+          time_zone: fixture_body['time_zone'],
+          birthday: fixture_body['birthday'],
+          country_code: fixture_body['country_code'],
+        }
+      end
+
+      subject { described_class.new(client).find(user_id) }
+
+      include_examples 'responses'
+    end
   end
 
   describe '#notification_preferences' do
@@ -145,6 +174,30 @@ RSpec.describe CirroIOV2::Resources::User do
       expect(notification_preference.locale).to eq('de')
       expect(notification_preference.topics.class).to eq(CirroIOV2::Responses::NotificationTopicPreferenceListResponse)
       expect(notification_preference.topics.data.first.class).to eq(CirroIOV2::Responses::NotificationTopicPreferenceResponse)
+    end
+
+    context 'when testing response' do
+      let(:fixture_body) { JSON.parse(File.read('./spec/fixtures/user/notification_preferences.json')) }
+      let(:request_url) { "#{site}/v2/users/#{user_id}/notification_preference" }
+      let(:request_action) { :get }
+      let(:keys) { fixture_body.keys }
+      let(:replace_keys) do
+        {
+          'topics' => 'channel'
+        }
+      end
+      let(:expected_response_class) { CirroIOV2::Responses::UserNotificationPreferenceResponse }
+      let(:expected_response) do
+        {
+          id: '1',
+          object: 'notification_preference',
+          locale: fixture_body['locale']
+        }
+      end
+
+      subject { described_class.new(client).notification_preference(user_id) }
+
+      include_examples 'responses'
     end
   end
 end

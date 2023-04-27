@@ -36,6 +36,27 @@ RSpec.describe CirroIOV2::Resources::SpaceInvitation do
       expect(space_invitation.skip_background_check).to eq(params[:skip_background_check])
       expect(space_invitation.expires_at).to eq('2023-05-12T00:00:00Z')
     end
+
+    context 'when testing response' do
+      let(:fixture_body) { JSON.parse(File.read('./spec/fixtures/space_invitation/create.json')) }
+      let(:request_url) { "#{site}/v2/space_invitations" }
+      let(:request_action) { :post }
+      let(:keys) { fixture_body.keys }
+      let(:replace_keys) do
+        {
+          'expires_at' => 'expires_in',
+          'subject' => 'object'
+        }
+      end
+      let(:expected_response_class) { CirroIOV2::Responses::SpaceInvitationResponse }
+      let(:expected_response) do
+        fixture_body.excluding(*replace_keys.values)
+      end
+
+      subject { described_class.new(client).create(params) }
+
+      include_examples 'responses'
+    end
   end
 
   describe '#expire' do

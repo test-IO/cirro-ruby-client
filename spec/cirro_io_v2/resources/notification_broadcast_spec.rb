@@ -33,5 +33,25 @@ RSpec.describe CirroIOV2::Resources::NotificationBroadcast do
         expect(created_notification_broadcast.notification_topic_id).to eq('1')
       end
     end
+
+    context 'when testing response' do
+      let(:fixture_body) { JSON.parse(File.read('./spec/fixtures/notification_broadcast/create.json')) }
+      let(:request_url) { "#{site}/v2/notification_broadcasts" }
+      let(:request_action) { :post }
+      let(:keys) { fixture_body.keys }
+      let(:replace_keys) do
+        {
+          'payload' => 'content'
+        }
+      end
+      let(:expected_response_class) { CirroIOV2::Responses::NotificationBroadcastResponse }
+      let(:expected_response) do
+        fixture_body.excluding(*replace_keys.values)
+      end
+
+      subject { described_class.new(client).create(params) }
+
+      include_examples 'responses'
+    end
   end
 end

@@ -55,6 +55,26 @@ RSpec.describe CirroIOV2::Resources::GigInvitation do
 
       expect(stub_api).to have_been_made
     end
+
+    context 'when testing response' do
+      let(:fixture_body) { JSON.parse(File.read('./spec/fixtures/gig_invitation/accept.json')) }
+      let(:request_url) { "#{site}/v2/gig_invitations/#{id}/accept" }
+      let(:request_action) { :post }
+      let(:keys) { fixture_body.keys }
+      let(:replace_keys) do
+        {
+          'status' => 'aasm_state'
+        }
+      end
+      let(:expected_response_class) { CirroIOV2::Responses::GigInvitationResponse }
+      let(:expected_response) do
+        fixture_body.excluding(*replace_keys.values)
+      end
+
+      subject { described_class.new(client).accept(id, no_reward: true) }
+
+      include_examples 'responses'
+    end
   end
 
   describe '#reject' do

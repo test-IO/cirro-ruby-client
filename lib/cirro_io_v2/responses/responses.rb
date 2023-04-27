@@ -23,16 +23,16 @@ module CirroIOV2
       :NotificationTopicDeleteResponse,
     ].freeze
 
-    UserResponse = Struct.new(:id, :object, :first_name, :last_name, :time_zone, :birthday, :country_code, :epam, :worker, :anonymous_email) do
+    UserResponse = Struct.new(:id, :object, :first_name, :last_name, :time_zone, :birthday, :country_code, :epam, :worker, :anonymous_email, keyword_init: true) do
       include Base
     end
 
-    UserNotificationPreferenceResponse = Struct.new(:id, :object, :locale, :topics) do
+    UserNotificationPreferenceResponse = Struct.new(:id, :object, :locale, :topics, keyword_init: true) do
       self::NESTED_RESPONSES = { topics: :NotificationTopicPreferenceListResponse }.freeze
       include Base
     end
 
-    SpaceInvitationResponse = Struct.new(:id, :object, :token, :subject, :email, :name, :inviter_name, :skip_background_check, :expires_at) do
+    SpaceInvitationResponse = Struct.new(:id, :object, :token, :subject, :email, :name, :inviter_name, :skip_background_check, :expires_at, keyword_init: true ) do
       include Base
     end
 
@@ -51,20 +51,21 @@ module CirroIOV2
                              :filter_query,
                              :tasks,
                              :notification_payload,
-                             :epam_options) do
+                             :epam_options,
+                             keyword_init: true) do
       self::NESTED_RESPONSES = { tasks: :GigTaskListResponse }.freeze
       include Base
     end
 
-    GigTaskResponse = Struct.new(:id, :object, :title, :base_price) do
+    GigTaskResponse = Struct.new(:id, :object, :title, :base_price, keyword_init: true) do
       include Base
     end
 
-    GigInvitationResponse = Struct.new(:id, :object, :status, :gig_id, :user_id, :no_reward, :epam_bench_status) do
+    GigInvitationResponse = Struct.new(:id, :object, :status, :gig_id, :user_id, :no_reward, :epam_bench_status, keyword_init: true) do
       include Base
     end
 
-    GigTimeActivityResponse = Struct.new(:id, :object, :gig_id, :user_id, :description, :duration_in_ms, :date) do
+    GigTimeActivityResponse = Struct.new(:id, :object, :gig_id, :user_id, :description, :duration_in_ms, :date, keyword_init: true) do
       include Base
     end
 
@@ -78,7 +79,8 @@ module CirroIOV2
                                    :multiplier,
                                    :delivery_date,
                                    :cost_center_key,
-                                   :cost_center_data) do
+                                   :cost_center_data,
+                                   keyword_init: true) do
       include Base
     end
 
@@ -92,46 +94,47 @@ module CirroIOV2
                                 :reference_type,
                                 :user_id,
                                 :cost_center_key,
-                                :cost_center_data) do
+                                :cost_center_data,
+                                keyword_init: true) do
       include Base
     end
 
-    NotificationTopicPreferenceResponse = Struct.new(:id, :object, :preferences, :notification_topic_id, :user_id) do
+    NotificationTopicPreferenceResponse = Struct.new(:id, :object, :preferences, :notification_topic_id, :user_id, keyword_init: true) do
       include Base
     end
 
-    NotificationLocaleResponse = Struct.new(:id, :object, :locale, :default, :configurations) do
+    NotificationLocaleResponse = Struct.new(:id, :object, :locale, :default, :configurations, keyword_init: true) do
       self::NESTED_RESPONSES = { configurations: :NotificationConfigurationListResponse }.freeze
       include Base
     end
 
-    NotificationConfigurationResponse = Struct.new(:id, :object, :deliver_by, :format, :kind, :locale) do
+    NotificationConfigurationResponse = Struct.new(:id, :object, :deliver_by, :format, :kind, :locale, keyword_init: true) do
       include Base
     end
 
-    NotificationLayoutResponse = Struct.new(:id, :object, :name, :templates) do
+    NotificationLayoutResponse = Struct.new(:id, :object, :name, :templates, keyword_init: true) do
       self::NESTED_RESPONSES = { templates: :NotificationLayoutTemplateListResponse }.freeze
       include Base
     end
 
-    NotificationLayoutTemplateResponse = Struct.new(:id, :notification_configuration_id, :notification_layout_id, :body) do
+    NotificationLayoutTemplateResponse = Struct.new(:id, :object, :notification_configuration_id, :notification_layout_id, :body, keyword_init: true) do
       include Base
     end
 
-    NotificationTopicResponse = Struct.new(:id, :object, :name, :notification_layout_id, :preferences, :templates) do
+    NotificationTopicResponse = Struct.new(:id, :object, :name, :notification_layout_id, :preferences, :templates, keyword_init: true) do
       self::NESTED_RESPONSES = { templates: :NotificationTemplateListResponse }.freeze
       include Base
     end
 
-    NotificationTemplateResponse = Struct.new(:id, :object, :notification_configuration_id, :notification_topic_id, :subject, :body) do
+    NotificationTemplateResponse = Struct.new(:id, :object, :notification_configuration_id, :notification_topic_id, :subject, :body, keyword_init: true) do
       include Base
     end
 
-    NotificationBroadcastResponse = Struct.new(:id, :object, :payload, :recipients, :notification_topic_id) do
+    NotificationBroadcastResponse = Struct.new(:id, :object, :payload, :recipients, :notification_topic_id, keyword_init: true) do
       include Base
     end
 
-    EpamHeroesBadgeResponse = Struct.new(:content, :refs, :paging, :hasMoreResults) do
+    EpamHeroesBadgeResponse = Struct.new(:content, :refs, :paging, :hasMoreResults, keyword_init: true) do
       include Base
     end
 
@@ -140,8 +143,8 @@ module CirroIOV2
       return const_get(name) if const_defined? name
 
       struct = nil
-      struct = Struct.new(:object, :url, :has_more, :data) if LIST_RESPONSES.include?(name)
-      struct = Struct.new(:id, :object, :deleted) if DELETE_RESPONSES.include?(name)
+      struct = Struct.new(:object, :url, :has_more, :data, keyword_init: true) if LIST_RESPONSES.include?(name)
+      struct = Struct.new(:id, :object, :deleted, keyword_init: true) if DELETE_RESPONSES.include?(name)
 
       return unless struct.present?
 
