@@ -37,6 +37,27 @@ RSpec.describe CirroIOV2::Resources::NotificationTopic do
       expect(notification_topic.templates.class).to eq(CirroIOV2::Responses::NotificationTemplateListResponse)
       expect(notification_topic.templates.data.first.class).to eq(CirroIOV2::Responses::NotificationTemplateResponse)
     end
+
+    context 'when testing response' do
+      subject { described_class.new(client).find(id) }
+
+      let(:fixture_body) { JSON.parse(File.read('./spec/fixtures/notification_topic/find.json')) }
+      let(:request_url) { "#{site}/v2/notification_topics/#{id}" }
+      let(:request_action) { :get }
+      let(:keys) { fixture_body.keys }
+      let(:replace_keys) do
+        {
+          'name' => 'title',
+          'templates' => 'something',
+        }
+      end
+      let(:expected_response_class) { CirroIOV2::Responses::NotificationTopicResponse }
+      let(:expected_response) do
+        fixture_body.excluding(*replace_keys.values)
+      end
+
+      include_examples 'responses'
+    end
   end
 
   describe '#update' do

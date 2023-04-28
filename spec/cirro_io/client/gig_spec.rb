@@ -30,7 +30,6 @@ RSpec.describe CirroIO::Client::Gig do
     end
   end
 
-  # rubocop:disable RSpec/MultipleMemoizedHelpers
   describe 'bulk_archive_with' do
     before do
       configure_api_client
@@ -83,5 +82,4 @@ RSpec.describe CirroIO::Client::Gig do
       expect(archived_gig.gig_time_activities.map(&:id)).to eq(['1', '2'])
     end
   end
-  # rubocop:enable RSpec/MultipleMemoizedHelpers
 end

@@ -58,6 +58,26 @@ RSpec.describe CirroIOV2::Resources::NotificationLayout do
       expect(notification_layout.templates.data.first.notification_configuration_id).to eq(params[:templates].first[:notification_configuration_id])
       expect(notification_layout.templates.data.first.body).to eq(params[:templates].first[:body])
     end
+
+    context 'when testing response' do
+      subject { described_class.new(client).create(params) }
+
+      let(:fixture_body) { JSON.parse(File.read('./spec/fixtures/notification_layout/create.json')) }
+      let(:request_url) { "#{site}/v2/notification_layouts" }
+      let(:request_action) { :post }
+      let(:keys) { fixture_body.keys }
+      let(:replace_keys) do
+        {
+          'templates' => 'content',
+        }
+      end
+      let(:expected_response_class) { CirroIOV2::Responses::NotificationLayoutResponse }
+      let(:expected_response) do
+        fixture_body.excluding(*replace_keys.values)
+      end
+
+      include_examples 'responses'
+    end
   end
 
   describe '#update' do

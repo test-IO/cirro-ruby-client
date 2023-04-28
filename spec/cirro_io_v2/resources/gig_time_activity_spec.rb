@@ -32,6 +32,26 @@ RSpec.describe CirroIOV2::Resources::GigTimeActivity do
       expect(gig_time_activity.duration_in_ms).to eq(params[:duration_in_ms])
       expect(gig_time_activity.date).to eq(params[:date])
     end
+
+    context 'when testing response' do
+      subject { described_class.new(client).create(params) }
+
+      let(:fixture_body) { JSON.parse(File.read('./spec/fixtures/gig_time_activity/create.json')) }
+      let(:request_url) { "#{site}/v2/gig_time_activities" }
+      let(:request_action) { :post }
+      let(:keys) { fixture_body.keys }
+      let(:replace_keys) do
+        {
+          'date' => 'delivery_date',
+        }
+      end
+      let(:expected_response_class) { CirroIOV2::Responses::GigTimeActivityResponse }
+      let(:expected_response) do
+        fixture_body.excluding(*replace_keys.values)
+      end
+
+      include_examples 'responses'
+    end
   end
 
   describe '#list' do

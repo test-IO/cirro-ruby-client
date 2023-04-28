@@ -3,29 +3,22 @@ module CirroIOV2
     module Base
       def initialize(body)
         body = body.deep_symbolize_keys
+
         if body[:object] == 'list'
           list_item_class = self.class.name.gsub('List', '').constantize
-          values_hash = body.slice(*members.excluding(:data)).merge(
-            data: body[:data].map { |list_item| list_item_class.new(list_item) },
-          )
-          super(*members.map { |attr| values_hash[attr] })
-        elsif list_attribute(body)
-          values_hash = body.slice(*members.excluding(list_attribute(body))).merge(
-            list_attribute(body) => create_sub_resource(list_attribute(body), body[list_attribute(body)]),
-          )
-          super(*body.slice(*members).keys.map { |attr| values_hash[attr] })
-        else
-          super(*body.slice(*members).values)
+          body[:data] = body[:data].map { |list_item| list_item_class.new(list_item) }
         end
-      end
 
-      def list_attribute(data)
-        data.keys.find { |key| data[key].is_a?(Hash) && data[key][:object] == 'list' }
-      end
+        if self.class.const_defined?('NESTED_RESPONSES')
+          self.class::NESTED_RESPONSES.each do |attribute_name, class_name|
+            next unless members.include?(attribute_name)
+            next unless body[attribute_name]
 
-      def create_sub_resource(resource_name, body)
-        sub_resource_class = "CirroIOV2::Responses::#{self.class::NESTED_RESPONSES[resource_name]}".constantize
-        sub_resource_class.new(body)
+            body[attribute_name] = "CirroIOV2::Responses::#{class_name}".constantize.new(body[attribute_name])
+          end
+        end
+
+        super(**body.slice(*members))
       end
     end
   end
