@@ -55,6 +55,7 @@ module CirroIOV2
       include Base
     end
 
+    InvitationNotificationTopicResponse = Struct.new(:id, :object, :name, keyword_init: true)
     GigResponse = Struct.new(:id,
                              :object,
                              :title,
@@ -70,9 +71,10 @@ module CirroIOV2
                              :filter_query,
                              :tasks,
                              :notification_payload,
+                             :invitation_notification_topic,
                              :epam_options,
                              keyword_init: true) do
-      self::NESTED_RESPONSES = { tasks: :GigTaskListResponse }.freeze
+      self::NESTED_RESPONSES = { tasks: :GigTaskListResponse, invitation_notification_topic: :InvitationNotificationTopicResponse }.freeze
       include Base
     end
 
