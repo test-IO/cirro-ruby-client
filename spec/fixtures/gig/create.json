@@ -31,6 +31,11 @@
         "task_title": "Add dataset",
         "task_type": "Review"
     },
+    "invitation_notification_topic": {
+        "id": "2",
+        "object": "notification_topic",
+        "name": "new_gig_invitation"
+    },
     "epam_options": {
         "extra_mile": true
     }
