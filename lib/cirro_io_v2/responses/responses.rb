@@ -142,8 +142,7 @@ module CirroIOV2
       include Base
     end
 
-    NotificationTopicResponse = Struct.new(:id, :object, :name, :notification_layout_id, :preferences, :templates, keyword_init: true) do
-      self::NESTED_RESPONSES = { templates: :NotificationTemplateListResponse }.freeze
+    NotificationTopicResponse = Struct.new(:id, :object, :name, :notification_layout_id, :preferences, keyword_init: true) do
       include Base
     end
 
