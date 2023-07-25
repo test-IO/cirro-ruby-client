@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cirro-ruby-client (2.5.17)
+    cirro-ruby-client (2.5.18)
       activesupport
       faraday (< 1.2.0)
       faraday_middleware
@@ -119,4 +119,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   2.3.20
+   2.4.9

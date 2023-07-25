@@ -46,6 +46,7 @@ RSpec.describe CirroIOV2::Resources::Gig do
           "extra_mile": true,
         },
         archive_at: 1653412329,
+        invitation_frequency: 3
       }
     end
 
@@ -71,6 +72,7 @@ RSpec.describe CirroIOV2::Resources::Gig do
       expect(gig.tasks.data.first.base_price).to eq(params[:tasks].first[:base_price])
       expect(gig.invitation_notification_topic.class).to eq(CirroIOV2::Responses::InvitationNotificationTopicResponse)
       expect(gig.invitation_notification_topic.name).to eq('new_gig_invitation')
+      expect(gig.invitation_frequency).to eq(3)
     end
   end
 
@@ -95,6 +97,7 @@ RSpec.describe CirroIOV2::Resources::Gig do
       expect(gig.end_at).to eq(params[:end_at])
       expect(gig.invitation_notification_topic.class).to eq(CirroIOV2::Responses::InvitationNotificationTopicResponse)
       expect(gig.invitation_notification_topic.name).to eq('new_gig_invitation')
+      expect(gig.invitation_frequency).to eq(3)
     end
   end
 
@@ -123,6 +126,7 @@ RSpec.describe CirroIOV2::Resources::Gig do
       expect(gig.tasks.data.first.object).to eq('gig_task')
       expect(gig.tasks.data.first.title).to eq('Ah, Wilderness!')
       expect(gig.tasks.data.first.base_price).to eq(300)
+      expect(gig.invitation_frequency).to eq(3)
     end
   end
 

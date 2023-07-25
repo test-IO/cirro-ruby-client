@@ -11,6 +11,7 @@
     "seats_min": 2,
     "seats_max": null,
     "invitation_mode": "auto",
+    "invitation_frequency": 3,
     "filter_query": {
         "status": "active",
         "segment": "my_favorite_testers"
