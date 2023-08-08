@@ -10,7 +10,7 @@ module CirroIOV2
 
         response
       rescue Faraday::ParsingError => e
-        # Temporarily handle "You are being redirected step and make request to target location" 
+        # Temporarily handle "You are being redirected step and make request to target location"
         # Strictly unrecommended to show this hack to children and to people with heart disease
         raise Errors::ResponseNotJsonError, e unless e.response.status >= 300
 
