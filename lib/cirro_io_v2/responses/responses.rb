@@ -73,6 +73,7 @@ module CirroIOV2
                              :notification_payload,
                              :invitation_notification_topic,
                              :epam_options,
+                             :archive_at,
                              keyword_init: true) do
       self::NESTED_RESPONSES = { tasks: :GigTaskListResponse, invitation_notification_topic: :InvitationNotificationTopicResponse }.freeze
       include Base
