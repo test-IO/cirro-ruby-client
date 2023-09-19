@@ -99,6 +99,7 @@ module CirroIOV2
                                    :quantity,
                                    :multiplier,
                                    :delivery_date,
+                                   :currency,
                                    :cost_center_key,
                                    :cost_center_data,
                                    keyword_init: true) do
@@ -114,6 +115,7 @@ module CirroIOV2
                                 :reference_id,
                                 :reference_type,
                                 :user_id,
+                                :currency,
                                 :cost_center_key,
                                 :cost_center_data,
                                 keyword_init: true) do
