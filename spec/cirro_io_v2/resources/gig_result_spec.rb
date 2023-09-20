@@ -16,6 +16,7 @@ RSpec.describe CirroIOV2::Resources::GigResult do
         quantity: 2,
         multiplier: '1.0',
         delivery_date: '2022-06-13',
+        currency: 'EUR',
         cost_center_data: {
           company: 'Schinner, Brakus and Ortiz',
           inhouse: 'no',
@@ -41,6 +42,7 @@ RSpec.describe CirroIOV2::Resources::GigResult do
       expect(gig_result.quantity).to eq(params[:quantity])
       expect(gig_result.multiplier).to eq(params[:multiplier])
       expect(gig_result.delivery_date).to eq(params[:delivery_date])
+      expect(gig_result.currency).to eq(params[:currency])
       expect(gig_result.cost_center_data).to eq(params[:cost_center_data])
       expect(gig_result.cost_center_key).to be_nil
     end

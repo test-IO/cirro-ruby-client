@@ -10,6 +10,7 @@
       "title": "The Golden Bowl",
       "description": "Language designers want to design the perfect language. They want to be able to say, 'My language is perfect. It can do everything.' But it's just plain impossible to design a perfect language, because there are two ways to look at a language. One way is by looking at what can be done with that language. The other is by looking at how we feel using that language-how we feel while programming.",
       "billing_date": "2022-06-05",
+      "currency": "EUR",
       "cost_center_key": "EPM-CRWD",
       "cost_center_data": null,
       "reference_id": "42",

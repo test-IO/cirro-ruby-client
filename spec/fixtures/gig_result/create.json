@@ -8,6 +8,7 @@
   "quantity": 2,
   "multiplier": "1.0",
   "delivery_date": "2022-06-13",
+  "currency": "EUR",
   "cost_center_key": null,
   "cost_center_data": {
     "company": "Schinner, Brakus and Ortiz",
