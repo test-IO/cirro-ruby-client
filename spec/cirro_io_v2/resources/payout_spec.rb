@@ -13,7 +13,6 @@ RSpec.describe CirroIOV2::Resources::Payout do
         title: 'The Golden Bowl',
         description: 'Language designers want to design the perfect language.',
         billing_date: '2022-06-05',
-        currency: 'EUR',
         cost_center_key: 'EPM-CRWD',
         user_id: 1,
       }
@@ -33,7 +32,6 @@ RSpec.describe CirroIOV2::Resources::Payout do
       expect(payout.amount).to eq(params[:amount])
       expect(payout.description).to eq(params[:description])
       expect(payout.billing_date).to eq(params[:billing_date])
-      expect(payout.currency).to eq(params[:currency])
       expect(payout.cost_center_key).to eq(params[:cost_center_key])
       expect(payout.cost_center_data).to be_nil
     end
