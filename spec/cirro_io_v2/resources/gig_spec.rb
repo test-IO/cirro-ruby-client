@@ -45,6 +45,7 @@ RSpec.describe CirroIOV2::Resources::Gig do
         "epam_options": {
           "extra_mile": true,
         },
+        archive_at: 1653412329,
       }
     end
 
