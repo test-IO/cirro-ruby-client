@@ -11,6 +11,8 @@ module CirroIOV2
         response
       rescue Faraday::ParsingError => e
         raise Errors::ResponseNotJsonError, e
+      rescue Faraday::ClientError => e
+        raise Errors::ClientError, e
       end
 
       def make_request(*args)

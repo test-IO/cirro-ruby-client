@@ -1,6 +1,7 @@
 require 'cirro_io/client/version'
 require 'cirro_io_v2/errors/http_error'
 require 'cirro_io_v2/errors/response_not_json_error'
+require 'cirro_io_v2/errors/client_error'
 
 require 'cirro_io_v2/request_clients/base'
 require 'cirro_io_v2/request_clients/jwt'

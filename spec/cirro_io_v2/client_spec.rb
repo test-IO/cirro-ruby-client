@@ -125,4 +125,37 @@ RSpec.describe CirroIOV2::Client do
       expect(CirroIOV2::Resources::NotificationTemplate).to have_received(:new)
     end
   end
+
+  describe 'error handling' do
+    let(:exception) { RuntimeError.new('test') }
+    let(:body) { { error: 'error' } }
+    let(:response) { { status: 400, body: body } }
+
+    let(:faraday_error) { Faraday::ClientError.new(exception, response) }
+
+    before do
+      allow_any_instance_of(CirroIOV2::RequestClients::Jwt).to receive(:make_request).and_raise(faraday_error) # rubocop:disable RSpec/AnyInstance
+    end
+
+    context 'when DEBUG_CIRRO_RUBY_CLIENT is not set' do
+      it 'raises CirroIOV2::Errors::ClientError when request fails with 4xx' do
+        expect { client.request_client.request(:foo, :bar) }.to raise_error(CirroIOV2::Errors::ClientError) do |error|
+          expect(error.faraday_error.message).to eq('test')
+          expect(error.message).to eq({ error: 'error' })
+        end
+      end
+    end
+
+    context 'when DEBUG_CIRRO_RUBY_CLIENT is set' do
+      before do
+        stub_const('ENV', { 'DEBUG_CIRRO_RUBY_CLIENT' => 'asdf' })
+      end
+
+      it 'raises the error AND logs the whole response to simplify debugging' do
+        expect { client.request_client.request(:foo, :bar) }.to raise_error(CirroIOV2::Errors::ClientError) do |error|
+          expect(error.message).to eq('{:status=>400, :body=>{:error=>"error"}}')
+        end
+      end
+    end
+  end
 end
