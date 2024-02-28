@@ -1,6 +1,6 @@
 RSpec.describe CirroIOV2::Resources::EpamHeroes::Badges do
   let(:site) { 'http://api.cirro.io' }
-  let(:client) { CirroIOV2::Client.new(private_key: File.read('./spec/fixtures/private_key.pem'), client_id: 1, site: site) }
+  let(:client) { CirroIOV2::Client.new(private_key: File.read('./spec/fixtures/private_key.pem'), client_id: 1, site:) }
   let(:api_badge_data) { File.read('./spec/fixtures/epam_heroes/badges/create.json') }
 
   describe '#create' do

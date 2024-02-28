@@ -3,7 +3,7 @@ RSpec.describe CirroIOV2::Resources::NotificationLocale do
   let(:client) do
     CirroIOV2::Client.new(private_key: File.read('./spec/fixtures/private_key.pem'),
                           client_id: 1,
-                          site: site)
+                          site:)
   end
   let(:locale) { 'de' }
 
@@ -13,7 +13,7 @@ RSpec.describe CirroIOV2::Resources::NotificationLocale do
         stub_api = stub_request(:post, "#{site}/v2/notification_locales")
                    .to_return(body: File.read('./spec/fixtures/notification_locale/create.json'))
 
-        created_notification_locale = described_class.new(client).create(locale: locale)
+        created_notification_locale = described_class.new(client).create(locale:)
 
         expect(stub_api).to have_been_made
         expect(created_notification_locale.class).to eq(CirroIOV2::Responses::NotificationLocaleResponse)
@@ -24,7 +24,7 @@ RSpec.describe CirroIOV2::Resources::NotificationLocale do
     end
 
     context 'when testing response' do
-      subject { described_class.new(client).create(locale: locale) }
+      subject { described_class.new(client).create(locale:) }
 
       let(:fixture_body) { JSON.parse(File.read('./spec/fixtures/notification_locale/create.json')) }
       let(:request_url) { "#{site}/v2/notification_locales" }

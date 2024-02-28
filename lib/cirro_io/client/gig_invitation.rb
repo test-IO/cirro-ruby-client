@@ -7,7 +7,7 @@ module CirroIO
       has_one :app_worker
 
       def bulk_create_with(worker_filter, auto_accept: false)
-        payload = { data: { attributes: attributes.merge(worker_filter: worker_filter.attributes, auto_accept: auto_accept) } }
+        payload = { data: { attributes: attributes.merge(worker_filter: worker_filter.attributes, auto_accept:) } }
 
         response = self.class.custom_post("bulk/gigs/#{gig.id}/gig_invitations", format_to_dashed_keys(payload))
 

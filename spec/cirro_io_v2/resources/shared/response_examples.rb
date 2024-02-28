@@ -5,7 +5,7 @@ RSpec.shared_examples_for 'responses' do
       stub_request(request_action, request_url).to_return(body: fixture_body.to_json)
 
       expect(subject.class).to eq(expected_response_class)
-      replace_keys.each do |key, _|
+      replace_keys.each_key do |key|
         expect(subject.send(key)).to be_nil
       end
 

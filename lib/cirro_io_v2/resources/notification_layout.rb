@@ -2,7 +2,7 @@ module CirroIOV2
   module Resources
     class NotificationLayout < Base
       def list(params = nil)
-        response = client.request_client.request(:get, resource_root, params: params)
+        response = client.request_client.request(:get, resource_root, params:)
         Responses::NotificationLayoutListResponse.new(response.body)
       end
 

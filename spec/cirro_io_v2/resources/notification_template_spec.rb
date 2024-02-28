@@ -3,7 +3,7 @@ RSpec.describe CirroIOV2::Resources::NotificationTemplate do
   let(:client) do
     CirroIOV2::Client.new(private_key: File.read('./spec/fixtures/private_key.pem'),
                           client_id: 1,
-                          site: site)
+                          site:)
   end
   let(:id) { '1' }
 

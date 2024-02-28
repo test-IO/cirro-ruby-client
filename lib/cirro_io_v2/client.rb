@@ -54,7 +54,7 @@ module CirroIOV2
         private_key = OpenSSL::PKey::RSA.new(File.read(@options[:private_key_path])) if @options[:private_key_path]
         @request_client = RequestClients::Jwt.new(base_url: "#{@options[:site]}/#{@options[:api_version]}",
                                                   client_id: @options[:client_id],
-                                                  private_key: private_key)
+                                                  private_key:)
       else
         raise ArgumentError, 'Options: ":auth_type" must be ":jwt"'
       end

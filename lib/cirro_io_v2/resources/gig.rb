@@ -40,7 +40,8 @@ module CirroIOV2
         response = client.request_client.request(:post, "#{resource_root}/#{id}/invite", body: params)
 
         return Responses::GigInvitationResponse.new(response.body) if response.body['object'] == 'gig_invitation'
-        return Responses::GigInvitationListResponse.new(response.body) if response.body['object'] == 'list'
+
+        Responses::GigInvitationListResponse.new(response.body) if response.body['object'] == 'list'
       end
     end
   end

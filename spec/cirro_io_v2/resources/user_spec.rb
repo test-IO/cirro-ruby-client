@@ -3,7 +3,7 @@ RSpec.describe CirroIOV2::Resources::User do
   let(:client) do
     CirroIOV2::Client.new(private_key: File.read('./spec/fixtures/private_key.pem'),
                           client_id: 1,
-                          site: site)
+                          site:)
   end
   let(:user_id) { '13' }
   let(:params) do

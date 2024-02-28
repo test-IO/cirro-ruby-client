@@ -3,7 +3,7 @@ RSpec.describe CirroIOV2::Client do
     described_class.new(
       private_key: private_key_path,
       client_id: app_id,
-      site: site,
+      site:,
     )
   end
 
@@ -129,7 +129,7 @@ RSpec.describe CirroIOV2::Client do
   describe 'error handling' do
     let(:exception) { RuntimeError.new('test') }
     let(:body) { { error: 'error' } }
-    let(:response) { { status: 400, body: body } }
+    let(:response) { { status: 400, body: } }
 
     let(:faraday_error) { Faraday::ClientError.new(exception, response) }
 

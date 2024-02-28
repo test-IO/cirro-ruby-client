@@ -9,7 +9,7 @@ module CirroIO
       has_many :gig_time_activities
 
       def bulk_create_with(worker_filter, gig_tasks)
-        payload = { data: { attributes: attributes, relationships: {} } }
+        payload = { data: { attributes:, relationships: {} } }
         payload[:data][:relationships][:gig_tasks] = gig_tasks.map(&:attributes)
         payload[:data][:relationships][:worker_filter] = worker_filter.attributes
 
