@@ -30,9 +30,14 @@ RSpec.describe CirroIOV2::Resources::Gig do
         "end_at": 1653412329,
         "total_seats": 2,
         "invitation_mode": 'auto',
+        "invitation_multiplier": 5,
+        "invitation_frequency": 1,
         "filter_query": {
           "status": 'active',
           "segment": 'my_favorite_testers',
+        },
+        "sort_query": {
+          "status": 1,
         },
         "tasks": [
           { "title": 'Ah, Wilderness!', "base_price": 300 },
@@ -62,6 +67,9 @@ RSpec.describe CirroIOV2::Resources::Gig do
       expect(gig.seats_min).to eq(params[:total_seats])
       expect(gig.seats_max).to be_nil
       expect(gig.archived_at).to be_nil
+      expect(gig.invitation_multiplier).to eq(params[:invitation_multiplier])
+      expect(gig.invitation_frequency).to eq(params[:invitation_frequency])
+      expect(gig.sort_query).to eq(params[:sort_query])
       expect(gig.tasks.class).to eq(CirroIOV2::Responses::GigTaskListResponse)
       expect(gig.tasks.object).to eq('list')
       expect(gig.tasks.data.first.class).to eq(CirroIOV2::Responses::GigTaskResponse)
