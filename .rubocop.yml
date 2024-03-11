@@ -100,6 +100,9 @@ Lint/RaiseException:
 Lint/StructNewOverride:
   Enabled: true
 
+Lint/MissingSuper:
+  Enabled: false
+
 Style/HashEachMethods:
   Enabled: true
 

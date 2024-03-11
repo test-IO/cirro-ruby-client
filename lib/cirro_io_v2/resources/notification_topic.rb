@@ -16,7 +16,7 @@ module CirroIOV2
       end
 
       def list(params = nil)
-        response = client.request_client.request(:get, resource_root, params: params)
+        response = client.request_client.request(:get, resource_root, params:)
         Responses::NotificationTopicListResponse.new(response.body)
       end
 

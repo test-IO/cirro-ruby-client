@@ -14,11 +14,11 @@ RSpec.describe CirroIO::Client::AppUser do
       stub_request(:post, "#{test_site}/v1/app-users")
         .to_return(body: File.read('./spec/fixtures/app_user.json'), headers: { 'Content-Type' => 'application/json' })
 
-      app_user = described_class.new(email: email,
-                                     first_name: first_name,
-                                     last_name: last_name,
-                                     password: password,
-                                     time_zone: time_zone)
+      app_user = described_class.new(email:,
+                                     first_name:,
+                                     last_name:,
+                                     password:,
+                                     time_zone:)
 
       app_user.save
 

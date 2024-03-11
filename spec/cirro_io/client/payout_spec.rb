@@ -12,7 +12,7 @@ RSpec.describe CirroIO::Client::Payout do
 
   describe '.create' do
     let(:request_url) { "#{test_site}/v1/payouts" }
-    let(:payout) { described_class.create app_worker: app_worker, **attributes }
+    let(:payout) { described_class.create app_worker:, **attributes }
     let(:attributes) do
       {
         title: Faker::Lorem.sentence,
@@ -38,7 +38,7 @@ RSpec.describe CirroIO::Client::Payout do
               },
             },
           },
-          attributes: attributes,
+          attributes:,
         },
       }
 

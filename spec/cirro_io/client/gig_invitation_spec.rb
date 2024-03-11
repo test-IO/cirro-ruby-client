@@ -5,7 +5,7 @@ RSpec.describe CirroIO::Client::GigInvitation do
     end
 
     let(:gig) { CirroIO::Client::Gig.load(id: 1) }
-    let(:gig_invitation) { described_class.new(gig: gig) }
+    let(:gig_invitation) { described_class.new(gig:) }
 
     let(:worker_filter) { CirroIO::Client::WorkerFilter.new(filter_query: '{}') }
 

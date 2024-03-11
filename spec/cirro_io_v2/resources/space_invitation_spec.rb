@@ -4,7 +4,7 @@ RSpec.describe CirroIOV2::Resources::SpaceInvitation do
   let(:client) do
     CirroIOV2::Client.new(private_key: File.read('./spec/fixtures/private_key.pem'),
                           client_id: 1,
-                          site: site)
+                          site:)
   end
 
   describe '#create' do

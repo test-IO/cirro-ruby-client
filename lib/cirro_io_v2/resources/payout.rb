@@ -2,7 +2,7 @@ module CirroIOV2
   module Resources
     class Payout < Base
       def list(params = nil)
-        response = client.request_client.request(:get, resource_root, params: params)
+        response = client.request_client.request(:get, resource_root, params:)
         Responses::PayoutListResponse.new(response.body)
       end
 

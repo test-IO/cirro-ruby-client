@@ -46,12 +46,12 @@ RSpec.describe CirroIO::Client::Gig do
 
     let(:gig_results) do
       [CirroIO::Client::GigResult.new(app_worker: app_worker1,
-                                      gig_task: gig_task,
+                                      gig_task:,
                                       title: Faker::Hipster.sentence,
                                       description: Faker::Hipster.paragraph,
                                       quantity: 2),
        CirroIO::Client::GigResult.new(app_worker: app_worker2,
-                                      gig_task: gig_task,
+                                      gig_task:,
                                       title: Faker::Hipster.sentence,
                                       description: Faker::Hipster.paragraph,
                                       quantity: 4)]
