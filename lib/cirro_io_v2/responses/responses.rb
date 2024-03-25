@@ -38,12 +38,12 @@ module CirroIOV2
     end
 
     UserInvitationAttemptResponse = Struct.new(:id,
-                              :object,
-                              :payload,
-                              :gig_ids,
-                              :app_worker_id,
-                              :created_at,
-                              keyword_init: true) do
+                                               :object,
+                                               :payload,
+                                               :gig_ids,
+                                               :app_worker_id,
+                                               :created_at,
+                                               keyword_init: true) do
       include Base
     end
 

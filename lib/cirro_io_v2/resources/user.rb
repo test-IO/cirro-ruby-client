@@ -27,7 +27,7 @@ module CirroIOV2
       end
 
       def invitation_attempt(id, params)
-        response  = client.request_client.request(:post, "#{resource_root}/#{id}/invitation_attempt", body: params)
+        response = client.request_client.request(:post, "#{resource_root}/#{id}/invitation_attempt", body: params)
         CirroIOV2::Responses::UserInvitationAttemptResponse.new(response.body)
       end
     end

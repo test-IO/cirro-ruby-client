@@ -205,7 +205,7 @@ RSpec.describe CirroIOV2::Resources::User do
     let(:params) do
       {
         gig_ids: [2, 3],
-        max_amount: 2
+        max_amount: 2,
       }
     end
 
