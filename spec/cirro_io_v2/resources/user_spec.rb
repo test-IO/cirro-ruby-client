@@ -200,4 +200,27 @@ RSpec.describe CirroIOV2::Resources::User do
       include_examples 'responses'
     end
   end
+
+  describe '#invitation_attempt' do
+    let(:params) do
+      {
+        gig_ids: [2, 3],
+        max_amount: 2,
+      }
+    end
+
+    it 'creates invitation_attempt' do
+      stub_api = stub_request(:post, "#{site}/v2/users/#{user_id}/invitation_attempt")
+                 .to_return(body: File.read('./spec/fixtures/user/invitation_attempt.json'))
+
+      invitation_attempt = described_class.new(client).invitation_attempt(user_id, params)
+
+      expect(stub_api).to have_been_made
+      expect(invitation_attempt.class).to eq(CirroIOV2::Responses::UserInvitationAttemptResponse)
+      expect(invitation_attempt.object).to eq('invitation_attempt')
+      expect(invitation_attempt.payload).to eq(params)
+      expect(invitation_attempt.gig_ids).to eq([2, 3])
+      expect(invitation_attempt.app_worker_id).to eq(1)
+    end
+  end
 end
