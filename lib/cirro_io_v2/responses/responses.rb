@@ -37,6 +37,16 @@ module CirroIOV2
       include Base
     end
 
+    UserInvitationAttemptResponse = Struct.new(:id,
+                              :object,
+                              :payload,
+                              :gig_ids,
+                              :app_worker_id,
+                              :created_at,
+                              keyword_init: true) do
+      include Base
+    end
+
     UserNotificationPreferenceResponse = Struct.new(:id, :object, :locale, :topics, keyword_init: true) do
       self::NESTED_RESPONSES = { topics: :NotificationTopicPreferenceListResponse }.freeze
       include Base
