@@ -1,0 +1,9 @@
+{
+    "id": "1",
+    "object": "notification_topic_preference",
+    "notification_topic_id": "1",
+    "user_id": "1",
+    "preferences": {
+        "email": "never"
+    }
+}
