@@ -3,7 +3,7 @@ PATH
   specs:
     cirro-ruby-client (2.6.3)
       activesupport
-      faraday (< 1.2.0)
+      faraday (< 1.11.0)
       faraday_middleware
       json_api_client (>= 1.10.0)
       jwt
