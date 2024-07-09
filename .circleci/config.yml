@@ -7,7 +7,7 @@ infra_container_registry_auth:
   &infra_container_registry_auth
     auth:
       username: _json_key # default username when using a JSON key file to authenticate
-      password: $GOOGLE_JSON_KEY
+      password: $GOOGLE_JSON_KEY_OI_TSET
 
 jobs:
   test:
@@ -79,7 +79,7 @@ jobs:
       - run:
           name: Setup access to GCP
           command: |
-            echo $GOOGLE_JSON_KEY > ${HOME}/gcloud-service-key.json && \
+            echo $GOOGLE_JSON_KEY_OI_TSET > ${HOME}/gcloud-service-key.json && \
             gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
             gcloud auth configure-docker
       - run:
