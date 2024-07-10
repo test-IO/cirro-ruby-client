@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cirro-ruby-client (2.6.5)
+    cirro-ruby-client (2.6.6)
       activesupport
       faraday (< 1.2.0)
       faraday_middleware
