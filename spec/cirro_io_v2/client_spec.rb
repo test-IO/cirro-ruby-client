@@ -146,6 +146,17 @@ RSpec.describe CirroIOV2::Client do
       end
     end
 
+    context 'when response body is empty and DEBUG_CIRRO_RUBY_CLIENT is not set' do
+      let(:body) { nil }
+
+      it 'raises CirroIOV2::Errors::ClientError when request fails with 4xx' do
+        expect { client.request_client.request(:foo, :bar) }.to raise_error(CirroIOV2::Errors::ClientError) do |error|
+          expect(error.faraday_error.message).to eq('test')
+          expect(error.message).to eq(exception.message)
+        end
+      end
+    end
+
     context 'when DEBUG_CIRRO_RUBY_CLIENT is set' do
       before do
         stub_const('ENV', { 'DEBUG_CIRRO_RUBY_CLIENT' => 'asdf' })
