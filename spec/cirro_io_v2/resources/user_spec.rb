@@ -35,7 +35,7 @@ RSpec.describe CirroIOV2::Resources::User do
 
     it 'creates user with params' do
       stub_api = stub_request(:post, "#{site}/v2/users")
-                 .to_return(body: File.read('./spec/fixtures/user/create.json'))
+                 .to_return(body: File.read('./spec/fixtures/user/create.json'), headers: { 'Content-Type' => 'application/json' })
 
       user = described_class.new(client).create(params)
 
@@ -51,7 +51,7 @@ RSpec.describe CirroIOV2::Resources::User do
 
     it 'creates user without params' do
       stub_api = stub_request(:post, "#{site}/v2/users")
-                 .to_return(body: File.read('./spec/fixtures/user/create.json'))
+                 .to_return(body: File.read('./spec/fixtures/user/create.json'), headers: { 'Content-Type' => 'application/json' })
 
       user = described_class.new(client).create
 
@@ -64,7 +64,7 @@ RSpec.describe CirroIOV2::Resources::User do
   describe '#find' do
     it 'finds user' do
       stub_api = stub_request(:get, "#{site}/v2/users/#{user_id}")
-                 .to_return(body: File.read('./spec/fixtures/user/find.json'))
+                 .to_return(body: File.read('./spec/fixtures/user/find.json'), headers: { 'Content-Type' => 'application/json' })
 
       user = described_class.new(client).find(user_id)
 
@@ -80,7 +80,7 @@ RSpec.describe CirroIOV2::Resources::User do
     it 'correctly sets attributes when any attribute is nil' do
       fixture_body = JSON.parse(File.read('./spec/fixtures/user/find.json'))
       fixture_body['epam'] = nil
-      stub_request(:get, "#{site}/v2/users/#{user_id}").to_return(body: fixture_body.to_json)
+      stub_request(:get, "#{site}/v2/users/#{user_id}").to_return(body: fixture_body.to_json, headers: { 'Content-Type' => 'application/json' })
 
       user = described_class.new(client).find(user_id)
 
@@ -121,7 +121,7 @@ RSpec.describe CirroIOV2::Resources::User do
   describe '#notification_preferences' do
     it 'creates notification_preferences' do
       stub_api = stub_request(:post, "#{site}/v2/users/#{user_id}/notification_preferences")
-                 .to_return(body: File.read('./spec/fixtures/user/notification_preferences.json'))
+                 .to_return(body: File.read('./spec/fixtures/user/notification_preferences.json'), headers: { 'Content-Type' => 'application/json' })
 
       notification_preferences = described_class.new(client).notification_preferences(user_id, params)
 
@@ -148,7 +148,7 @@ RSpec.describe CirroIOV2::Resources::User do
 
     it 'update/create worker document' do
       stub_api = stub_request(:post, "#{site}/v2/users/#{user_id}/worker")
-                 .to_return(body: File.read('./spec/fixtures/user/worker.json'))
+                 .to_return(body: File.read('./spec/fixtures/user/worker.json'), headers: { 'Content-Type' => 'application/json' })
 
       user = described_class.new(client).worker(user_id, params)
 
@@ -164,7 +164,8 @@ RSpec.describe CirroIOV2::Resources::User do
   describe '#notification_preference' do
     it 'gets the notification preference for a user' do
       stub_api = stub_request(:get, "#{site}/v2/users/#{user_id}/notification_preference")
-                 .to_return(body: File.read('./spec/fixtures/user/notification_preferences.json')) # same response as create
+                 .to_return(body: File.read('./spec/fixtures/user/notification_preferences.json'),
+                            headers: { 'Content-Type' => 'application/json' }) # same response as create
 
       notification_preference = described_class.new(client).notification_preference(user_id)
 
@@ -211,7 +212,7 @@ RSpec.describe CirroIOV2::Resources::User do
 
     it 'creates invitation_attempt' do
       stub_api = stub_request(:post, "#{site}/v2/users/#{user_id}/invitation_attempt")
-                 .to_return(body: File.read('./spec/fixtures/user/invitation_attempt.json'))
+                 .to_return(body: File.read('./spec/fixtures/user/invitation_attempt.json'), headers: { 'Content-Type' => 'application/json' })
 
       invitation_attempt = described_class.new(client).invitation_attempt(user_id, params)
 

@@ -5,7 +5,10 @@ RSpec.describe CirroIOV2::Resources::EpamHeroes::Badges do
 
   describe '#create' do
     let(:params) { { to: '1', comment: 'MyComment', type: 'MyEvent', from: '2', emails: ['test@example.com', 'test@test.com'] } }
-    let!(:request_heroes_stub) { stub_request(:post, "#{site}/v2/epam_heroes/badges").to_return(body: api_badge_data) }
+    let!(:request_heroes_stub) do
+      stub_request(:post, "#{site}/v2/epam_heroes/badges").to_return(body: api_badge_data,
+                                                                     headers: { 'Content-Type' => 'application/json' })
+    end
 
     it 'calls creation badge event for cirro client' do
       response_data = described_class.new(client).create(params)

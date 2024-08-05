@@ -19,7 +19,7 @@ RSpec.describe CirroIOV2::Resources::GigTimeActivity do
 
     it 'creates a gig time activity' do
       stub_api = stub_request(:post, "#{site}/v2/gig_time_activities")
-                 .to_return(body: File.read('./spec/fixtures/gig_time_activity/create.json'))
+                 .to_return(body: File.read('./spec/fixtures/gig_time_activity/create.json'), headers: { 'Content-Type' => 'application/json' })
 
       gig_time_activity = described_class.new(client).create(params)
 
@@ -57,7 +57,7 @@ RSpec.describe CirroIOV2::Resources::GigTimeActivity do
   describe '#list' do
     it 'returns gig results' do
       stub_api = stub_request(:get, "#{site}/v2/gig_time_activities")
-                 .to_return(body: File.read('./spec/fixtures/gig_time_activity/list.json'))
+                 .to_return(body: File.read('./spec/fixtures/gig_time_activity/list.json'), headers: { 'Content-Type' => 'application/json' })
 
       gig_time_activities = described_class.new(client).list
 
