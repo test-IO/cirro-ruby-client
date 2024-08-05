@@ -21,7 +21,7 @@ module CirroIOV2
         faraday_error.response.then do |response|
           return response.inspect if ENV.fetch('DEBUG_CIRRO_RUBY_CLIENT', false)
 
-          faraday_error.response[:body].presence || faraday_error.try[:message]
+          faraday_error.response[:body].presence || faraday_error.try(:message)
         end
       end
     end
