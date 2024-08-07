@@ -10,7 +10,7 @@ RSpec.describe CirroIOV2::Resources::NotificationTemplate do
   describe '#list' do
     it 'returns notification_templates' do
       stub_api = stub_request(:get, "#{site}/v2/notification_templates")
-                 .to_return(body: File.read('./spec/fixtures/notification_template/list.json'))
+                 .to_return(body: File.read('./spec/fixtures/notification_template/list.json'), headers: { 'Content-Type' => 'application/json' })
 
       notification_templates = described_class.new(client).list
 
@@ -35,7 +35,7 @@ RSpec.describe CirroIOV2::Resources::NotificationTemplate do
 
     it 'creates a notification_template' do
       stub_api = stub_request(:post, "#{site}/v2/notification_templates")
-                 .to_return(body: File.read('./spec/fixtures/notification_template/create.json'))
+                 .to_return(body: File.read('./spec/fixtures/notification_template/create.json'), headers: { 'Content-Type' => 'application/json' })
 
       updated_notification_template = described_class.new(client).create(params)
 
@@ -80,7 +80,7 @@ RSpec.describe CirroIOV2::Resources::NotificationTemplate do
 
     it 'updates a notification_template' do
       stub_api = stub_request(:post, "#{site}/v2/notification_templates/#{id}")
-                 .to_return(body: File.read('./spec/fixtures/notification_template/update.json'))
+                 .to_return(body: File.read('./spec/fixtures/notification_template/update.json'), headers: { 'Content-Type' => 'application/json' })
 
       updated_notification_template = described_class.new(client).update(id, update_params)
 
@@ -98,7 +98,7 @@ RSpec.describe CirroIOV2::Resources::NotificationTemplate do
   describe '#delete' do
     it 'deletes a notification_layout_template' do
       stub_api = stub_request(:delete, "#{site}/v2/notification_templates/#{id}")
-                 .to_return(body: File.read('./spec/fixtures/notification_template/delete.json'))
+                 .to_return(body: File.read('./spec/fixtures/notification_template/delete.json'), headers: { 'Content-Type' => 'application/json' })
 
       deleted_notification_template = described_class.new(client).delete(id)
 

@@ -10,7 +10,7 @@ RSpec.describe CirroIOV2::Resources::NotificationLayout do
   describe '#list' do
     it 'returns list of a notifications layouts' do
       stub_api = stub_request(:get, "#{site}/v2/notification_layouts")
-                 .to_return(body: File.read('./spec/fixtures/notification_layout/list.json'))
+                 .to_return(body: File.read('./spec/fixtures/notification_layout/list.json'), headers: { 'Content-Type' => 'application/json' })
 
       layouts = described_class.new(client).list
 
@@ -44,7 +44,7 @@ RSpec.describe CirroIOV2::Resources::NotificationLayout do
 
     it 'creates a notification_layout' do
       stub_api = stub_request(:post, "#{site}/v2/notification_layouts")
-                 .to_return(body: File.read('./spec/fixtures/notification_layout/create.json'))
+                 .to_return(body: File.read('./spec/fixtures/notification_layout/create.json'), headers: { 'Content-Type' => 'application/json' })
 
       notification_layout = described_class.new(client).create(params)
 
@@ -89,7 +89,7 @@ RSpec.describe CirroIOV2::Resources::NotificationLayout do
 
     it 'updates a notification_layout' do
       stub_api = stub_request(:post, "#{site}/v2/notification_layouts/#{id}")
-                 .to_return(body: File.read('./spec/fixtures/notification_layout/update.json'))
+                 .to_return(body: File.read('./spec/fixtures/notification_layout/update.json'), headers: { 'Content-Type' => 'application/json' })
 
       updated_notification_layout = described_class.new(client).update(id, update_params)
 
@@ -113,7 +113,7 @@ RSpec.describe CirroIOV2::Resources::NotificationLayout do
 
     it 'creates a notification_layout_template' do
       stub_api = stub_request(:post, "#{site}/v2/notification_layouts/#{id}/notification_layout_templates")
-                 .to_return(body: File.read('./spec/fixtures/notification_layout/create_template.json'))
+                 .to_return(body: File.read('./spec/fixtures/notification_layout/create_template.json'), headers: { 'Content-Type' => 'application/json' })
 
       notification_layout_template = described_class.new(client).create_template(id, template_params)
 

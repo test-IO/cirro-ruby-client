@@ -20,7 +20,7 @@ RSpec.describe CirroIOV2::Resources::Payout do
 
     it 'creates a payout' do
       stub_api = stub_request(:post, "#{site}/v2/payouts")
-                 .to_return(body: File.read('./spec/fixtures/payout/create.json'))
+                 .to_return(body: File.read('./spec/fixtures/payout/create.json'), headers: { 'Content-Type' => 'application/json' })
 
       payout = described_class.new(client).create(params)
 
@@ -61,7 +61,7 @@ RSpec.describe CirroIOV2::Resources::Payout do
   describe '#list' do
     it 'returns gig results' do
       stub_api = stub_request(:get, "#{site}/v2/payouts")
-                 .to_return(body: File.read('./spec/fixtures/payout/list.json'))
+                 .to_return(body: File.read('./spec/fixtures/payout/list.json'), headers: { 'Content-Type' => 'application/json' })
 
       payouts = described_class.new(client).list
 
@@ -82,7 +82,7 @@ RSpec.describe CirroIOV2::Resources::Payout do
 
     it 'deletes a payout' do
       stub_api = stub_request(:delete, "#{site}/v2/payouts/#{id}")
-                 .to_return(body: File.read('./spec/fixtures/payout/delete.json'))
+                 .to_return(body: File.read('./spec/fixtures/payout/delete.json'), headers: { 'Content-Type' => 'application/json' })
 
       deleted_payout = described_class.new(client).delete(id)
 

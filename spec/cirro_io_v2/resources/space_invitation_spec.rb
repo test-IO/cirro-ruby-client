@@ -21,7 +21,7 @@ RSpec.describe CirroIOV2::Resources::SpaceInvitation do
 
     it 'creates a space_invitation' do
       stub_api = stub_request(:post, "#{site}/v2/space_invitations")
-                 .to_return(body: File.read('./spec/fixtures/space_invitation/create.json'))
+                 .to_return(body: File.read('./spec/fixtures/space_invitation/create.json'), headers: { 'Content-Type' => 'application/json' })
 
       space_invitation = described_class.new(client).create(params)
 
@@ -62,7 +62,7 @@ RSpec.describe CirroIOV2::Resources::SpaceInvitation do
   describe '#expire' do
     it 'expires space_invitations' do
       stub_api = stub_request(:post, "#{site}/v2/space_invitations/#{id}/expire")
-                 .to_return(body: File.read('./spec/fixtures/space_invitation/create.json'))
+                 .to_return(body: File.read('./spec/fixtures/space_invitation/create.json'), headers: { 'Content-Type' => 'application/json' })
 
       expired_space_invitations = described_class.new(client).expire(id)
 

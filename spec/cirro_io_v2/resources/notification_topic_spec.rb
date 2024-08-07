@@ -26,7 +26,7 @@ RSpec.describe CirroIOV2::Resources::NotificationTopic do
   describe '#find' do
     it 'returns a notification topic' do
       stub_api = stub_request(:get, "#{site}/v2/notification_topics/#{id}")
-                 .to_return(body: File.read('./spec/fixtures/notification_topic/find.json'))
+                 .to_return(body: File.read('./spec/fixtures/notification_topic/find.json'), headers: { 'Content-Type' => 'application/json' })
 
       notification_topic = described_class.new(client).find(id)
 
@@ -63,7 +63,7 @@ RSpec.describe CirroIOV2::Resources::NotificationTopic do
   describe '#update' do
     it 'returns an updated notification topic' do
       stub_api = stub_request(:post, "#{site}/v2/notification_topics/#{id}")
-                 .to_return(body: File.read('./spec/fixtures/notification_topic/update.json'))
+                 .to_return(body: File.read('./spec/fixtures/notification_topic/update.json'), headers: { 'Content-Type' => 'application/json' })
 
       notification_topic = described_class.new(client).update(id, params)
 
@@ -80,7 +80,7 @@ RSpec.describe CirroIOV2::Resources::NotificationTopic do
   describe '#list' do
     it 'returns notification_topics' do
       stub_api = stub_request(:get, "#{site}/v2/notification_topics")
-                 .to_return(body: File.read('./spec/fixtures/notification_topic/list.json'))
+                 .to_return(body: File.read('./spec/fixtures/notification_topic/list.json'), headers: { 'Content-Type' => 'application/json' })
 
       notification_topic = described_class.new(client).list
 
@@ -96,7 +96,7 @@ RSpec.describe CirroIOV2::Resources::NotificationTopic do
   describe '#create' do
     it 'creates a new notification topic' do
       stub_api = stub_request(:post, "#{site}/v2/notification_topics")
-                 .to_return(body: File.read('./spec/fixtures/notification_topic/create.json'))
+                 .to_return(body: File.read('./spec/fixtures/notification_topic/create.json'), headers: { 'Content-Type' => 'application/json' })
 
       notification_topic = described_class.new(client).create(params)
 
@@ -112,7 +112,7 @@ RSpec.describe CirroIOV2::Resources::NotificationTopic do
   describe '#delete' do
     it 'deletes a notification topic' do
       stub_api = stub_request(:delete, "#{site}/v2/notification_topics/#{id}")
-                 .to_return(body: File.read('./spec/fixtures/notification_topic/delete.json'))
+                 .to_return(body: File.read('./spec/fixtures/notification_topic/delete.json'), headers: { 'Content-Type' => 'application/json' })
 
       deleted_notification_topic = described_class.new(client).delete(id)
 
