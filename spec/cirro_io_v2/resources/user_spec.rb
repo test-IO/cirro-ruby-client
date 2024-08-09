@@ -111,6 +111,13 @@ RSpec.describe CirroIOV2::Resources::User do
           time_zone: fixture_body['time_zone'],
           birthday: fixture_body['birthday'],
           country_code: fixture_body['country_code'],
+          banned_with_reason: {
+            detected_ip: '1.1.1.1',
+            input_country_code: 'FR',
+            detected_country_code: 'FR',
+            restricted: false,
+            cleared: false,
+          },
         }
       end
 

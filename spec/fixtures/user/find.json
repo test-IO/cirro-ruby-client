@@ -30,5 +30,12 @@
         }
       }
     },
-    "anonymous_email": "anonymous_email@some.mail"
+    "anonymous_email": "anonymous_email@some.mail",
+    "banned_with_reason": {
+      "detected_ip": "1.1.1.1",
+      "input_country_code": "FR",
+      "detected_country_code": "FR",
+      "restricted": false,
+      "cleared": false
+    }
 }

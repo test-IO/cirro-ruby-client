@@ -29,5 +29,6 @@
         "bar": "42"
       }
     }
-  }
+  },
+  "banned_with_reason": null
 }

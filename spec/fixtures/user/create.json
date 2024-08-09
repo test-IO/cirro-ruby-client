@@ -9,5 +9,6 @@
   "country_code": "DE",
   "password": "@123456abc@",
   "epam": null,
-  "worker": null
+  "worker": null,
+  "banned_with_reason": null
 }

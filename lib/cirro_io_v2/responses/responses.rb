@@ -33,6 +33,7 @@ module CirroIOV2
                               :epam,
                               :worker,
                               :anonymous_email,
+                              :banned_with_reason,
                               keyword_init: true) do
       include Base
     end
