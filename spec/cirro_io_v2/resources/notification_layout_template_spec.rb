@@ -16,7 +16,7 @@ RSpec.describe CirroIOV2::Resources::NotificationLayoutTemplate do
   describe '#update' do
     it 'updates a notification_layout_template' do
       stub_api = stub_request(:post, "#{site}/v2/notification_layout_templates/#{id}")
-                 .to_return(body: File.read('./spec/fixtures/notification_layout_template/update.json'))
+                 .to_return(body: File.read('./spec/fixtures/notification_layout_template/update.json'), headers: { 'Content-Type' => 'application/json' })
 
       notification_layout_template = described_class.new(client).update(id, params)
 
@@ -52,7 +52,7 @@ RSpec.describe CirroIOV2::Resources::NotificationLayoutTemplate do
   describe '#delete' do
     it 'deletes a notification_layout_template' do
       stub_api = stub_request(:delete, "#{site}/v2/notification_layout_templates/#{id}")
-                 .to_return(body: File.read('./spec/fixtures/notification_layout_template/delete.json'))
+                 .to_return(body: File.read('./spec/fixtures/notification_layout_template/delete.json'), headers: { 'Content-Type' => 'application/json' })
 
       deleted_notification_layout_template = described_class.new(client).delete(id)
 

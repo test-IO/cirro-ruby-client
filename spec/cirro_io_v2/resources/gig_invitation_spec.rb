@@ -10,7 +10,7 @@ RSpec.describe CirroIOV2::Resources::GigInvitation do
   describe '#list' do
     it 'returns gig_invitations' do
       stub_api = stub_request(:get, "#{site}/v2/gig_invitations")
-                 .to_return(body: File.read('./spec/fixtures/gig_invitation/list.json'))
+                 .to_return(body: File.read('./spec/fixtures/gig_invitation/list.json'), headers: { 'Content-Type' => 'application/json' })
 
       gig_invitations = described_class.new(client).list
 
@@ -31,7 +31,7 @@ RSpec.describe CirroIOV2::Resources::GigInvitation do
   describe '#accept' do
     it 'accepts gig_invitations' do
       stub_api = stub_request(:post, "#{site}/v2/gig_invitations/#{id}/accept")
-                 .to_return(body: File.read('./spec/fixtures/gig_invitation/accept.json'))
+                 .to_return(body: File.read('./spec/fixtures/gig_invitation/accept.json'), headers: { 'Content-Type' => 'application/json' })
 
       accepted_gig_invitation = described_class.new(client).accept(id)
 
@@ -49,7 +49,7 @@ RSpec.describe CirroIOV2::Resources::GigInvitation do
     it 'accepts `no_reward` as param' do
       stub_api = stub_request(:post, "#{site}/v2/gig_invitations/#{id}/accept")
                  .with(body: { no_reward: true })
-                 .to_return(body: File.read('./spec/fixtures/gig_invitation/accept.json'))
+                 .to_return(body: File.read('./spec/fixtures/gig_invitation/accept.json'), headers: { 'Content-Type' => 'application/json' })
 
       described_class.new(client).accept(id, no_reward: true)
 
@@ -80,7 +80,7 @@ RSpec.describe CirroIOV2::Resources::GigInvitation do
   describe '#reject' do
     it 'rejects gig_invitations' do
       stub_api = stub_request(:post, "#{site}/v2/gig_invitations/#{id}/reject")
-                 .to_return(body: File.read('./spec/fixtures/gig_invitation/reject.json'))
+                 .to_return(body: File.read('./spec/fixtures/gig_invitation/reject.json'), headers: { 'Content-Type' => 'application/json' })
 
       accepted_gig_invitation = described_class.new(client).reject(id)
 
@@ -99,7 +99,7 @@ RSpec.describe CirroIOV2::Resources::GigInvitation do
   describe '#expire' do
     it 'expires gig_invitations' do
       stub_api = stub_request(:post, "#{site}/v2/gig_invitations/#{id}/expire")
-                 .to_return(body: File.read('./spec/fixtures/gig_invitation/expire.json'))
+                 .to_return(body: File.read('./spec/fixtures/gig_invitation/expire.json'), headers: { 'Content-Type' => 'application/json' })
 
       accepted_gig_invitation = described_class.new(client).expire(id)
 
@@ -118,7 +118,7 @@ RSpec.describe CirroIOV2::Resources::GigInvitation do
   describe '#reset' do
     it 'reset gig_invitations' do
       stub_api = stub_request(:post, "#{site}/v2/gig_invitations/#{id}/reset")
-                 .to_return(body: File.read('./spec/fixtures/gig_invitation/reset.json'))
+                 .to_return(body: File.read('./spec/fixtures/gig_invitation/reset.json'), headers: { 'Content-Type' => 'application/json' })
 
       accepted_gig_invitation = described_class.new(client).reset(id)
 

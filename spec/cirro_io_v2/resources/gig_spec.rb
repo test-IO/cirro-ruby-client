@@ -10,7 +10,7 @@ RSpec.describe CirroIOV2::Resources::Gig do
   describe '#find' do
     it 'finds and renders a gig' do
       stub_api = stub_request(:get, "#{site}/v2/gigs/#{id}")
-                 .to_return(body: File.read('./spec/fixtures/gig/create.json'))
+                 .to_return(body: File.read('./spec/fixtures/gig/create.json'), headers: { 'Content-Type' => 'application/json' })
 
       gig = described_class.new(client).find(id)
 
@@ -56,7 +56,7 @@ RSpec.describe CirroIOV2::Resources::Gig do
 
     it 'creates a gig' do
       stub_api = stub_request(:post, "#{site}/v2/gigs")
-                 .to_return(body: File.read('./spec/fixtures/gig/create.json'))
+                 .to_return(body: File.read('./spec/fixtures/gig/create.json'), headers: { 'Content-Type' => 'application/json' })
 
       gig = described_class.new(client).create(params)
 
@@ -92,7 +92,7 @@ RSpec.describe CirroIOV2::Resources::Gig do
 
     it 'updates a gig' do
       stub_api = stub_request(:post, "#{site}/v2/gigs/#{id}")
-                 .to_return(body: File.read('./spec/fixtures/gig/update.json'))
+                 .to_return(body: File.read('./spec/fixtures/gig/update.json'), headers: { 'Content-Type' => 'application/json' })
 
       gig = described_class.new(client).update(id, params)
 
@@ -113,7 +113,7 @@ RSpec.describe CirroIOV2::Resources::Gig do
 
     it 'archives a gig' do
       stub_api = stub_request(:post, "#{site}/v2/gigs/#{id}/archive")
-                 .to_return(body: File.read('./spec/fixtures/gig/archive.json'))
+                 .to_return(body: File.read('./spec/fixtures/gig/archive.json'), headers: { 'Content-Type' => 'application/json' })
 
       gig = described_class.new(client).archive(id, params)
 
@@ -137,7 +137,7 @@ RSpec.describe CirroIOV2::Resources::Gig do
   describe '#delete' do
     it 'deletes a gig' do
       stub_api = stub_request(:delete, "#{site}/v2/gigs/#{id}")
-                 .to_return(body: File.read('./spec/fixtures/gig/delete.json'))
+                 .to_return(body: File.read('./spec/fixtures/gig/delete.json'), headers: { 'Content-Type' => 'application/json' })
 
       deleted_gig = described_class.new(client).delete(id)
 
@@ -159,7 +159,7 @@ RSpec.describe CirroIOV2::Resources::Gig do
 
     it 'creates task for gig' do
       stub_api = stub_request(:post, "#{site}/v2/gigs/#{id}/tasks")
-                 .to_return(body: File.read('./spec/fixtures/gig/tasks.json'))
+                 .to_return(body: File.read('./spec/fixtures/gig/tasks.json'), headers: { 'Content-Type' => 'application/json' })
 
       gig_task = described_class.new(client).tasks(id, params)
 
@@ -182,7 +182,7 @@ RSpec.describe CirroIOV2::Resources::Gig do
 
     it 'creates task for gig' do
       stub_api = stub_request(:post, "#{site}/v2/gigs/#{id}/tasks/#{task_id}")
-                 .to_return(body: File.read('./spec/fixtures/gig/update_task.json'))
+                 .to_return(body: File.read('./spec/fixtures/gig/update_task.json'), headers: { 'Content-Type' => 'application/json' })
 
       gig_task = described_class.new(client).update_task(id, task_id, params)
 
@@ -202,7 +202,7 @@ RSpec.describe CirroIOV2::Resources::Gig do
 
       it 'creates gig invitation for the user' do
         stub_api = stub_request(:post, "#{site}/v2/gigs/#{id}/invite")
-                   .to_return(body: File.read('./spec/fixtures/gig/invite_single.json'))
+                   .to_return(body: File.read('./spec/fixtures/gig/invite_single.json'), headers: { 'Content-Type' => 'application/json' })
 
         gig_invitation = described_class.new(client).invite(id, params)
 
@@ -223,7 +223,7 @@ RSpec.describe CirroIOV2::Resources::Gig do
 
       it 'creates gig invitation for the user' do
         stub_api = stub_request(:post, "#{site}/v2/gigs/#{id}/invite")
-                   .to_return(body: File.read('./spec/fixtures/gig/invite_multi.json'))
+                   .to_return(body: File.read('./spec/fixtures/gig/invite_multi.json'), headers: { 'Content-Type' => 'application/json' })
 
         gig_invitations = described_class.new(client).invite(id, params)
 

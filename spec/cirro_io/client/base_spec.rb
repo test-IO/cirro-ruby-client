@@ -4,7 +4,7 @@ RSpec.describe CirroIO::Client::Base do
       'Accept' => 'application/vnd.api+json',
       'Accept-Encoding' => 'gzip,deflate',
       'Content-Type' => 'application/vnd.api+json',
-      'User-Agent' => 'Faraday v1.1.0',
+      'User-Agent' => 'Faraday v1.10.3',
       'Authorization' => 'Bearer jwt-token',
     }
   end
@@ -37,7 +37,7 @@ RSpec.describe CirroIO::Client::Base do
                 'Accept' => '*/*',
                 'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
                 'Content-Type' => 'application/json',
-                'User-Agent' => 'Faraday v1.1.0',
+                'User-Agent' => 'Faraday v1.10.3',
                 'Authorization' => 'Bearer jwt-token',
               })
         .to_return(status: 201, body: '{}', headers: {})

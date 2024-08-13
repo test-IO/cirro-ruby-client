@@ -2,7 +2,7 @@ RSpec.shared_examples_for 'responses' do
   context 'when API endpoint changes attribute order or name' do
     it 'does not mess with the response attributes' do
       fixture_body.transform_keys! { |key| replace_keys[key] || key }
-      stub_request(request_action, request_url).to_return(body: fixture_body.to_json)
+      stub_request(request_action, request_url).to_return(body: fixture_body.to_json, headers: { 'Content-Type' => 'application/json' })
 
       expect(subject.class).to eq(expected_response_class)
       replace_keys.each_key do |key|

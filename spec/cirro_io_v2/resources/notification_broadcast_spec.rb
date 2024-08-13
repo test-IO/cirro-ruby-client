@@ -23,7 +23,7 @@ RSpec.describe CirroIOV2::Resources::NotificationBroadcast do
     context 'when all params are allowed' do
       it 'creates a new NotificationBroadcast' do
         stub_api = stub_request(:post, "#{site}/v2/notification_broadcasts")
-                   .to_return(body: File.read('./spec/fixtures/notification_broadcast/create.json'))
+                   .to_return(body: File.read('./spec/fixtures/notification_broadcast/create.json'), headers: { 'Content-Type' => 'application/json' })
 
         created_notification_broadcast = described_class.new(client).create(params)
 

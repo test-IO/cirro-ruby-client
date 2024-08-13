@@ -1,13 +1,13 @@
 version: 2.1
 infra_container: &infra_container
-  eu.gcr.io/cirro-io/swissknife@sha256:1dceb221bfc058c4ba22fe4dcbf4f30dfdc10951bc2293d5c53aebc4f87037f3
+  us.gcr.io/oi-tset/swissknife@sha256:e8b74aab06de688b29c600785782a614efdaf2c20df7ef9b53b2b0276815fb0c
 
 # Configure authentication in private registry
 infra_container_registry_auth:
   &infra_container_registry_auth
     auth:
       username: _json_key # default username when using a JSON key file to authenticate
-      password: $GOOGLE_JSON_KEY
+      password: $GOOGLE_JSON_KEY_OI_TSET
 
 jobs:
   test:
@@ -76,10 +76,10 @@ jobs:
       - DEFECTDOJO_ENG_NAME: CircleCI Scan
     steps:
       - checkout
-      - run: 
+      - run:
           name: Setup access to GCP
           command: |
-            echo $GOOGLE_JSON_KEY > ${HOME}/gcloud-service-key.json && \
+            echo $GOOGLE_JSON_KEY_OI_TSET > ${HOME}/gcloud-service-key.json && \
             gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
             gcloud auth configure-docker
       - run:
@@ -92,7 +92,7 @@ jobs:
           command: |
             export DEFECTDOJO_TOKEN=$(gcloud secrets versions access latest \
             --secret="defectdojo_token" \
-            --project=cirro-io \
+            --project=oi-tset \
             --quiet)
 
             # Send Trivy filesystem scan

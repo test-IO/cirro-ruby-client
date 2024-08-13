@@ -27,7 +27,7 @@ RSpec.describe CirroIOV2::Resources::GigResult do
 
     it 'creates a gig result' do
       stub_api = stub_request(:post, "#{site}/v2/gig_results")
-                 .to_return(body: File.read('./spec/fixtures/gig_result/create.json'))
+                 .to_return(body: File.read('./spec/fixtures/gig_result/create.json'), headers: { 'Content-Type' => 'application/json' })
 
       gig_result = described_class.new(client).create(params)
 
@@ -69,7 +69,7 @@ RSpec.describe CirroIOV2::Resources::GigResult do
   describe '#list' do
     it 'returns gig results' do
       stub_api = stub_request(:get, "#{site}/v2/gig_results")
-                 .to_return(body: File.read('./spec/fixtures/gig_result/list.json'))
+                 .to_return(body: File.read('./spec/fixtures/gig_result/list.json'), headers: { 'Content-Type' => 'application/json' })
 
       gig_results = described_class.new(client).list
 
