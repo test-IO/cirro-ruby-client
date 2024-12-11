@@ -74,6 +74,7 @@ jobs:
       - DEFECTDOJO_URL: defectdojo.testcloud.io
       - DEFECTDOJO_PRODUCT: Cirro Ruby Client
       - DEFECTDOJO_ENG_NAME: CircleCI Scan
+    circleci_ip_ranges: true # opts the job into the IP ranges feature
     steps:
       - checkout
       - run:
@@ -85,7 +86,7 @@ jobs:
       - run:
           name: Scans
           command: |
-            unset GITHUB_TOKEN && trivy fs --exit-code 0 --no-progress --ignorefile .trivyignore-fake --format json --output filesystem-scan.json .
+            unset GITHUB_TOKEN && trivy fs --exit-code 0 --no-progress --format json --output filesystem-scan.json .
             gitleaks detect --no-git --exit-code 0 --report-format json --report-path gitleaks.json
       - run:
           name: Send data to DefectDojo
@@ -124,7 +125,6 @@ jobs:
             --form "file=@gitleaks.json"
 
 workflows:
-  version: 2
   deploy_the_gem:
     jobs:
       - test
