@@ -1,21 +1,19 @@
 version: 2.1
-infra_container: &infra_container
-  us.gcr.io/oi-tset/swissknife@sha256:e8b74aab06de688b29c600785782a614efdaf2c20df7ef9b53b2b0276815fb0c
 
-# Configure authentication in private registry
-infra_container_registry_auth:
-  &infra_container_registry_auth
-    auth:
-      username: _json_key # default username when using a JSON key file to authenticate
-      password: $GOOGLE_JSON_KEY_OI_TSET
+executors:
+  cci-ruby:
+    docker:
+    - image: cimg/ruby:3.2.2
+      environment:
+        RAILS_ENV: test
+        RACK_ENV: test
+  cci-base:
+    docker:
+    - image: cimg/base:stable
 
 jobs:
   test:
-    docker:
-      - image: cimg/ruby:3.2.2-node
-        environment:
-          - RAILS_ENV=test
-          - RACK_ENV=test
+    executor: cci-ruby
     steps:
       - checkout
       - restore_cache:
@@ -36,8 +34,7 @@ jobs:
           command: bundle exec rubocop
 
   deploy:
-    docker:
-      - image: cimg/ruby:3.2.2-node
+    executor: cci-ruby
     steps:
       - checkout
       - run:
@@ -53,48 +50,44 @@ jobs:
               git push origin v"$version"
             fi
       - run:
-          name: build gem
+          name: Build the gem
           command: gem build cirro-ruby-client.gemspec
       - run:
-          name: push to rubygems
+          name: Push to Rubygems
           command: |
             version=$(cat lib/cirro_io/client/version.rb | grep VERSION | awk -F' = ' '{print $2}' | xargs)
-            echo "gem `gem --version`"
+            echo "gem $(gem --version)"
             mkdir ~/.gem
-            cat .circleci/gem_credentials | sed -e "s/__RUBYGEMS_API_KEY__/${RUBYGEMS_API_KEY}/" > ~/.gem/credentials
+            cat .circleci/gem_credentials | sed -e "s/__RUBYGEMS_API_KEY__/$RUBYGEMS_API_KEY/" > ~/.gem/credentials
             chmod 0600 ~/.gem/credentials
             gem push cirro-ruby-client-$version.gem
-            shred -u ~/.gem/credentials
+            shred -u ~/.gem/credentials # completely remove the file making it hard for even very expensive hardware to recover the data
 
   defectdojo:
-    docker:
-      - image: *infra_container
-        <<: *infra_container_registry_auth
+    executor: cci-base
     environment:
-      - DEFECTDOJO_URL: defectdojo.testcloud.io
-      - DEFECTDOJO_PRODUCT: Cirro Ruby Client
-      - DEFECTDOJO_ENG_NAME: CircleCI Scan
+      DEFECTDOJO_URL: defectdojo.testcloud.io
+      DEFECTDOJO_PRODUCT: Cirro Ruby Client
+      DEFECTDOJO_ENG_NAME: CircleCI Scan
     circleci_ip_ranges: true # opts the job into the IP ranges feature
     steps:
       - checkout
       - run:
-          name: Setup access to GCP
+          name: Install Trivy and Gitleaks
           command: |
-            echo $GOOGLE_JSON_KEY_OI_TSET > ${HOME}/gcloud-service-key.json && \
-            gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
-            gcloud auth configure-docker
+            curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin
+            curl -sfL https://github.com/zricethezav/gitleaks/releases/download/v8.18.2/gitleaks_8.18.2_linux_x64.tar.gz -o gitleaks.tar.gz && \
+            tar -xf gitleaks.tar.gz
       - run:
           name: Scans
           command: |
-            unset GITHUB_TOKEN && trivy fs --exit-code 0 --no-progress --format json --output filesystem-scan.json .
-            gitleaks detect --no-git --exit-code 0 --report-format json --report-path gitleaks.json
+            trivy fs --exit-code 0 --no-progress --format json --output filesystem-scan.json .
+            ./gitleaks detect --no-git --exit-code 0 --report-format json --report-path gitleaks.json
       - run:
           name: Send data to DefectDojo
           command: |
-            export DEFECTDOJO_TOKEN=$(gcloud secrets versions access latest \
-            --secret="defectdojo_token" \
-            --project=oi-tset \
-            --quiet)
+            # The DEFECTDOJO_TOKEN env var is set in CCI to not have to be authenticated
+            # to GCP only for this purpose, so please change it there if it gets rotated
 
             # Send Trivy filesystem scan
             curl --fail --request POST https://$DEFECTDOJO_URL/api/v2/reimport-scan/ \
@@ -133,10 +126,8 @@ workflows:
             - test
           filters:
             branches:
-              only:
-                - master
+              only: master
       - defectdojo:
           filters:
             branches:
-              only:
-                - master
+              only: master
