@@ -16,6 +16,7 @@ module CirroIOV2
     ].freeze
 
     DELETE_RESPONSES = [
+      :UserDeleteResponse,
       :GigDeleteResponse,
       :PayoutDeleteResponse,
       :NotificationTemplateDeleteResponse,
