@@ -125,6 +125,23 @@ RSpec.describe CirroIOV2::Resources::User do
     end
   end
 
+  describe '#delete' do
+    let(:id) { '1' }
+
+    it 'deletes a user' do
+      stub_api = stub_request(:delete, "#{site}/v2/users/#{id}")
+                 .to_return(body: File.read('./spec/fixtures/user/delete.json'), headers: { 'Content-Type' => 'application/json' })
+
+      deleted_user = described_class.new(client).delete(id)
+
+      expect(stub_api).to have_been_made
+      expect(deleted_user.class).to eq(CirroIOV2::Responses::UserDeleteResponse)
+      expect(deleted_user.id).to eq(id)
+      expect(deleted_user.object).to eq('user')
+      expect(deleted_user.deleted).to eq(nil)
+    end
+  end
+
   describe '#notification_preferences' do
     it 'creates notification_preferences' do
       stub_api = stub_request(:post, "#{site}/v2/users/#{user_id}/notification_preferences")

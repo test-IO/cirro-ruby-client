@@ -11,6 +11,11 @@ module CirroIOV2
         CirroIOV2::Responses::UserResponse.new(response.body)
       end
 
+      def delete(id)
+        response = client.request_client.request(:delete, "#{resource_root}/#{id}")
+        Responses::UserDeleteResponse.new(response.body)
+      end
+
       def notification_preference(id)
         response = client.request_client.request(:get, "#{resource_root}/#{id}/notification_preference")
         CirroIOV2::Responses::UserNotificationPreferenceResponse.new(response.body)
