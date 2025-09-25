@@ -2,7 +2,6 @@ require 'json_api_client'
 
 require 'cirro_io/client/version'
 require 'cirro_io/client/configuration'
-require 'cirro_io/client/response_debugging_middleware'
 require 'cirro_io/client/jwt_authentication'
 require 'cirro_io/client/base'
 require 'cirro_io/client/bulk_action_helper'
