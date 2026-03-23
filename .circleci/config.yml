@@ -63,60 +63,6 @@ jobs:
             gem push cirro-ruby-client-$version.gem
             shred -u ~/.gem/credentials # completely remove the file making it hard for even very expensive hardware to recover the data
 
-  defectdojo:
-    executor: cci-base
-    environment:
-      DEFECTDOJO_URL: defectdojo.testcloud.io
-      DEFECTDOJO_PRODUCT: Cirro Ruby Client
-      DEFECTDOJO_ENG_NAME: CircleCI Scan
-    circleci_ip_ranges: true # opts the job into the IP ranges feature
-    steps:
-      - checkout
-      - run:
-          name: Install Trivy and Gitleaks
-          command: |
-            curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin
-            curl -sfL https://github.com/zricethezav/gitleaks/releases/download/v8.18.2/gitleaks_8.18.2_linux_x64.tar.gz -o gitleaks.tar.gz && \
-            tar -xf gitleaks.tar.gz
-      - run:
-          name: Scans
-          command: |
-            trivy fs --exit-code 0 --no-progress --format json --output filesystem-scan.json .
-            ./gitleaks detect --no-git --exit-code 0 --report-format json --report-path gitleaks.json
-      - run:
-          name: Send data to DefectDojo
-          command: |
-            # The DEFECTDOJO_TOKEN env var is set in CCI to not have to be authenticated
-            # to GCP only for this purpose, so please change it there if it gets rotated
-
-            # Send Trivy filesystem scan
-            curl --fail --request POST https://$DEFECTDOJO_URL/api/v2/reimport-scan/ \
-            --header "Authorization: Token $DEFECTDOJO_TOKEN" \
-            --form "active=true" \
-            --form "auto_create_context=true" \
-            --form "branch_tag=${CIRCLE_BRANCH}" \
-            --form "commit_hash=${CIRCLE_SHA1}" \
-            --form "close_old_findings=true" \
-            --form "scan_type=Trivy Scan" \
-            --form "test_title=Trivy application scan" \
-            --form "engagement_name=${DEFECTDOJO_ENG_NAME}" \
-            --form "product_name=${DEFECTDOJO_PRODUCT}" \
-            --form "file=@filesystem-scan.json"
-
-            # Send Gitleaks scan
-            curl --fail --request POST https://$DEFECTDOJO_URL/api/v2/reimport-scan/ \
-            --header "Authorization: Token $DEFECTDOJO_TOKEN" \
-            --form "active=true" \
-            --form "auto_create_context=true" \
-            --form "branch_tag=${CIRCLE_BRANCH}" \
-            --form "commit_hash=${CIRCLE_SHA1}" \
-            --form "close_old_findings=true" \
-            --form "scan_type=Gitleaks Scan" \
-            --form "test_title=Gitleaks Scan" \
-            --form "engagement_name=${DEFECTDOJO_ENG_NAME}" \
-            --form "product_name=${DEFECTDOJO_PRODUCT}" \
-            --form "file=@gitleaks.json"
-
 workflows:
   deploy_the_gem:
     jobs:
@@ -124,10 +70,6 @@ workflows:
       - deploy:
           requires:
             - test
-          filters:
-            branches:
-              only: master
-      - defectdojo:
           filters:
             branches:
               only: master
