@@ -5,8 +5,8 @@ gemspec
 
 ruby '3.2.2'
 
-gem 'rake', '~> 12.3.3'
-gem 'rspec', '~> 3.13.0'
+gem 'rake', '~> 12.0'
+gem 'rspec', '~> 3.0'
 
 group :development do
   gem 'faker'

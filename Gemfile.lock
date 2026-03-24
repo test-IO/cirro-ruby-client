@@ -2,10 +2,10 @@ PATH
   remote: .
   specs:
     cirro-ruby-client (2.9.0)
-      activesupport (~> 7.1.3.4)
-      faraday (~> 2.13.4)
+      activesupport
+      faraday (~> 2.0)
       json_api_client (>= 1.10.0)
-      jwt (~> 2.8.2)
+      jwt
 
 GEM
   remote: https://rubygems.org/
@@ -135,8 +135,8 @@ DEPENDENCIES
   cirro-ruby-client!
   faker
   pry
-  rake (~> 12.3.3)
-  rspec (~> 3.13.0)
+  rake (~> 12.0)
+  rspec (~> 3.0)
   rubocop
   rubocop-rspec
   webmock
