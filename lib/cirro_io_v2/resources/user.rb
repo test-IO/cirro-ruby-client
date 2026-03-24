@@ -16,6 +16,11 @@ module CirroIOV2
         Responses::UserDeleteResponse.new(response.body)
       end
 
+      def delete_intercom(id)
+        response = client.request_client.request(:delete, "#{resource_root}/#{id}/intercom")
+        Responses::UserDeleteIntercomResponse.new(response.body)
+      end
+
       def notification_preference(id)
         response = client.request_client.request(:get, "#{resource_root}/#{id}/notification_preference")
         CirroIOV2::Responses::UserNotificationPreferenceResponse.new(response.body)

@@ -142,6 +142,23 @@ RSpec.describe CirroIOV2::Resources::User do
     end
   end
 
+  describe '#delete_intercom' do
+    let(:id) { '1' }
+
+    it 'deletes a user from Intercom' do
+      stub_api = stub_request(:delete, "#{site}/v2/users/#{id}/intercom")
+                 .to_return(body: File.read('./spec/fixtures/user/delete_intercom.json'), headers: { 'Content-Type' => 'application/json' })
+
+      response = described_class.new(client).delete_intercom(id)
+
+      expect(stub_api).to have_been_made
+      expect(response.class).to eq(CirroIOV2::Responses::UserDeleteIntercomResponse)
+      expect(response.id).to eq(id)
+      expect(response.object).to eq('user')
+      expect(response.intercom_deleted).to eq(true)
+    end
+  end
+
   describe '#notification_preferences' do
     it 'creates notification_preferences' do
       stub_api = stub_request(:post, "#{site}/v2/users/#{user_id}/notification_preferences")

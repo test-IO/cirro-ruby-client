@@ -175,6 +175,10 @@ module CirroIOV2
       include Base
     end
 
+    UserDeleteIntercomResponse = Struct.new(:id, :object, :intercom_deleted, keyword_init: true) do
+      include Base
+    end
+
     # cover the list and delete responses
     def self.const_missing(name)
       return const_get(name) if const_defined? name

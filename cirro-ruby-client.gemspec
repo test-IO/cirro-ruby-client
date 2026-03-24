@@ -25,8 +25,8 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_runtime_dependency 'activesupport'
-  spec.add_runtime_dependency 'jwt'
-  spec.add_runtime_dependency 'faraday', '~> 2.0'
+  spec.add_runtime_dependency 'activesupport', '~> 7.1.3.4'
+  spec.add_runtime_dependency 'jwt', '~> 2.8.2'
+  spec.add_runtime_dependency 'faraday', '~> 2.13.4'
   spec.add_runtime_dependency 'json_api_client', '>= 1.10.0'
 end
