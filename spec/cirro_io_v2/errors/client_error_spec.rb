@@ -2,7 +2,7 @@ RSpec.describe CirroIOV2::Errors::ClientError do
   subject(:error) { described_class.new(faraday_error) }
 
   let(:exception) { RuntimeError.new('something went wrong') }
-  let(:response) { { status: 422, body: body } }
+  let(:response) { { status: 422, body: } }
   let(:faraday_error) { Faraday::ClientError.new(exception, response) }
 
   describe '#message' do
