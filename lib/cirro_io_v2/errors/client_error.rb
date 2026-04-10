@@ -17,12 +17,11 @@ module CirroIOV2
       end
 
       def message
-        puts faraday_error.response.inspect
-        faraday_error.response.then do |response|
-          return response.inspect if ENV.fetch('DEBUG_CIRRO_RUBY_CLIENT', false)
+        return faraday_error.response.inspect if ENV['DEBUG_CIRRO_RUBY_CLIENT']
 
-          faraday_error.response[:body].presence || faraday_error.try(:message)
-        end
+        body = faraday_error.response&.dig(:body)
+        result = body.presence || faraday_error.try(:message)
+        result.is_a?(String) ? result : result.to_json
       end
     end
   end
