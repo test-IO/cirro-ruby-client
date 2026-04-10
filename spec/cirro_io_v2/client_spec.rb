@@ -141,7 +141,7 @@ RSpec.describe CirroIOV2::Client do
       it 'raises CirroIOV2::Errors::ClientError when request fails with 4xx' do
         expect { client.request_client.request(:foo, :bar) }.to raise_error(CirroIOV2::Errors::ClientError) do |error|
           expect(error.faraday_error.message).to eq('test')
-          expect(error.message).to eq({ error: 'error' })
+          expect(error.message).to eq('{"error":"error"}')
         end
       end
     end
